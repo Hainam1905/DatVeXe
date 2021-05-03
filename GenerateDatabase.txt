@@ -1,0 +1,402 @@
+/****** Object:  Database [QLyDatXe]    Script Date: 4/30/2021 9:23:33 PM ******/
+CREATE DATABASE [QLyDatXe]
+GO
+USE [QLyDatXe]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Account](
+	[Account] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Kind] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[Account] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Car]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Car](
+	[Car_License_Plates] [varchar](50) NOT NULL,
+	[Car_Seat_Amount] [int] NOT NULL,
+	[Gar_Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Car] PRIMARY KEY CLUSTERED 
+(
+	[Car_License_Plates] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Driver]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Driver](
+	[Driver_CMND] [varchar](50) NOT NULL,
+	[Driver_License] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Driver] PRIMARY KEY CLUSTERED 
+(
+	[Driver_CMND] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Drop_Off_Place]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Drop_Off_Place](
+	[Drop_Off_Name] [nvarchar](50) NOT NULL,
+	[Drop_Off_Address] [nvarchar](50) NOT NULL,
+	[Drop_Off_District] [nvarchar](50) NOT NULL,
+	[Drop_Off_City] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Drop_Off_Place] PRIMARY KEY CLUSTERED 
+(
+	[Drop_Off_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Gara]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Gara](
+	[Gara_Name] [nvarchar](50) NOT NULL,
+	[Gara_Picture] [ntext] NULL,
+	[Gara_Review] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Gara] PRIMARY KEY CLUSTERED 
+(
+	[Gara_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Manage_Passenger_Care]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Manage_Passenger_Care](
+	[Staff_CMND] [varchar](50) NOT NULL,
+	[Passenger_SDT] [varchar](50) NOT NULL,
+	[Passenger_Care_Time] [datetime] NOT NULL,
+ CONSTRAINT [PK_Manage_Passenger_Care] PRIMARY KEY CLUSTERED 
+(
+	[Staff_CMND] ASC,
+	[Passenger_SDT] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ManageDrive]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ManageDrive](
+	[Drive_CMND] [varchar](50) NOT NULL,
+	[Trip_No] [varchar](50) NOT NULL,
+	[License_Plates] [varchar](50) NOT NULL,
+	[Drive_Date] [date] NOT NULL,
+	[Drive_Hour] [time](7) NOT NULL,
+ CONSTRAINT [PK_ManageDrive] PRIMARY KEY CLUSTERED 
+(
+	[Drive_CMND] ASC,
+	[Trip_No] ASC,
+	[License_Plates] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ManageDropOff]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ManageDropOff](
+	[Trip_No] [varchar](50) NOT NULL,
+	[Drop_Off_Name] [nvarchar](50) NOT NULL,
+	[Drop_Off_Time] [datetime] NOT NULL,
+ CONSTRAINT [PK_ManageDropOff] PRIMARY KEY CLUSTERED 
+(
+	[Trip_No] ASC,
+	[Drop_Off_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ManagePickUp]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ManagePickUp](
+	[Trip_No] [varchar](50) NOT NULL,
+	[Pick_Up_Name] [nvarchar](50) NOT NULL,
+	[Pick_Up_Time] [datetime] NOT NULL,
+ CONSTRAINT [PK_ManagePickUp] PRIMARY KEY CLUSTERED 
+(
+	[Trip_No] ASC,
+	[Pick_Up_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ManageReview]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ManageReview](
+	[Passenger_SDT] [varchar](50) NOT NULL,
+	[Trip_No] [varchar](50) NOT NULL,
+	[Staff_Attitude] [int] NOT NULL,
+	[Service_Quality] [int] NOT NULL,
+	[Safe] [int] NOT NULL,
+	[Information] [int] NOT NULL,
+	[Convenient] [int] NOT NULL,
+	[Comment] [ntext] NULL,
+	[Review_Time] [datetime] NOT NULL,
+ CONSTRAINT [PK_ManageReview] PRIMARY KEY CLUSTERED 
+(
+	[Passenger_SDT] ASC,
+	[Trip_No] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Passenger]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Passenger](
+	[Passenger_SDT] [varchar](50) NOT NULL,
+	[Passenger_First_Name] [nvarchar](50) NOT NULL,
+	[Passenger_Last_Name] [nvarchar](50) NOT NULL,
+	[Passenger_Email] [varbinary](50) NULL,
+	[Account] [varchar](50) NULL,
+ CONSTRAINT [PK_Passenger] PRIMARY KEY CLUSTERED 
+(
+	[Passenger_SDT] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Passenger_Care]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Passenger_Care](
+	[Staff_CMND] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Passenger_Care] PRIMARY KEY CLUSTERED 
+(
+	[Staff_CMND] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pick_Up_Place]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pick_Up_Place](
+	[Pick_Up_Name] [nvarchar](50) NOT NULL,
+	[Pick_Up_Address] [nvarchar](50) NOT NULL,
+	[Pick_Up_District] [nvarchar](50) NOT NULL,
+	[Pick_Up_City] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Pick_Up_Place] PRIMARY KEY CLUSTERED 
+(
+	[Pick_Up_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Staff]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Staff](
+	[Staff_CMND] [varchar](50) NOT NULL,
+	[Staff_First_Name] [nvarchar](50) NOT NULL,
+	[Staff_Last_Name] [nvarchar](50) NOT NULL,
+	[Staff_SDT] [varchar](50) NOT NULL,
+	[Staff_Gender] [nvarchar](50) NULL,
+	[Staff_Account] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Staff] PRIMARY KEY CLUSTERED 
+(
+	[Staff_CMND] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Ticket]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Ticket](
+	[Ticket_No] [varchar](50) NOT NULL,
+	[Ticket_Price] [int] NOT NULL,
+	[Seat_Position] [int] NOT NULL,
+	[Seat_Kind] [nvarchar](50) NOT NULL,
+	[Is_Paid] [bit] NOT NULL,
+	[Passenger_Note] [ntext] NULL,
+	[Book_Time] [time](7) NOT NULL,
+	[Staff_CMND] [varchar](50) NULL,
+	[Passenger_SDT] [varchar](50) NOT NULL,
+	[Trip_No] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Ticket] PRIMARY KEY CLUSTERED 
+(
+	[Ticket_No] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Trip]    Script Date: 4/30/2021 9:23:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Trip](
+	[Trip_No] [varchar](50) NOT NULL,
+	[Trip_Time] [time](7) NOT NULL,
+	[Gara_Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Trip] PRIMARY KEY CLUSTERED 
+(
+	[Trip_No] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Car]  WITH CHECK ADD  CONSTRAINT [FK_Car_Gara1] FOREIGN KEY([Gar_Name])
+REFERENCES [dbo].[Gara] ([Gara_Name])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Car] CHECK CONSTRAINT [FK_Car_Gara1]
+GO
+ALTER TABLE [dbo].[Driver]  WITH CHECK ADD  CONSTRAINT [FK_Driver_Staff] FOREIGN KEY([Driver_CMND])
+REFERENCES [dbo].[Staff] ([Staff_CMND])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Driver] CHECK CONSTRAINT [FK_Driver_Staff]
+GO
+ALTER TABLE [dbo].[Manage_Passenger_Care]  WITH CHECK ADD  CONSTRAINT [FK_Manage_Passenger_Care_Passenger] FOREIGN KEY([Passenger_SDT])
+REFERENCES [dbo].[Passenger] ([Passenger_SDT])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Manage_Passenger_Care] CHECK CONSTRAINT [FK_Manage_Passenger_Care_Passenger]
+GO
+ALTER TABLE [dbo].[Manage_Passenger_Care]  WITH CHECK ADD  CONSTRAINT [FK_Manage_Passenger_Care_Passenger_Care] FOREIGN KEY([Staff_CMND])
+REFERENCES [dbo].[Passenger_Care] ([Staff_CMND])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Manage_Passenger_Care] CHECK CONSTRAINT [FK_Manage_Passenger_Care_Passenger_Care]
+GO
+ALTER TABLE [dbo].[ManageDrive]  WITH CHECK ADD  CONSTRAINT [FK_ManageDrive_Car] FOREIGN KEY([License_Plates])
+REFERENCES [dbo].[Car] ([Car_License_Plates])
+GO
+ALTER TABLE [dbo].[ManageDrive] CHECK CONSTRAINT [FK_ManageDrive_Car]
+GO
+ALTER TABLE [dbo].[ManageDrive]  WITH CHECK ADD  CONSTRAINT [FK_ManageDrive_Driver] FOREIGN KEY([Drive_CMND])
+REFERENCES [dbo].[Driver] ([Driver_CMND])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageDrive] CHECK CONSTRAINT [FK_ManageDrive_Driver]
+GO
+ALTER TABLE [dbo].[ManageDrive]  WITH CHECK ADD  CONSTRAINT [FK_ManageDrive_Trip] FOREIGN KEY([Trip_No])
+REFERENCES [dbo].[Trip] ([Trip_No])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageDrive] CHECK CONSTRAINT [FK_ManageDrive_Trip]
+GO
+ALTER TABLE [dbo].[ManageDropOff]  WITH CHECK ADD  CONSTRAINT [FK_ManageDropOff_Drop_Off_Place] FOREIGN KEY([Drop_Off_Name])
+REFERENCES [dbo].[Drop_Off_Place] ([Drop_Off_Name])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageDropOff] CHECK CONSTRAINT [FK_ManageDropOff_Drop_Off_Place]
+GO
+ALTER TABLE [dbo].[ManageDropOff]  WITH CHECK ADD  CONSTRAINT [FK_ManageDropOff_Trip] FOREIGN KEY([Trip_No])
+REFERENCES [dbo].[Trip] ([Trip_No])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageDropOff] CHECK CONSTRAINT [FK_ManageDropOff_Trip]
+GO
+ALTER TABLE [dbo].[ManagePickUp]  WITH CHECK ADD  CONSTRAINT [FK_ManagePickUp_Pick_Up_Place] FOREIGN KEY([Pick_Up_Name])
+REFERENCES [dbo].[Pick_Up_Place] ([Pick_Up_Name])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManagePickUp] CHECK CONSTRAINT [FK_ManagePickUp_Pick_Up_Place]
+GO
+ALTER TABLE [dbo].[ManagePickUp]  WITH CHECK ADD  CONSTRAINT [FK_ManagePickUp_Trip] FOREIGN KEY([Trip_No])
+REFERENCES [dbo].[Trip] ([Trip_No])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManagePickUp] CHECK CONSTRAINT [FK_ManagePickUp_Trip]
+GO
+ALTER TABLE [dbo].[ManageReview]  WITH CHECK ADD  CONSTRAINT [FK_ManageReview_Passenger] FOREIGN KEY([Passenger_SDT])
+REFERENCES [dbo].[Passenger] ([Passenger_SDT])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageReview] CHECK CONSTRAINT [FK_ManageReview_Passenger]
+GO
+ALTER TABLE [dbo].[ManageReview]  WITH CHECK ADD  CONSTRAINT [FK_ManageReview_Trip] FOREIGN KEY([Trip_No])
+REFERENCES [dbo].[Trip] ([Trip_No])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[ManageReview] CHECK CONSTRAINT [FK_ManageReview_Trip]
+GO
+ALTER TABLE [dbo].[Passenger]  WITH CHECK ADD  CONSTRAINT [FK_Passenger_Account] FOREIGN KEY([Account])
+REFERENCES [dbo].[Account] ([Account])
+GO
+ALTER TABLE [dbo].[Passenger] CHECK CONSTRAINT [FK_Passenger_Account]
+GO
+ALTER TABLE [dbo].[Passenger_Care]  WITH CHECK ADD  CONSTRAINT [FK_Passenger_Care_Staff] FOREIGN KEY([Staff_CMND])
+REFERENCES [dbo].[Staff] ([Staff_CMND])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Passenger_Care] CHECK CONSTRAINT [FK_Passenger_Care_Staff]
+GO
+ALTER TABLE [dbo].[Staff]  WITH CHECK ADD  CONSTRAINT [FK_Staff_Account] FOREIGN KEY([Staff_Account])
+REFERENCES [dbo].[Account] ([Account])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Staff] CHECK CONSTRAINT [FK_Staff_Account]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Passenger] FOREIGN KEY([Passenger_SDT])
+REFERENCES [dbo].[Passenger] ([Passenger_SDT])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Passenger]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Staff] FOREIGN KEY([Staff_CMND])
+REFERENCES [dbo].[Staff] ([Staff_CMND])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Staff]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Trip] FOREIGN KEY([Trip_No])
+REFERENCES [dbo].[Trip] ([Trip_No])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Trip]
+GO
+ALTER TABLE [dbo].[Trip]  WITH CHECK ADD  CONSTRAINT [FK_Trip_Gara] FOREIGN KEY([Gara_Name])
+REFERENCES [dbo].[Gara] ([Gara_Name])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Trip] CHECK CONSTRAINT [FK_Trip_Gara]
+GO
+ALTER TABLE [dbo].[ManageReview]  WITH CHECK ADD  CONSTRAINT [CK_ManageReview] CHECK  (([Staff_Attitude]>=(1) AND [Staff_Attitude]<=(3)))
+GO
+ALTER TABLE [dbo].[ManageReview] CHECK CONSTRAINT [CK_ManageReview]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ManageReview', @level2type=N'CONSTRAINT',@level2name=N'CK_ManageReview'
+GO
+USE [master]
+GO
+ALTER DATABASE [QLyDatXe] SET  READ_WRITE 
+GO
