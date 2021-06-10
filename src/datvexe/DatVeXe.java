@@ -33,6 +33,9 @@ public class DatVeXe {
     public static void main(String[] args) {
         // TODO code application logic here jdbc:sqlserver://;databaseName=QLyDatXe
         layKetNoi();
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
     
 }
