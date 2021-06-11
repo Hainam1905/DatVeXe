@@ -5,31 +5,17 @@
  */
 package datvexe;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author huynh
  */
 public class ManageGara extends javax.swing.JFrame {
-    DefaultTableModel dtf;
+
     /**
      * Creates new form ManageGara
      */
     public ManageGara() {
         initComponents();
-        DatVeXe datvexe = new DatVeXe(); 
-        Connection connection;
-        connection = datvexe.layKetNoi();
-        performed(connection);
     }
 
     /**
@@ -41,54 +27,61 @@ public class ManageGara extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbListGaras = new javax.swing.JTable();
+        btShowGaraList = new javax.swing.JButton();
+        btAddNewGara = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("DANH SÁCH NHÀ XE");
-
-        tbListGaras.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh"
+        btShowGaraList.setText("Quản lí danh sách nhà xe");
+        btShowGaraList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btShowGaraListActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tbListGaras);
+        });
+
+        btAddNewGara.setText("Thêm nhà xe mới");
+        btAddNewGara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddNewGaraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(102, 102, 102)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btShowGaraListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btShowGaraListActionPerformed
+        this.setVisible(false);
+        ShowGaraList showGaraList = new ShowGaraList(); 
+        showGaraList.setLocationRelativeTo(null);
+        showGaraList.setVisible(true);
+    }//GEN-LAST:event_btShowGaraListActionPerformed
+
+    private void btAddNewGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddNewGaraActionPerformed
+            AddNewGara addNewGara = new AddNewGara(this, rootPaneCheckingEnabled);
+            addNewGara.setLocationRelativeTo(null);
+            addNewGara.setVisible(true);
+    }//GEN-LAST:event_btAddNewGaraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,41 +117,9 @@ public class ManageGara extends javax.swing.JFrame {
             }
         });
     }
-    public void performed(Connection conn){
-        String sql = "SELECT * FROM Gara"; 
-        
-        dtf = new DefaultTableModel(); 
-        ListSelectionModel listSelectionModel = tbListGaras.getSelectionModel(); 
-        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
-        tbListGaras.setModel(dtf);
-        
-        
-        dtf.addColumn("Tên nhà xe");
-        dtf.addColumn("Đánh giá");
-        dtf.addColumn("Giấy phép kinh doanh");
-        ResultSet rs; 
-        try { 
-            Statement stt = conn.createStatement();
-            rs = stt.executeQuery(sql); 
-            while(rs.next()){
-            String garaName = rs.getString(1);
-            String garaReview = rs.getString(3);
-            String Bus_Res_number = rs.getString(4);
-            
-            
-            
-            
-            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbListGaras;
+    private javax.swing.JButton btAddNewGara;
+    private javax.swing.JButton btShowGaraList;
     // End of variables declaration//GEN-END:variables
 }
