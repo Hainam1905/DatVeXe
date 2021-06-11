@@ -18,8 +18,8 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    String kind = "";
-    String user = "";
+    String kind = ""; // loại người dùng (staff,boss,..)
+    String user = ""; // tên đăng nhập của người dùng
     public Home(String user, String kind) {
         initComponents();
         label_staffName.setText(getNameStaff(user)+" ("+kind+")");

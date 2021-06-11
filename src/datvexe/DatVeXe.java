@@ -12,7 +12,8 @@ import java.sql.DriverManager;
  *
  * @author Vanic
  */
-public class DatVeXe {
+public class DatVeXe{
+    
     public static Connection layKetNoi(){
         Connection ketNoi = null;
         String url ="jdbc:sqlserver://;databaseName=QLyDatXe";
@@ -33,7 +34,8 @@ public class DatVeXe {
     public static void main(String[] args) {
         // TODO code application logic here jdbc:sqlserver://;databaseName=QLyDatXe
         //layKetNoi();
-        new Login().setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
     }
     
 }

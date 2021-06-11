@@ -25,6 +25,7 @@ public class infoStaff extends javax.swing.JFrame {
     String cmnd = "";
     public infoStaff(String userName) {
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         getInfoStaff(userName);
         this.userName = userName;
         clear();
