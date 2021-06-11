@@ -22,8 +22,11 @@ public class Home extends javax.swing.JFrame {
     String user = ""; // tên đăng nhập của người dùng
     public Home(String user, String kind) {
         initComponents();
-        label_staffName.setText(getNameStaff(user)+" ("+kind+")");
         this.kind = kind;
+        if(this.kind.equals("staff")){
+            btManageStaff.setVisible(false);
+            label_staffName.setText(getNameStaff(user)+" ("+kind+")");
+        }
         this.user = user;
     }
     
@@ -39,6 +42,8 @@ public class Home extends javax.swing.JFrame {
         label_staffName = new javax.swing.JLabel();
         btn_infoStaff = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
+        btManageStaff = new javax.swing.JButton();
+        btn_managerTicket = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,20 +63,39 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        btManageStaff.setText("Quản lí nhân viên");
+        btManageStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btManageStaffActionPerformed(evt);
+            }
+        });
+
+        btn_managerTicket.setText("Quản lý vé");
+        btn_managerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_managerTicketActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(label_staffName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
-                .addComponent(btn_logout)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_infoStaff)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_staffName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
+                        .addComponent(btn_logout)
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(155, 155, 155)
+                        .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,9 +104,13 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_staffName)
                     .addComponent(btn_logout))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_infoStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_infoStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,6 +140,20 @@ public class Home extends javax.swing.JFrame {
         this.setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btManageStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageStaffActionPerformed
+        this.setVisible(false);
+        ManageStaff manageStaff = new ManageStaff();
+        manageStaff.setLocationRelativeTo(null);
+        manageStaff.setVisible(true);
+    }//GEN-LAST:event_btManageStaffActionPerformed
+
+    private void btn_managerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_managerTicketActionPerformed
+
+        ManageTicket mt = new ManageTicket();
+        mt.setLocationRelativeTo(null);
+        mt.setVisible(true);
+    }//GEN-LAST:event_btn_managerTicketActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,8 +191,10 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btManageStaff;
     private javax.swing.JButton btn_infoStaff;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_managerTicket;
     private javax.swing.JLabel label_staffName;
     // End of variables declaration//GEN-END:variables
 }
