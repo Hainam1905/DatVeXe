@@ -14,20 +14,22 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author huynh
  */
-public class ShowStaffList extends javax.swing.JDialog {
+public class ShowStaffList extends javax.swing.JFrame{
     DefaultTableModel dtf;
     /**
      * Creates new form ShowStaffList
      */
     public ShowStaffList(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        
         initComponents();
         DatVeXe datvexe = new DatVeXe(); 
-        Connection connection = datvexe.layKetNoi();
+        Connection connection;
+        connection = datvexe.layKetNoi();
         performed(connection);
     }
 
@@ -52,17 +54,27 @@ public class ShowStaffList extends javax.swing.JDialog {
 
         tbListEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CMND", "Họ", "Tên", "SĐT", "Giới tính", "Tên đăng nhập", "Mật khẩu"
+                "CMND", "Họ", "Tên", "SĐT", "Giới tính", "Tên đăng nhập", "Mật khẩu", "Chức vụ", "Tình trạng làm việc"
             }
         ));
         jScrollPane1.setViewportView(tbListEmp);
 
         btDel.setText("Xóa nhân viên");
+        btDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDelActionPerformed(evt);
+            }
+        });
 
         btUpdate.setText("Cập nhật thông tin nhân viên");
+        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,14 +86,14 @@ public class ShowStaffList extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +111,76 @@ public class ShowStaffList extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelActionPerformed
+        if(tbListEmp.getSelectedRow()==-1) return;
+        
+        
+        DatVeXe datvexe = new DatVeXe(); 
+        Connection connection;
+        connection = datvexe.layKetNoi();
+        
+        
+        
+        
+        String sql = "UPDATE Staff SET Active='false',Staff_Account='noneactive' WHERE Staff_CMND=?";
+        String cmnd = "";
+        
+        cmnd = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),0);
+        String first = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),1);
+        String last = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),2);
+        
+        int confirm = JOptionPane.showConfirmDialog(rootPane,"Xác nhận thao tác xóa" ,"Bạn có chắc chắn xóa nhân viên \n"+cmnd+"\nHọ tên: "+first+" "+last, JOptionPane.YES_NO_OPTION);
+                
+        if(confirm ==JOptionPane.NO_OPTION){        
+                JOptionPane.showMessageDialog(rootPane, "Thao tác xóa bị hủy");
+        }else if(confirm ==JOptionPane.YES_OPTION){
+            PreparedStatement pstt;
+        try {
+            pstt = connection.prepareStatement(sql);
+            pstt.setString(1, cmnd);
+            int result = pstt.executeUpdate();
+            if(result>0){
+                JOptionPane.showMessageDialog(rootPane, "Xóa nhân viên thành công!");
+                performed(connection);
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+                
+        
+        
+        
+                 
+    }//GEN-LAST:event_btDelActionPerformed
+
+    private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+       if(tbListEmp.getSelectedRow()==-1) return; 
+        DatVeXe datvexe = new DatVeXe(); 
+        Connection connection;
+        connection = datvexe.layKetNoi();
+        
+        String cmnd;
+        
+        cmnd = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),0);
+        String first = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),1);
+        String last = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),2);
+        String phone = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),3);
+        String sex = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),4);
+        String account = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),5);
+        String password = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),6);
+        String kind = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),7);
+        String active = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),8);
+         
+        
+        UpEmp upEmp = new UpEmp(this, rootPaneCheckingEnabled,cmnd, first, last, phone, sex, account, password,kind,active);
+        
+        upEmp.setLocationRelativeTo(null);
+        upEmp.setVisible(true);
+        performed(connection);
+    }//GEN-LAST:event_btUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,8 +237,9 @@ public class ShowStaffList extends javax.swing.JDialog {
         dtf.addColumn("SĐT");
         dtf.addColumn("Giới tính");
         dtf.addColumn("Tên đăng nhập");
-        dtf.addColumn("Mật khẩu"); 
-        
+        dtf.addColumn("Mật khẩu");
+        dtf.addColumn("Chức vụ");
+        dtf.addColumn("Tình trạng làm việc"); 
         ResultSet rs; 
         try { 
             Statement stt = conn.createStatement();
@@ -168,26 +251,43 @@ public class ShowStaffList extends javax.swing.JDialog {
             String phone = rs.getString(4);
             String sex = rs.getString(5);
             String account = rs.getString(6);
-            String password=""; 
-            String sql2 = "SELECT Password from Account where Account.Account=?";
+            String password="";
+            String kind = "";
+            String sql2 = "SELECT Password,Kind from Account where Account.Account=?";
+            boolean active = rs.getBoolean(7); 
+            String activeString; 
+            if(active==true){
+                activeString = "Làm việc";
+            }else{
+                activeString = "Đã nghỉ việc";
+            }
+            
             PreparedStatement pstt = conn.prepareStatement(sql2);
             pstt.setString(1, account);
             ResultSet rs2 = pstt.executeQuery();
             
             if(rs2.next()){
             password = rs2.getString(1);
-                System.out.println("vao day roi ne!");
+            
+            kind = rs2.getString(2); 
+            if(kind.equals("noneactive")){
+                kind = " ";
+            }else if(kind.equals("boss")){
+                kind="Quản lí";
+            }else if(kind.equals("staff")){
+                kind = "Nhân viên"; 
+            }
             }
             
             
             
-            dtf.addRow(new Object[]{cmnd,firstName,lastName,phone,sex,account,password});
+            dtf.addRow(new Object[]{cmnd,firstName,lastName,phone,sex,account,password,kind,activeString});
             }
         } catch (SQLException ex) {
             Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDel;
