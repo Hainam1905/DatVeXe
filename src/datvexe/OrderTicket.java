@@ -5,6 +5,7 @@
  */
 package datvexe;
 
+import java.security.interfaces.RSAKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ public class OrderTicket extends javax.swing.JFrame {
     /**
      * Creates new form OrderTicket
      */
+    boolean checkNewUser = false;
     public OrderTicket() {
         initComponents();
         clear();
@@ -43,6 +45,24 @@ public class OrderTicket extends javax.swing.JFrame {
         label_lastName.setVisible(false);
         txt_firstName.setVisible(false);
         txt_lastName.setVisible(false);
+        getDataStation();
+    }
+    public void getDataStation(){
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql = "select station_Name from Station";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cbb_noiDi.addItem(rs.getString("station_Name"));
+                cbb_noiDen.addItem(rs.getString("station_Name"));
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("loi getDataStation"+e);
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,6 +150,17 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel10.setText("chọn chuyến xe: ");
 
+        cbb_tripName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbb_tripNameMouseClicked(evt);
+            }
+        });
+
+        cbb_bookTime.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbb_bookTimeMouseClicked(evt);
+            }
+        });
         cbb_bookTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbb_bookTimeActionPerformed(evt);
@@ -333,12 +364,101 @@ public class OrderTicket extends javax.swing.JFrame {
             txt_lastName.setVisible(true);
             txt_lastName.setText(s[0]);
             txt_firstName.setText(s[1]);
-        }else{
-            JOptionPane.showMessageDialog(this, "SDT chưa được đăng ký\n vui lòng nhập vào họ và tên của người dùng mới" ,"Inane Eror",JOptionPane.ERROR_MESSAGE);
+            checkNewUser = false;
+        }else if (!txt_SDT.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "SDT chưa được đăng ký\n vui lòng nhập vào họ và tên của hành khách mới" ,"Inane Eror",JOptionPane.ERROR_MESSAGE);
             txt_lastName.setText("");
             txt_firstName.setText("");
+            label_firstName.setVisible(true);
+            label_lastName.setVisible(true);
+            txt_firstName.setVisible(true);
+            txt_lastName.setVisible(true);
+            checkNewUser = true;
+        }else{
+            label_firstName.setVisible(false);
+            label_lastName.setVisible(false);
+            txt_firstName.setVisible(false);
+            txt_lastName.setVisible(false);
+            checkNewUser = false;
         }
     }//GEN-LAST:event_txt_SDTFocusLost
+
+    public String convertStationNametoStationNo(String station_Name){
+        String Station_No = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select station_No from Station where station_Name ='"+station_Name+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Station_No = rs.getString("station_No");
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("loi convertStationNametoStationNo"+e);
+        }
+        return Station_No;
+    }
+    
+    public String[] searchGaraName(String noiDi,String noiDen){
+        String[] listGaraName = new String[100];
+        int d = 0;
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select GaraName from TotalScheduels t inner join ScheduelOfGara s on t.SChedule_no = s.Scheduel_no where BeginStation ='"+noiDi+"' and EndStation = '"+noiDen+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listGaraName[d] = rs.getString("GaraName");
+                d++;
+            }
+        } catch (Exception e) {
+            System.out.println("loi searchGaraName"+e);
+        }
+        return listGaraName;
+    }
+    private void cbb_tripNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_tripNameMouseClicked
+        cbb_tripName.removeAllItems();
+        String noiDi = String.valueOf(cbb_noiDi.getSelectedItem());
+        String noiDen = String.valueOf(cbb_noiDen.getSelectedItem());
+        String ma_NoiDi = convertStationNametoStationNo(noiDi);
+        String ma_NoiDen = convertStationNametoStationNo(noiDen);
+        String[] listGaraName = new String[100];
+        listGaraName = searchGaraName(ma_NoiDi, ma_NoiDen);
+        for (int i=0;i<=100;i++){
+            if (listGaraName[i]!=null){
+                cbb_tripName.addItem(listGaraName[i]);
+            }else break;  
+        }
+    }//GEN-LAST:event_cbb_tripNameMouseClicked
+    public String[] searchTime(String garaName){
+        String[] listTime = new String[100];
+        int d = 0;
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select DepartTime from ScheduelOfGara where GaraName ='"+garaName+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listTime[d] = rs.getString("DepartTime");
+                d++;
+            }
+        } catch (Exception e) {
+            System.out.println("loi searchTime"+e);
+        }
+        return listTime;
+    }
+    private void cbb_bookTimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_bookTimeMouseClicked
+        cbb_bookTime.removeAllItems();
+        String GaraName = String.valueOf(cbb_tripName.getSelectedItem());
+        String[] listTime = searchTime(GaraName);
+        for (int i = 0;i<=100;i++){
+            if (listTime[i]!= null){
+                cbb_bookTime.addItem(listTime[i]);
+            }else break;
+        }
+    }//GEN-LAST:event_cbb_bookTimeMouseClicked
 
     /**
      * @param args the command line arguments
