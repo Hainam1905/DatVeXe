@@ -154,9 +154,16 @@ public class Login extends javax.swing.JFrame {
         switch(kind){
             case "staff":
                 this.setVisible(false);
-                new Home(userName,kind).setVisible(true);
+                Home home = new Home(userName, kind);
+                home.setLocationRelativeTo(null);
+                home.setVisible(true);
                 break;
-             
+             case "boss":
+                this.setVisible(false);
+                Home home2 = new Home(userName, kind);
+                home2.setLocationRelativeTo(null);
+                home2.setVisible(true);
+                break;
             case "none":
                 JOptionPane.showMessageDialog(this, "tài khoản không tồn tại hoặc mật khẩu không đúng","Inane Eror",JOptionPane.ERROR_MESSAGE);
                 break;
