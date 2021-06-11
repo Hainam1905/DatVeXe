@@ -156,6 +156,7 @@ public class Login extends javax.swing.JFrame {
                 this.setVisible(false);
                 new Home(userName,kind).setVisible(true);
                 break;
+             
             case "none":
                 JOptionPane.showMessageDialog(this, "tài khoản không tồn tại hoặc mật khẩu không đúng","Inane Eror",JOptionPane.ERROR_MESSAGE);
                 break;
