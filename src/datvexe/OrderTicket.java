@@ -23,6 +23,7 @@ public class OrderTicket extends javax.swing.JFrame {
     boolean checkNewUser = false;
     public OrderTicket() {
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         clear();
     }
     
@@ -184,6 +185,11 @@ public class OrderTicket extends javax.swing.JFrame {
         btn_order.setText("Đặt vé");
 
         btn_back.setText("<");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -459,6 +465,13 @@ public class OrderTicket extends javax.swing.JFrame {
             }else break;
         }
     }//GEN-LAST:event_cbb_bookTimeMouseClicked
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+       this.setVisible(false);
+       ManageTicket mt = new ManageTicket();
+        mt.setLocationRelativeTo(null);
+        mt.setVisible(true);
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments

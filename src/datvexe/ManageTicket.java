@@ -87,6 +87,11 @@ public class ManageTicket extends javax.swing.JFrame {
         });
 
         btn_orderTicket.setText("Đặt vé");
+        btn_orderTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderTicketActionPerformed(evt);
+            }
+        });
 
         btn_cancelTicket.setText("Hủy vé");
 
@@ -126,6 +131,13 @@ public class ManageTicket extends javax.swing.JFrame {
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_orderTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderTicketActionPerformed
+        this.setVisible(false);
+        OrderTicket order = new OrderTicket();
+        order.setLocationRelativeTo(null);
+        order.setVisible(true);
+    }//GEN-LAST:event_btn_orderTicketActionPerformed
 
     /**
      * @param args the command line arguments
