@@ -25,7 +25,7 @@ public class OrderTicket extends javax.swing.JFrame {
     boolean checkNewUser = false;
     public OrderTicket() {
         initComponents();
-        //this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         clear();
         label_errFirstName.setForeground(Color.red);
         label_errGaraName.setForeground(Color.red);
