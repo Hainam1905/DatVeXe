@@ -5,10 +5,12 @@
  */
 package datvexe;
 
+import java.awt.Color;
 import java.security.interfaces.RSAKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +27,13 @@ public class OrderTicket extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         clear();
+        label_errFirstName.setForeground(Color.red);
+        label_errGaraName.setForeground(Color.red);
+        label_errLastName.setForeground(Color.red);
+        label_errSDT.setForeground(Color.red);
+        label_errTime.setForeground(Color.red);
+        label_errCMND.setForeground(Color.red);
+
     }
     
     public void clear(){
@@ -33,12 +42,12 @@ public class OrderTicket extends javax.swing.JFrame {
         txt_lastName.setText("");
         txt_note.setText("");
         txt_price.setText("");
+        txt_price.setEditable(false);
         txt_staffCMND.setText("");
         cbb_bookTime.removeAllItems();
         cbb_noiDen.removeAllItems();
         cbb_noiDi.removeAllItems();
         cbb_seat.removeAllItems();
-        cbb_seatKind.removeAllItems();
         cbb_tripName.removeAllItems();
         cb_isPaid.setSelected(false);
         
@@ -46,6 +55,13 @@ public class OrderTicket extends javax.swing.JFrame {
         label_lastName.setVisible(false);
         txt_firstName.setVisible(false);
         txt_lastName.setVisible(false);
+        
+        label_errFirstName.setText("");
+        label_errGaraName.setText("");
+        label_errLastName.setText("");
+        label_errSDT.setText("");
+        label_errTime.setText("");
+        label_errCMND.setText("");
         getDataStation();
     }
     public void getDataStation(){
@@ -102,6 +118,12 @@ public class OrderTicket extends javax.swing.JFrame {
         txt_staffCMND = new javax.swing.JTextField();
         btn_order = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        label_errSDT = new javax.swing.JLabel();
+        label_errLastName = new javax.swing.JLabel();
+        label_errFirstName = new javax.swing.JLabel();
+        label_errGaraName = new javax.swing.JLabel();
+        label_errTime = new javax.swing.JLabel();
+        label_errCMND = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,7 +192,25 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel7.setText("chọn ghế: ");
 
+        cbb_seat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbb_seatMouseClicked(evt);
+            }
+        });
+
         jLabel8.setText("Loại ghế: ");
+
+        cbb_seatKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loai 1", "loai 2", "loai 3" }));
+        cbb_seatKind.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_seatKindItemStateChanged(evt);
+            }
+        });
+        cbb_seatKind.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cbb_seatKindMouseEntered(evt);
+            }
+        });
 
         jLabel9.setText("Giá ghế: ");
 
@@ -182,7 +222,18 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel12.setText("CMND của nhân viên đặt vé: ");
 
+        txt_staffCMND.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_staffCMNDFocusLost(evt);
+            }
+        });
+
         btn_order.setText("Đặt vé");
+        btn_order.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderActionPerformed(evt);
+            }
+        });
 
         btn_back.setText("<");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
@@ -199,69 +250,74 @@ public class OrderTicket extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_staffCMND)
+                            .addComponent(btn_order, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label_errCMND, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbb_seat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_SDT)
-                                        .addGap(42, 42, 42)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label_lastName))
-                                .addGap(6, 6, 6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(cbb_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(cbb_tripName, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 2, Short.MAX_VALUE)))
-                        .addGap(15, 15, 15)
+                            .addComponent(jLabel8)
+                            .addComponent(cbb_seatKind, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_firstName)
-                            .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(cbb_bookTime, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19))
+                                .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cb_isPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)))
+                    .addComponent(jLabel11)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(cbb_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(99, 99, 99)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbb_tripName, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(69, 69, 69))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(label_errGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbb_bookTime, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label_errTime, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_errLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(label_errFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btn_back)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_errSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbb_seat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(51, 51, 51)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8)
-                                        .addComponent(cbb_seatKind, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(68, 68, 68)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(cb_isPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addComponent(jLabel11)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(59, 59, 59)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_staffCMND)
-                                        .addComponent(btn_order, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(btn_back))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label_lastName))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_firstName)
+                            .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,47 +327,62 @@ public class OrderTicket extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(label_lastName)
-                    .addComponent(label_firstName))
+                    .addComponent(label_firstName)
+                    .addComponent(label_lastName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_errSDT)
+                    .addComponent(label_errLastName)
+                    .addComponent(label_errFirstName))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_tripName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_bookTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label_errGaraName)
+                            .addComponent(label_errTime))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbb_seat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_seatKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_isPaid))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_staffCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txt_staffCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_errCMND)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_order, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -473,6 +544,264 @@ public class OrderTicket extends javax.swing.JFrame {
         mt.setVisible(true);
     }//GEN-LAST:event_btn_backActionPerformed
 
+    public String searchTrip_No(String garaName, String time){
+        String trip_No = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select Trip_No from trip t inner join ScheduelOfGara s on t.TripOfGara_no = s.TripOfGara_no where GaraName = '"+garaName+"' and DepartTime ='"+time+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                trip_No = rs.getString("Trip_No");
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("loi searchTrip_No"+e);
+        }
+        return trip_No;
+    }
+    
+    public int searchSeatAmount(String trip_No){
+        String seatAmount = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select Car_Seat_Amount from Car c inner join ManageDrive m on c.Car_License_Plates = m.License_Plates where Trip_No = '"+trip_No+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return 0;
+            seatAmount = rs.getString("Car_Seat_Amount");
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("loi searchSeatAmount"+e);
+        }
+        return Integer.parseInt(seatAmount);
+    }
+    
+    public Vector searchOrderSeat(String trip_No){
+        Vector listSeat = new Vector();
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select Seat_Position from Ticket where Trip_No = '"+trip_No+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listSeat.add(rs.getString("Seat_Position"));
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Loi searchOrderSeat"+e);
+        }
+        return listSeat;
+    }
+    private void cbb_seatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_seatMouseClicked
+        cbb_seat.removeAllItems();
+        String trip_No = "";
+        String garaName = String.valueOf(cbb_tripName.getSelectedItem());
+        String time = String.valueOf(cbb_bookTime.getSelectedItem());
+        if (!garaName.equals("null") && !time.equals("null")){
+            trip_No = searchTrip_No(garaName, time);
+        
+            int seatAmount = searchSeatAmount(trip_No);
+            if (seatAmount == 0){
+                JOptionPane.showMessageDialog(this, "Chưa có xe nào cho chuyến đi này \n Vui lòng thay đổi thông tin chuyến đi khác!","Inane Eror",JOptionPane.ERROR_MESSAGE);
+            }else {
+                Vector listSeat = new Vector();
+                listSeat = searchOrderSeat(trip_No);
+                for (int i=1;i<=seatAmount;i++){
+                    if (!listSeat.contains(String.valueOf(i))){
+                        cbb_seat.addItem(String.valueOf(i));
+                    }
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_cbb_seatMouseClicked
+
+    private void cbb_seatKindMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_seatKindMouseEntered
+        
+    }//GEN-LAST:event_cbb_seatKindMouseEntered
+    
+    public String priceTicket(String trip_No){
+        String priceTicket = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select TicketPrice from Trip t inner join ScheduelOfGara s on t.TripOfGara_no = s.TripOfGara_no where Trip_No = '"+trip_No+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                double price = Double.valueOf(rs.getString("TicketPrice"));
+                priceTicket = String.valueOf((int)price);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Loi priceTicket funtion"+e);
+        }
+        return priceTicket+" vnd";
+    }
+    private void cbb_seatKindItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_seatKindItemStateChanged
+        String trip_No = "";
+        String garaName = String.valueOf(cbb_tripName.getSelectedItem());
+        String time = String.valueOf(cbb_bookTime.getSelectedItem());
+        if (!garaName.equals("null") && !time.equals("null")){
+            trip_No = searchTrip_No(garaName, time);
+            txt_price.setText(priceTicket(trip_No));
+        }
+        
+    }//GEN-LAST:event_cbb_seatKindItemStateChanged
+
+    public boolean checkStaffCMND(String staffCMND){
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select * from Staff where Staff_CMND ='"+staffCMND+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return false;
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Loi checkStaffMNND"+e);
+        }
+        return true;
+    }
+    private void txt_staffCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_staffCMNDFocusLost
+        String staffCMND = txt_staffCMND.getText();
+        staffCMND.trim();
+        if (!staffCMND.equals("")){
+            if (!checkStaffCMND(staffCMND)){
+                JOptionPane.showMessageDialog(this, "CMND của nhân viên vừa nhập không tồn tại","Inane Eror",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txt_staffCMNDFocusLost
+    
+    public String sinhMa(String cotMa,String tenBang){
+        String kq = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql = "select MAX("+cotMa+") as X from "+tenBang;
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                kq = rs.getString("X");
+            }
+            if (kq == null){
+                return kq = "0";
+            }else{
+                int so = Integer.valueOf(kq)+1;
+                kq = String.valueOf(so);
+            }
+        } catch (Exception e) {
+            System.out.println(e+"loi sinh ma");
+        }
+        return kq;
+    }
+    
+    public void orderTicket(String seatPosition,String seatKind,String isPaid, String note, String time, String staffCMND, String sdt, String trip_No){
+        String ticKet_No = sinhMa("Ticket_No", "Ticket");
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="insert into Ticket values (?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ps.setString(1, ticKet_No);
+            ps.setString(2, seatPosition);
+            ps.setString(3, seatKind);
+            ps.setString(4, isPaid);
+            ps.setString(5, note);
+            ps.setString(6, time);
+            ps.setString(7, staffCMND);
+            ps.setString(8, sdt);
+            ps.setString(9, trip_No);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Loi orderTicket"+e);
+        }
+    }
+    
+    public void addNewPassenger(String sdt, String firstName, String lastName){
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="insert into Passenger (Passenger_SDT, Passenger_First_Name, Passenger_Last_Name) values (?,?,?)";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ps.setString(1, sdt);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Loi addNewPassenger"+e);
+        }
+    }
+    private void btn_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderActionPerformed
+        String sdt = txt_SDT.getText();
+        String garaName = String.valueOf(cbb_tripName.getSelectedItem());
+        String time = String.valueOf(cbb_bookTime.getSelectedItem());
+        String seatPosition = String.valueOf(cbb_seat.getSelectedItem());
+        String seatKind = String.valueOf(cbb_seatKind.getSelectedItem());
+        String isPaid = cb_isPaid.isSelected() ? "1" : "0";
+        String note = txt_note.getText();
+        String staffCMND = txt_staffCMND.getText();
+        String lastName = "";
+        String firstName = "";
+        boolean check1 = false;
+        boolean check2 = false;
+        boolean check3 = false;
+        boolean check4 = false;
+        if (!sdt.equals("")){
+            label_errSDT.setText("");
+            lastName = txt_lastName.getText();
+            firstName = txt_firstName.getText();
+            if (lastName.equals("")){
+                label_errLastName.setText("Họ không được bỏ trống");
+            }else label_errLastName.setText("");
+            if (firstName.equals("")){ 
+                label_errFirstName.setText("Tên không được bỏ trống");
+            }else label_errFirstName.setText("");
+            if (!lastName.equals("") && !firstName.equals("")) check1 = true;
+        }else {
+            check1 = false;
+            label_errSDT.setText("SDT không được bỏ trống");
+        }
+        if (garaName.equals("null")){
+            check2 = false;
+            label_errGaraName.setText("Hãy chọn nhà xe!");
+        }else {
+            check2 = true;
+            label_errGaraName.setText("");
+        }
+        if (time.equals("null")){
+            check3 = false;
+            label_errTime.setText("Hãy chọn thời gian đi!");
+        }else {
+            check3 = true;
+            label_errTime.setText("");
+        }
+        if (staffCMND.equals("")){
+            check4 = false;
+            label_errCMND.setText("nhập CMND nhân viên");
+        }else{
+            check4 = true;
+            label_errCMND.setText("");
+        }
+        if (check1 == true && check2 == true && check3 == true && check4 == true){
+            if (!seatPosition.equals("null") && !txt_price.getText().equals("")){
+                String trip_No = searchTrip_No(garaName, time);
+                if (checkNewUser == true){
+                    addNewPassenger(sdt,firstName,lastName);
+                }
+                orderTicket(seatPosition, seatKind, isPaid, note, time, staffCMND, sdt, trip_No);
+                JOptionPane.showMessageDialog(this, "Đã đặt vé thành công");
+                btn_backActionPerformed(evt);
+            }else{
+                JOptionPane.showMessageDialog(this, "Hãy chọn ghế và loại ghế trước khi đặt vé!","Inane Warning",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btn_orderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,6 +858,12 @@ public class OrderTicket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel label_errCMND;
+    private javax.swing.JLabel label_errFirstName;
+    private javax.swing.JLabel label_errGaraName;
+    private javax.swing.JLabel label_errLastName;
+    private javax.swing.JLabel label_errSDT;
+    private javax.swing.JLabel label_errTime;
     private javax.swing.JLabel label_firstName;
     private javax.swing.JLabel label_lastName;
     private javax.swing.JTextField txt_SDT;
