@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ShowGaraList extends javax.swing.JFrame {
     DefaultTableModel dtf;
+    
     /**
      * Creates new form ManageGara
      */
@@ -44,6 +46,9 @@ public class ShowGaraList extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListGaras = new javax.swing.JTable();
+        btDelGara = new javax.swing.JButton();
+        btUpdateGara = new javax.swing.JButton();
+        btViewDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,29 +58,59 @@ public class ShowGaraList extends javax.swing.JFrame {
 
         tbListGaras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh"
+                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(tbListGaras);
+
+        btDelGara.setText("Xòa nhà xe");
+        btDelGara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDelGaraActionPerformed(evt);
+            }
+        });
+
+        btUpdateGara.setText("Cập nhật thông tin nhà xe");
+        btUpdateGara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateGaraActionPerformed(evt);
+            }
+        });
+
+        btViewDetail.setText("Xem chi tiết");
+        btViewDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btViewDetailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btDelGara, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btUpdateGara, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,11 +119,187 @@ public class ShowGaraList extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btDelGara, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btUpdateGara, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btDelGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelGaraActionPerformed
+        if(tbListGaras.getSelectedRow()==-1) return;
+        
+        
+        DatVeXe datvexe = new DatVeXe(); 
+        Connection connection;
+        connection = datvexe.layKetNoi();
+        
+        
+        
+        
+        String sql = "UPDATE Gara SET Active='false',Account=NULL WHERE Gara_Name=?";
+        String sql2 = "SELECT Account from Gara where Gara_Name=?";
+        String sql3 = "DELETE Account where Account=?";
+        String garaName = "";
+        String account = ""; 
+        garaName = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),0);
+        
+        
+        int confirm = JOptionPane.showConfirmDialog(rootPane,"Xác nhận thao tác xóa" ,"Bạn có chắc chắn xóa nhà xe \n"+garaName, JOptionPane.YES_NO_OPTION);
+                
+        if(confirm ==JOptionPane.NO_OPTION){        
+                JOptionPane.showMessageDialog(rootPane, "Thao tác xóa bị hủy");
+        }else if(confirm ==JOptionPane.YES_OPTION){
+            PreparedStatement pstt;
+        try {
+            PreparedStatement pstt2 = connection.prepareStatement(sql2);
+            pstt2.setString(1, garaName);
+            ResultSet rs2 = pstt2.executeQuery(); 
+            if(rs2.next()){
+                account = rs2.getString(1);
+            }
+         } catch (SQLException ex) {
+                Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        
+        
+        
+            //cap nhat trang thai: active = false, account = NULL
+        try {
+            pstt = connection.prepareStatement(sql);
+            pstt.setString(1, garaName);
+            int result = pstt.executeUpdate();
+            if(result>0){
+                
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        PreparedStatement pstt3;
+            try {
+                pstt3 = connection.prepareStatement(sql3);
+                pstt3.setString(1, account);
+                int x= pstt3.executeUpdate();
+                if(x>0){
+                    JOptionPane.showMessageDialog(rootPane, "Xóa nhà xe thành công!");
+                    performed(connection);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+                
+    }//GEN-LAST:event_btDelGaraActionPerformed
+
+    private void btUpdateGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateGaraActionPerformed
+        if(tbListGaras.getSelectedRow()==-1) return ; 
+        DatVeXe datvexe = new DatVeXe(); 
+        Connection connection;
+        connection = datvexe.layKetNoi();
+        
+        String sql = "select Gara_Picture,Account from Gara where Gara_Name=?";
+        String sql2= "select password from Account where account = ?"; 
+        
+        
+        String garaName = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),0);
+        String picture ="";
+        String account="";
+        String password="";
+        String review = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),1);
+        String BusResNum = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),2);
+        String active = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),3);
+        PreparedStatement pstt;
+        try {
+            pstt = connection.prepareStatement(sql);
+        pstt.setString(1, garaName);
+        ResultSet rs = pstt.executeQuery(); 
+        if(rs.next()){
+            picture = rs.getString(1);
+            account = rs.getString(2);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        PreparedStatement pstt2;
+        try {
+            pstt2 = connection.prepareStatement(sql2);
+            pstt2.setString(1, account);
+            ResultSet rs = pstt2.executeQuery();
+            if(rs.next()){
+                password = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        UpGara upGara = new UpGara(this, rootPaneCheckingEnabled,garaName,picture,review,BusResNum,active,account, password);
+        upGara.setLocationRelativeTo(null);
+        upGara.setVisible(true);
+        performed(connection);
+    }//GEN-LAST:event_btUpdateGaraActionPerformed
+
+    private void btViewDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btViewDetailActionPerformed
+        
+        if(tbListGaras.getSelectedRow()==-1) return; 
+        DatVeXe datvexe = new DatVeXe(); 
+        Connection connection;
+        connection = datvexe.layKetNoi();
+        
+        String sql = "select Gara_Picture,Account from Gara where Gara_Name=?";
+        String sql2= "select password from Account where account = ?"; 
+        
+        String garaName = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),0);
+        String picture ="";
+        String review = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),1);
+        String BusResNum = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),2);
+        String active = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),3);
+        String account=""; 
+        String password=""; 
+        PreparedStatement pstt;
+        try {
+            pstt = connection.prepareStatement(sql);
+        pstt.setString(1, garaName);
+        ResultSet rs = pstt.executeQuery(); 
+        if(rs.next()){
+            picture = rs.getString(1);
+            account = rs.getString(2);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        PreparedStatement pstt2;
+        try {
+            pstt2 = connection.prepareStatement(sql2);
+            pstt2.setString(1, account);
+            ResultSet rs = pstt2.executeQuery();
+            if(rs.next()){
+                password = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        ViewDetailGara viewDetailGara = new ViewDetailGara(this, rootPaneCheckingEnabled,garaName,picture,review,BusResNum,active,account, password);
+        viewDetailGara.setLocationRelativeTo(null);
+        viewDetailGara.setVisible(true);
+    }//GEN-LAST:event_btViewDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,18 +338,35 @@ public class ShowGaraList extends javax.swing.JFrame {
             }
         });
     }
-    public void performed(Connection conn){
-        String sql = "SELECT * FROM Gara"; 
-        
-        dtf = new DefaultTableModel(); 
-        ListSelectionModel listSelectionModel = tbListGaras.getSelectionModel(); 
-        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
-        tbListGaras.setModel(dtf);
+    public void performedActiveGaras(DefaultTableModel dtf, Connection conn){
+        String sql = "SELECT * FROM Gara where active = 'True'"; 
         
         
-        dtf.addColumn("Tên nhà xe");
-        dtf.addColumn("Đánh giá");
-        dtf.addColumn("Giấy phép kinh doanh");
+        
+        ResultSet rs; 
+        try { 
+            Statement stt = conn.createStatement();
+            rs = stt.executeQuery(sql); 
+            while(rs.next()){
+            String garaName = rs.getString(1);
+            String garaReview = rs.getString(3);
+            String Bus_Res_number = rs.getString(4);
+            boolean active = rs.getBoolean(5);
+            String statement; 
+            if(active==true) statement = "Đang hợp tác";
+            else statement = "Ngừng hợp tác";
+            
+            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    public void performedInActiveGaras(DefaultTableModel dtf,Connection conn){
+        String sql = "SELECT * FROM Gara where active = 'False'"; 
+        
         ResultSet rs; 
         try { 
             Statement stt = conn.createStatement();
@@ -148,10 +376,11 @@ public class ShowGaraList extends javax.swing.JFrame {
             String garaReview = rs.getString(3);
             String Bus_Res_number = rs.getString(4);
             
+            String statement = "Ngừng hợp tác";
             
             
+            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement});
             
-            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number});
             }
         } catch (SQLException ex) {
             Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
@@ -159,7 +388,24 @@ public class ShowGaraList extends javax.swing.JFrame {
         
         
     }
+    public void performed(Connection conn){
+        dtf = new DefaultTableModel();
+        ListSelectionModel listSelectionModel = tbListGaras.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbListGaras.setModel(dtf);
+        
+        
+        dtf.addColumn("Tên nhà xe");
+        dtf.addColumn("Đánh giá");
+        dtf.addColumn("Giấy phép kinh doanh");
+        dtf.addColumn("Trạng thái");
+        performedActiveGaras(dtf, conn);
+        performedInActiveGaras(dtf,conn);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDelGara;
+    private javax.swing.JButton btUpdateGara;
+    private javax.swing.JButton btViewDetail;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListGaras;

@@ -71,7 +71,7 @@ public class ManageGara extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btShowGaraListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btShowGaraListActionPerformed
-        this.setVisible(false);
+        
         ShowGaraList showGaraList = new ShowGaraList(); 
         showGaraList.setLocationRelativeTo(null);
         showGaraList.setVisible(true);

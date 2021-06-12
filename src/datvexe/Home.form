@@ -34,11 +34,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btn_infoStaff" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btManageGara" max="32767" attributes="0"/>
-                          <Component id="btManageStaff" pref="157" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="btManageStaff" min="-2" pref="166" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btManageGara" min="-2" pref="157" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -53,14 +52,13 @@
                   <Component id="label_staffName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_logout" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_infoStaff" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="btManageStaff" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btManageStaff" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="btManageGara" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="btManageGara" min="-2" pref="53" max="-2" attributes="0"/>
-              <EmptySpace pref="55" max="32767" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

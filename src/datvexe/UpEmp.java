@@ -404,7 +404,7 @@ public class UpEmp extends javax.swing.JDialog {
         
         //truoc do lam, bay gio nghi: 
         else{
-                String sql = "UPDATE Staff set Staff_CMND=?,Staff_First_Name=?,Staff_Last_Name=?,Staff_SDT=?,Staff_Gender=?,Staff_Account='noneactive',Active=? where Staff_CMND=?";
+                String sql = "UPDATE Staff set Staff_CMND=?,Staff_First_Name=?,Staff_Last_Name=?,Staff_SDT=?,Staff_Gender=?,Staff_Account=NULL,Active=? where Staff_CMND=?";
                 try {
                     PreparedStatement pstt  = conn.prepareStatement(sql);
                     pstt.setString(1, cmnd);
