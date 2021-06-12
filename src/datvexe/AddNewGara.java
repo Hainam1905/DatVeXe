@@ -5,12 +5,20 @@
  */
 package datvexe;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -25,7 +33,9 @@ public class AddNewGara extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    String saveFolder = System.getProperty("user.dir")+"\\galaryPicture\\";
+    String nameofPicture ="";
+    File file; 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,9 +51,14 @@ public class AddNewGara extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         btAddGara = new javax.swing.JButton();
         txGaraName = new javax.swing.JTextField();
-        txGaraPicture = new javax.swing.JTextField();
         txGaraReview = new javax.swing.JTextField();
         txBusResNum = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txAccount = new javax.swing.JTextField();
+        txPassword = new javax.swing.JTextField();
+        btPickPicture = new javax.swing.JButton();
+        lbPicture = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,6 +77,19 @@ public class AddNewGara extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setText("Tên đăng nhập");
+
+        jLabel6.setText("Mật khẩu");
+
+        btPickPicture.setText("Chọn ảnh...");
+        btPickPicture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPickPictureActionPerformed(evt);
+            }
+        });
+
+        lbPicture.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,41 +100,64 @@ public class AddNewGara extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(110, 110, 110)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txGaraName)
-                    .addComponent(txGaraPicture)
-                    .addComponent(txGaraReview)
-                    .addComponent(txBusResNum, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                .addContainerGap(65, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btAddGara, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btAddGara, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txGaraName)
+                        .addComponent(txGaraReview)
+                        .addComponent(txBusResNum, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addComponent(txAccount)
+                        .addComponent(txPassword))
+                    .addComponent(btPickPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addComponent(lbPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txGaraPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txGaraReview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txBusResNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(btAddGara, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(btPickPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txGaraReview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txBusResNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btAddGara, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,25 +165,48 @@ public class AddNewGara extends javax.swing.JDialog {
 
     private void btAddGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddGaraActionPerformed
         String garaName = txGaraName.getText(); 
-        String garaPicture = txGaraPicture.getText(); 
         String garaReview = txGaraReview.getText();
         String BusResNum = txBusResNum.getText(); 
-        
+        String account = txAccount.getText();
+        String password = txPassword.getText();
         
         
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
-        String sql = "INSERT INTO Gara VALUES(?,?,?,?)";
         
-        PreparedStatement pstt;
+        
+        String sql = "INSERT INTO ACCOUNT values(?,?,?)";
+                PreparedStatement pstt;
+                try {
+                    pstt = conn.prepareStatement(sql);
+                    pstt.setString(1, account);
+                    pstt.setString(2, password);
+                    pstt.setString(3, "Gara");
+                    int x = pstt.executeUpdate();
+                    if(x>0){
+                        
+                    }
+                 
+                } catch (SQLException ex) {
+                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+        
+        
+        
+        String sql2 = "INSERT INTO Gara VALUES(?,?,?,?,?,?)";
+        
+        PreparedStatement pstt2;
         try {
             
-            pstt = conn.prepareStatement(sql);
-            pstt.setString(1, garaName);
-            pstt.setString(2, garaPicture);
-            pstt.setString(3, garaReview);
-            pstt.setString(4, BusResNum);
-            int x = pstt.executeUpdate();
+            pstt2 = conn.prepareStatement(sql2);
+            pstt2.setString(1, garaName);
+            pstt2.setString(2, nameofPicture);
+            pstt2.setString(3, garaReview);
+            pstt2.setString(4, BusResNum);
+            pstt2.setBoolean(5,true);
+            pstt2.setString(6,account);
+            int x = pstt2.executeUpdate();
             if(x>0){
                 JOptionPane.showMessageDialog(rootPane, "Thêm nhà xe thành công!");
                 this.dispose();
@@ -144,9 +218,56 @@ public class AddNewGara extends javax.swing.JDialog {
             Logger.getLogger(AddNewEmployer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        //save file ra thu muc galaryPicture: 
+            //luu file anh ra vung nho
+            BufferedImage bImage = null;
+            try {
+
+                bImage = ImageIO.read(file);
+                ImageIO.write(bImage, "jpg", new File(saveFolder+nameofPicture));
+                ImageIO.write(bImage, "png", new File(saveFolder+nameofPicture));
+                ImageIO.write(bImage, "jpeg", new File(saveFolder+nameofPicture));
+ 
+         } catch (IOException e) {
+               System.out.println("Exception occured :" + e.getMessage());
+         }
+         System.out.println("Images were written succesfully.");
     }//GEN-LAST:event_btAddGaraActionPerformed
 
+    private void btPickPictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPickPictureActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter extension = new FileNameExtensionFilter("Hình ảnh", "jpg","jpeg","png");
+        fileChooser.setFileFilter(extension);
+        fileChooser.setMultiSelectionEnabled(false);
+        
+        int x = fileChooser.showDialog(this, "Chọn ảnh nhà xe");
+        if(x==JFileChooser.APPROVE_OPTION){
+            file = fileChooser.getSelectedFile();
+            ImageIcon icon  = new ImageIcon(file.getAbsolutePath());
+            Image image = icon.getImage();
+            Image newImage = image.getScaledInstance(410,410, java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newImage);
+            lbPicture.setIcon(icon);
+          //lay ten file
+          System.out.println(file.getAbsolutePath());
+                
+            String finalString = file.getAbsolutePath();
+            char s = '\\';
+            String result="";
+            for(int i =finalString.length()-1;i>=0;i--){
+                char compareStr = finalString.charAt(i);
+                if(Character.compare(s, compareStr)==0){
+                    result = finalString.substring(i+1);
+                    break;
+                }
+            }
+            nameofPicture = result; 
+            System.out.println("ten cua anh: "+nameofPicture);
+            
+            
+        }
+    }//GEN-LAST:event_btPickPictureActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -191,13 +312,18 @@ public class AddNewGara extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddGara;
+    private javax.swing.JButton btPickPicture;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lbPicture;
+    private javax.swing.JTextField txAccount;
     private javax.swing.JTextField txBusResNum;
     private javax.swing.JTextField txGaraName;
-    private javax.swing.JTextField txGaraPicture;
     private javax.swing.JTextField txGaraReview;
+    private javax.swing.JTextField txPassword;
     // End of variables declaration//GEN-END:variables
 }

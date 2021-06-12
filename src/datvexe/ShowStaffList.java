@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author huynh
  */
 public class ShowStaffList extends javax.swing.JFrame{
-    DefaultTableModel dtf;
+    DefaultTableModel dtf ;
     /**
      * Creates new form ShowStaffList
      */
@@ -123,7 +123,7 @@ public class ShowStaffList extends javax.swing.JFrame{
         
         
         
-        String sql = "UPDATE Staff SET Active='false',Staff_Account='noneactive' WHERE Staff_CMND=?";
+        String sql = "UPDATE Staff SET Active='false',Staff_Account=NULL WHERE Staff_CMND=?";
         String cmnd = "";
         
         cmnd = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),0);
@@ -223,13 +223,11 @@ public class ShowStaffList extends javax.swing.JFrame{
             }
         });
     }
-    public void performed(Connection conn){
-        String sql = "SELECT * FROM Staff"; 
+    public void performedActive(DefaultTableModel dtf,Connection conn){
+        String sql = "SELECT * FROM Staff where active = 'true'"; 
         
-        dtf = new DefaultTableModel(); 
-        ListSelectionModel listSelectionModel = tbListEmp.getSelectionModel(); 
-        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
-        tbListEmp.setModel(dtf);
+        
+        
         
         dtf.addColumn("CMND");
         dtf.addColumn("Họ");
@@ -255,12 +253,7 @@ public class ShowStaffList extends javax.swing.JFrame{
             String kind = "";
             String sql2 = "SELECT Password,Kind from Account where Account.Account=?";
             boolean active = rs.getBoolean(7); 
-            String activeString; 
-            if(active==true){
-                activeString = "Làm việc";
-            }else{
-                activeString = "Đã nghỉ việc";
-            }
+            String activeString = "Làm việc";
             
             PreparedStatement pstt = conn.prepareStatement(sql2);
             pstt.setString(1, account);
@@ -288,6 +281,68 @@ public class ShowStaffList extends javax.swing.JFrame{
         }
         
         
+    }
+    public void performedInActive(DefaultTableModel dtf, Connection conn){
+        String sql = "SELECT * FROM Staff where active = 'false'"; 
+        
+        
+        ListSelectionModel listSelectionModel = tbListEmp.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbListEmp.setModel(dtf);
+        
+        
+        ResultSet rs; 
+        try { 
+            Statement stt = conn.createStatement();
+            rs = stt.executeQuery(sql); 
+            while(rs.next()){
+            String cmnd = rs.getString(1);
+            String firstName = rs.getString(2);
+            String lastName = rs.getString(3);
+            String phone = rs.getString(4);
+            String sex = rs.getString(5);
+            String account = rs.getString(6);
+            String password="";
+            String kind = "";
+            String sql2 = "SELECT Password,Kind from Account where Account.Account=?";
+            String activeString = "Đã nghỉ việc"; 
+            
+            
+            PreparedStatement pstt = conn.prepareStatement(sql2);
+            pstt.setString(1, account);
+            ResultSet rs2 = pstt.executeQuery();
+            
+            if(rs2.next()){
+            password = rs2.getString(1);
+            
+            kind = rs2.getString(2); 
+            if(kind.equals("noneactive")){
+                kind = " ";
+            }else if(kind.equals("boss")){
+                kind="Quản lí";
+            }else if(kind.equals("staff")){
+                kind = "Nhân viên"; 
+            }
+            }
+            
+            
+            
+            dtf.addRow(new Object[]{cmnd,firstName,lastName,phone,sex,account,password,kind,activeString});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    public void performed(Connection conn){
+        dtf =new DefaultTableModel();
+        ListSelectionModel listSelectionModel = tbListEmp.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbListEmp.setModel(dtf);
+        
+        performedActive(dtf, conn);
+        performedInActive(dtf, conn);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDel;

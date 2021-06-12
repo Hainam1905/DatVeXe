@@ -99,6 +99,7 @@ public class Home extends javax.swing.JFrame {
         lbPassword = new javax.swing.JLabel();
         lbErrorPassword = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        btManageGara = new javax.swing.JButton();
 
         jButton3.setText("Thêm tài khoản");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +276,7 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lbErrorFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbErrorFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -400,6 +401,13 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab2", jPanel2);
 
+        btManageGara.setText("Quản lí Gara");
+        btManageGara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btManageGaraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -417,7 +425,9 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(155, 155, 155)
-                        .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(btManageGara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jTabbedPane1)
         );
@@ -433,7 +443,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_infoStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
-                .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
@@ -580,6 +592,12 @@ public class Home extends javax.swing.JFrame {
     private void btESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btESCActionPerformed
         Reset();
     }//GEN-LAST:event_btESCActionPerformed
+
+    private void btManageGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageGaraActionPerformed
+        ManageGara manageGara = new ManageGara();
+        manageGara.setLocationRelativeTo(null);
+        manageGara.setVisible(true);
+    }//GEN-LAST:event_btManageGaraActionPerformed
     
     private void EditPassenger() {
         
@@ -746,6 +764,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btAddAcount;
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btESC;
+    private javax.swing.JButton btManageGara;
     private javax.swing.JButton btManageStaff;
     private javax.swing.JButton btSave;
     private javax.swing.JButton btSetting;
