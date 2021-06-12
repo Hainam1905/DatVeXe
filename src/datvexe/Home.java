@@ -9,16 +9,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Code.TableFunction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Vanic
  */
+
 public class Home extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
 
+    public enum Function {
+        None,
+        Add,
+        Delete,
+        Edit,
+    }
+    
+    Function userFunction;
+    
     String kind = ""; // loại người dùng (staff,boss,..)
     String user = ""; // tên đăng nhập của người dùng
 
@@ -29,6 +42,8 @@ public class Home extends javax.swing.JFrame {
 
     public Home(String user, String kind) {
         initComponents();
+        start();
+        
         this.kind = kind;
         if(this.kind.equals("staff")){
             btManageStaff.setVisible(false);
@@ -56,11 +71,10 @@ public class Home extends javax.swing.JFrame {
         btManageStaff = new javax.swing.JButton();
         btn_managerTicket = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         spPassengerManager = new javax.swing.JScrollPane();
         tbPassengerManager = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tLastName = new javax.swing.JTextField();
@@ -69,8 +83,22 @@ public class Home extends javax.swing.JFrame {
         tCellPhone = new javax.swing.JTextField();
         tAccount = new javax.swing.JTextField();
         btAddAcount = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btSetting = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         btDelete = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btSave = new javax.swing.JButton();
+        btESC = new javax.swing.JButton();
+        lbErrorFirstName = new javax.swing.JLabel();
+        lbErrorLastName = new javax.swing.JLabel();
+        lbErrorEmail = new javax.swing.JLabel();
+        lbErrorAccout = new javax.swing.JLabel();
+        lbErrorNumber = new javax.swing.JLabel();
+        tPassword = new javax.swing.JTextField();
+        lbPassword = new javax.swing.JLabel();
+        lbErrorPassword = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         jButton3.setText("Thêm tài khoản");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -142,21 +170,18 @@ public class Home extends javax.swing.JFrame {
         });
         spPassengerManager.setViewportView(tbPassengerManager);
 
-        jTabbedPane1.addTab("Quản Lý khách hàng", spPassengerManager);
-
-        jLabel1.setText("Tài khoản");
-
-        jLabel2.setText("Họ");
-
-        jLabel3.setText("Tên");
-
         jLabel4.setText("Email");
 
-        jLabel5.setText("Số điện thoại");
+        jLabel5.setText("Số điện thoại*");
 
         tLastName.setEditable(false);
 
         tFirstName.setEditable(false);
+        tFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tFirstNameActionPerformed(evt);
+            }
+        });
 
         tEmail.setEditable(false);
         tEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +196,13 @@ public class Home extends javax.swing.JFrame {
 
         btAddAcount.setText("Thêm tài khoản");
         btAddAcount.setEnabled(false);
+        btAddAcount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddAcountActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tài khoản *");
 
         btSetting.setText("Sửa");
         btSetting.setEnabled(false);
@@ -180,8 +212,193 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Họ*");
+
         btDelete.setText("Xóa");
         btDelete.setEnabled(false);
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Tên*");
+
+        btSave.setText("Lưu");
+        btSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSaveActionPerformed(evt);
+            }
+        });
+
+        btESC.setText("Hủy");
+        btESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btESCActionPerformed(evt);
+            }
+        });
+
+        lbErrorFirstName.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorFirstName.setText("Tên không được bỏ trống");
+
+        lbErrorLastName.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorLastName.setText("Họ không được bỏ trống");
+
+        lbErrorEmail.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorEmail.setText("Email không hợp lệ");
+
+        lbErrorAccout.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorAccout.setText("Tài khoản không hợp lệ");
+
+        lbErrorNumber.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorNumber.setText("Số điện thoại không được bỏ trống");
+
+        lbPassword.setText("Mật khẩu*");
+
+        lbErrorPassword.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorPassword.setText("Mật khẩu không hợp lệ");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(btESC, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lbErrorFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                            .addComponent(tLastName)))
+                                    .addComponent(lbErrorLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lbErrorEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lbErrorAccout))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbErrorNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(lbPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbErrorPassword))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbErrorFirstName)
+                    .addComponent(lbErrorEmail)
+                    .addComponent(lbErrorNumber))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbErrorLastName)
+                            .addComponent(lbErrorAccout)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbErrorPassword)))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btESC, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(165, 165, 165))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spPassengerManager)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(spPassengerManager, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, Short.MAX_VALUE)
+                .addGap(98, 98, 98))
+        );
+
+        jTabbedPane1.addTab("Quản lý khách hàng", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 654, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 566, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,9 +409,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_staffName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_logout)
-                        .addContainerGap(54, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -203,37 +420,6 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jTabbedPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(tLastName))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,32 +434,27 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(btn_infoStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(275, 275, 275))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void start() {
+        btSave.setVisible(false);
+        btESC.setVisible(false);
+        lbErrorAccout.setVisible(false);
+        lbErrorEmail.setVisible(false);
+        lbErrorFirstName.setVisible(false);
+        lbErrorLastName.setVisible(false);;
+        lbErrorNumber.setVisible(false);
+        lbErrorPassword.setVisible(false);
+        lbPassword.setVisible(false);
+        tPassword.setVisible(false);
+    }
+    
     //hàm lấy thông tin của nhân viên đã đăng nhập vào trang chủ
     public String getNameStaff(String userName){
         String name = "";
@@ -345,8 +526,177 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSettingActionPerformed
-        // TODO add your handling code here:
+        tFirstName.setEditable(true);
+        tLastName.setEditable(true);
+        tCellPhone.setEditable(true);
+        tEmail.setEditable(true);
+        
+        userFunction = Function.Edit;
     }//GEN-LAST:event_btSettingActionPerformed
+
+    private void btAddAcountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddAcountActionPerformed
+        userFunction = Function.Add;
+
+        //Unlock
+        tAccount.setEditable(true);
+        btSave.setVisible(true);
+        btESC.setVisible(true);
+        lbPassword.setVisible(true);
+        tPassword.setVisible(true);
+    }//GEN-LAST:event_btAddAcountActionPerformed
+
+    private void tFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFirstNameActionPerformed
+
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+        //Check input
+        if (!CheckInput()) return;
+        
+        if (userFunction == Function.Add) AddAccount(tAccount.getText(), tPassword.getText(), tCellPhone.getText());
+        else if (userFunction == Function.Edit) //edit
+            
+//        //reload table
+//        tbFunction.LoadData(tbPassengerManager, sqlLoadData);
+//        //Lock
+//        tAccount.setEditable(false);
+//        btSave.setVisible(false);
+//        btESC.setVisible(false);
+//        lbErrorPassword.setVisible(false);
+//        lbPassword.setVisible(false);
+//        tPassword.setVisible(false);
+//        btAddAcount.setEnabled(false);
+//        btDelete.setEnabled(false);
+//        btSetting.setEnabled(false);
+//        
+//        userFunction = Function.None;
+        Reset();
+    }//GEN-LAST:event_btSaveActionPerformed
+        
+    private void btESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btESCActionPerformed
+        Reset();
+    }//GEN-LAST:event_btESCActionPerformed
+    
+    private void EditPassenger() {
+        
+    }
+    
+    private void Reset() {
+        userFunction = Function.None;
+
+        //reload table
+        tbFunction.LoadData(tbPassengerManager, sqlLoadData);
+        tAccount.setText("");
+        tCellPhone.setText("");
+        tEmail.setText("");
+        tFirstName.setText("");
+        tLastName.setText("");
+        tPassword.setText("");
+        
+        //Lock
+        tAccount.setEditable(false);
+        btSave.setVisible(false);
+        btESC.setVisible(false);
+        lbErrorPassword.setVisible(false);
+        lbPassword.setVisible(false);
+        tPassword.setVisible(false);
+        btAddAcount.setEnabled(false);
+        btDelete.setEnabled(false);
+        btSetting.setEnabled(false);
+    }
+    
+    private Boolean CheckInput() {
+        //check add account
+        if (userFunction == Function.Add) {
+            if(tAccount.getText().isEmpty()) {
+                lbErrorAccout.setVisible(true);
+                return false;
+            } 
+            else lbErrorAccout.setVisible(false);
+            
+            if (tPassword.getText().isEmpty()) {
+                lbErrorPassword.setVisible(true);
+                return false;
+            }
+            else {
+                lbErrorPassword.setVisible(false);
+                tPassword.setVisible(false);
+                lbPassword.setVisible(false);
+            }
+            return true;
+        }
+        //check edit
+        else if (userFunction == Function.Edit) {
+            if(tFirstName.getText().isEmpty()) {
+                lbErrorFirstName.setVisible(true);
+                return false;
+            } 
+            else lbErrorFirstName.setVisible(false);
+            
+            if(tLastName.getText().isEmpty()) {
+                lbErrorLastName.setVisible(true);
+                return false;
+            } 
+            else lbErrorLastName.setVisible(false);
+            
+            if(tCellPhone.getText().isEmpty()) {
+                lbErrorNumber.setVisible(true);
+                return false;
+            } 
+            else lbErrorNumber.setVisible(false);
+            
+            return true;
+        }
+        
+        return true;
+    }
+    
+    private void AddAccount(String account, String password, String number) {
+        Connection conn = DatVeXe.layKetNoi();
+        //check null
+        String sql = "SELECT * FROM ACCOUNT WHERE ACCOUNT = '" + account + "'";
+        //add an account
+        String sql2 = "INSERT INTO ACCOUNT VALUES (?,?,?) ";
+        //add an account into passenger
+        String sql3 = "UPDATE PASSENGER SET ACCOUNT = ? WHERE PASSENGER_SDT = '" + number + "'";
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(this, "Tài khoản đã tồn tại");
+                rs.close();
+                ps.close();
+                conn.close();
+                return;
+            }
+            
+            //active sql2
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, account);
+            ps.setString(2, password);
+            ps.setString(3, "passenger");
+            ps.executeUpdate();
+            
+            //active sql3
+            ps = conn.prepareStatement(sql3);
+            ps.setString(1, account);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công");
+            
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+    }
     
     private void setTextField(String cellPhone, String firstName, String lastName, String email, String account) {
         tCellPhone.setText(cellPhone);
@@ -395,7 +745,9 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddAcount;
     private javax.swing.JButton btDelete;
+    private javax.swing.JButton btESC;
     private javax.swing.JButton btManageStaff;
+    private javax.swing.JButton btSave;
     private javax.swing.JButton btSetting;
     private javax.swing.JButton btn_infoStaff;
     private javax.swing.JButton btn_logout;
@@ -406,14 +758,25 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel label_staffName;
+    private javax.swing.JLabel lbErrorAccout;
+    private javax.swing.JLabel lbErrorEmail;
+    private javax.swing.JLabel lbErrorFirstName;
+    private javax.swing.JLabel lbErrorLastName;
+    private javax.swing.JLabel lbErrorNumber;
+    private javax.swing.JLabel lbErrorPassword;
+    private javax.swing.JLabel lbPassword;
     private javax.swing.JScrollPane spPassengerManager;
     private javax.swing.JTextField tAccount;
     private javax.swing.JTextField tCellPhone;
     private javax.swing.JTextField tEmail;
     private javax.swing.JTextField tFirstName;
     private javax.swing.JTextField tLastName;
+    private javax.swing.JTextField tPassword;
     private javax.swing.JTable tbPassengerManager;
     // End of variables declaration//GEN-END:variables
 }
