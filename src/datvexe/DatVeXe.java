@@ -12,7 +12,8 @@ import java.sql.DriverManager;
  *
  * @author Vanic
  */
-public class DatVeXe {
+public class DatVeXe{
+    
     public static Connection layKetNoi(){
         Connection ketNoi = null;
         String url ="jdbc:sqlserver://;databaseName=QLyDatXe";

@@ -18,19 +18,21 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    String kind = "";
-    String user = "";
-    
+
+    String kind = ""; // loại người dùng (staff,boss,..)
+    String user = ""; // tên đăng nhập của người dùng
+
     //To handle Table
     TableFunction tbFunction = new TableFunction();
     String sqlLoadData = "SELECT * FROM Passenger";
     
+
     public Home(String user, String kind) {
         initComponents();
-        label_staffName.setText(getNameStaff(user)+" ("+kind+")");
         this.kind = kind;
         if(this.kind.equals("staff")){
             btManageStaff.setVisible(false);
+            label_staffName.setText(getNameStaff(user)+" ("+kind+")");
         }
         this.user = user;
         
@@ -52,6 +54,7 @@ public class Home extends javax.swing.JFrame {
         btn_infoStaff = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
         btManageStaff = new javax.swing.JButton();
+        btn_managerTicket = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         spPassengerManager = new javax.swing.JScrollPane();
         tbPassengerManager = new javax.swing.JTable();
@@ -98,6 +101,13 @@ public class Home extends javax.swing.JFrame {
         btManageStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btManageStaffActionPerformed(evt);
+            }
+        });
+
+        btn_managerTicket.setText("Quản lý vé");
+        btn_managerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_managerTicketActionPerformed(evt);
             }
         });
 
@@ -182,11 +192,13 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_staffName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
                         .addComponent(btn_logout)
-                        .addGap(25, 25, 25))
+                        .addContainerGap(54, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_infoStaff)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(155, 155, 155)
                         .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -234,7 +246,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_infoStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
+                .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,7 +258,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(tLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,6 +307,14 @@ public class Home extends javax.swing.JFrame {
         manageStaff.setVisible(true);
     }//GEN-LAST:event_btManageStaffActionPerformed
 
+
+    private void btn_managerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_managerTicketActionPerformed
+
+        ManageTicket mt = new ManageTicket();
+        mt.setLocationRelativeTo(null);
+        mt.setVisible(true);
+    }//GEN-LAST:event_btn_managerTicketActionPerformed
+
     private void tEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tEmailActionPerformed
@@ -334,6 +356,7 @@ public class Home extends javax.swing.JFrame {
         tAccount.setText(account);
    }
     
+
     /**
      * @param args the command line arguments
      */
@@ -376,6 +399,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btSetting;
     private javax.swing.JButton btn_infoStaff;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_managerTicket;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
