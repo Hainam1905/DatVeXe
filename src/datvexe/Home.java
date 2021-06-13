@@ -494,7 +494,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btManageStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageStaffActionPerformed
-        this.setVisible(false);
+//        this.setVisible(false);
         ManageStaff manageStaff = new ManageStaff();
         manageStaff.setLocationRelativeTo(null);
         manageStaff.setVisible(true);

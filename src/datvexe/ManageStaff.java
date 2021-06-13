@@ -33,7 +33,7 @@ public class ManageStaff extends javax.swing.JFrame {
         btManageStaffLiss = new javax.swing.JButton();
         btAddNewStaff = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Quản lí nhân viên trang chính");
 

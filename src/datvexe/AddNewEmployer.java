@@ -20,6 +20,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
     /**
      * Creates new form AddNewEmployer
      */
+    
     public AddNewEmployer(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -208,18 +209,18 @@ public class AddNewEmployer extends javax.swing.JDialog {
        DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
         String sql = "INSERT INTO Staff VALUES(?,?,?,?,?,?)";
-        String cmnd = txCMND.getText(); 
-        String firstName= txFirstname.getText();
-        String lastname = txLastName.getText();
-        String phone = txPhone.getText();
+        String cmnd = txCMND.getText().trim(); 
+        String firstName= txFirstname.getText().trim();
+        String lastname = txLastName.getText().trim();
+        String phone = txPhone.getText().trim();
         String sex = "";
         if(rdMale.isSelected()){
             sex = "Nam";
         }else{
             sex = "Nữ";
         }
-        String account = txAccount.getText();
-        String password = txPassword.getText();
+        String account = txAccount.getText().trim();
+        String password = txPassword.getText().trim();
         
         if(cmnd.trim().equals("") || firstName.trim().equals("") || lastname.trim().equals("") || phone.trim().equals("") || account.trim().equals("") || password.trim().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Các trường thông tin không được để trống!");
@@ -385,6 +386,8 @@ public class AddNewEmployer extends javax.swing.JDialog {
         }
         return 1;
     }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddEmployer;
     private javax.swing.ButtonGroup buttonGroup1;

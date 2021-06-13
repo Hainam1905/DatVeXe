@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,13 @@ public class AddNewGara extends javax.swing.JDialog {
     /**
      * Creates new form AddNewGara
      */
+    
+    //check infor: 
+    int empty = -1; 
+    int duplicateGaraName = -2;
+    int duplicateAccount = -3; 
+    int duplicateBusResNum = -4; 
+    int emptyPicture = -5; 
     public AddNewGara(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -87,8 +95,6 @@ public class AddNewGara extends javax.swing.JDialog {
                 btPickPictureActionPerformed(evt);
             }
         });
-
-        lbPicture.setText("jLabel7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,16 +170,44 @@ public class AddNewGara extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAddGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddGaraActionPerformed
-        String garaName = txGaraName.getText(); 
-        String garaReview = txGaraReview.getText();
-        String BusResNum = txBusResNum.getText(); 
-        String account = txAccount.getText();
-        String password = txPassword.getText();
+        String garaName = txGaraName.getText().trim(); 
+        String garaReview = txGaraReview.getText().trim();
+        String BusResNum = txBusResNum.getText().trim(); 
+        String account = txAccount.getText().trim();
+        String password = txPassword.getText().trim();
         
         
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
         
+        int checkResult = checkInfor(garaName, garaReview, BusResNum, account, password, conn);
+        if(checkResult==empty){
+            JOptionPane.showMessageDialog(rootPane, "Thông tin phải được điền đầy đủ");
+            return; 
+        }
+        
+        
+        else  if(checkResult==duplicateGaraName){
+            JOptionPane.showMessageDialog(rootPane, "Tên nhà xe đã có trong hệ thống \nVui lòng chọn tên nhà xe khác!");
+            return; 
+        }
+        
+        
+        
+        else  if(checkResult==duplicateAccount){
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã có trong hệ thống \nVui lòng chọn tên đăng nhập khác!");
+            return; 
+                }
+        
+        
+        
+        else if(checkResult==duplicateBusResNum){
+            JOptionPane.showMessageDialog(rootPane, "Giấy phép ĐKKD đã có trong hệ thống \nVui lòng kiểm tra lại!");
+            return; 
+        }else if(checkResult==emptyPicture){
+            JOptionPane.showMessageDialog(rootPane, "Hình ảnh nhà xe không được để trống");
+            return; 
+        }
         
         String sql = "INSERT INTO ACCOUNT values(?,?,?)";
                 PreparedStatement pstt;
@@ -309,7 +343,63 @@ public class AddNewGara extends javax.swing.JDialog {
             }
         });
     }
-
+public int checkInfor(String garaName, String garaReview, String busResNum, String account, String password, Connection conn){
+        
+        
+        if(garaName.trim().equals("")|| garaReview.trim().equals("")|| busResNum.trim().equals("")|| account.trim().equals("")||password.trim().equals("")){
+            return -1; 
+        }
+        
+        if(nameofPicture.equals("")) return -5; 
+        String sql = "select * from Gara where Gara_Name=?";
+        try {
+            PreparedStatement pstt = conn.prepareStatement(sql);
+            pstt.setString(1, garaName);
+            ResultSet rs = pstt.executeQuery(); 
+            if(rs.next()){
+                return -2; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+       
+           String sql2 = "select * from account where account.account = ?";
+        try {
+            
+            PreparedStatement pstt2 = conn.prepareStatement(sql2);
+            pstt2.setString(1, account);
+            ResultSet rs = pstt2.executeQuery(); 
+            if(rs.next()){
+                System.out.println("thong tin bi trung roi ne!");
+                return -3; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+        
+            String sql3 = "select Bus_Res_number from Gara where Bus_Res_number=?";
+        try {
+            PreparedStatement pstt3 = conn.prepareStatement(sql3);
+            pstt3.setString(1, busResNum);
+            ResultSet rs = pstt3.executeQuery(); 
+            if(rs.next()){
+                return -4; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return 0;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddGara;
     private javax.swing.JButton btPickPicture;
