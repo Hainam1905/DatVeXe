@@ -12,6 +12,8 @@ import Code.TableFunction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Code.FormatString;
+import Code.PassengerFunction;
 /**
  *
  * @author Vanic
@@ -291,7 +293,7 @@ public class Home extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -319,7 +321,7 @@ public class Home extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lbErrorPassword))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +394,7 @@ public class Home extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,6 +414,7 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,13 +426,12 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(155, 155, 155)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(btManageGara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,17 +440,17 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_staffName)
                     .addComponent(btn_logout))
-                .addGap(79, 79, 79)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_infoStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                    .addComponent(btn_infoStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(125, 125, 125))
         );
 
         pack();
@@ -523,13 +525,12 @@ public class Home extends javax.swing.JFrame {
                 tbFunction.selectRow(tbPassengerManager, 4));
         
         btSetting.setEnabled(true);
+        btDelete.setEnabled(true);
         if (tAccount.getText().isEmpty()) {
             btAddAcount.setEnabled(true);
-            btDelete.setEnabled(false);
         }
         else {
             btAddAcount.setEnabled(false);
-            btDelete.setEnabled(true);
         }
     }//GEN-LAST:event_tbPassengerManagerMouseClicked
 
@@ -538,10 +539,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSettingActionPerformed
+        //Only Edit Name and Email
         tFirstName.setEditable(true);
         tLastName.setEditable(true);
-        tCellPhone.setEditable(true);
         tEmail.setEditable(true);
+        
+        btSave.setVisible(true);
+        btESC.setVisible(true);
         
         userFunction = Function.Edit;
     }//GEN-LAST:event_btSettingActionPerformed
@@ -562,7 +566,17 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_tFirstNameActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-        // TODO add your handling code here:
+        userFunction = Function.Delete;
+        
+        //Confirm
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận xóa khách hàng", "Thông báo", 0);
+        if (choose == JOptionPane.OK_OPTION) {
+            PassengerFunction psFunction = new PassengerFunction(tCellPhone.getText());
+            
+            psFunction.DeletePassenger();
+        }
+        
+        Reset();
     }//GEN-LAST:event_btDeleteActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
@@ -570,22 +584,8 @@ public class Home extends javax.swing.JFrame {
         if (!CheckInput()) return;
         
         if (userFunction == Function.Add) AddAccount(tAccount.getText(), tPassword.getText(), tCellPhone.getText());
-        else if (userFunction == Function.Edit) //edit
-            
-//        //reload table
-//        tbFunction.LoadData(tbPassengerManager, sqlLoadData);
-//        //Lock
-//        tAccount.setEditable(false);
-//        btSave.setVisible(false);
-//        btESC.setVisible(false);
-//        lbErrorPassword.setVisible(false);
-//        lbPassword.setVisible(false);
-//        tPassword.setVisible(false);
-//        btAddAcount.setEnabled(false);
-//        btDelete.setEnabled(false);
-//        btSetting.setEnabled(false);
-//        
-//        userFunction = Function.None;
+        else if (userFunction == Function.Edit) EditPassenger();
+        
         Reset();
     }//GEN-LAST:event_btSaveActionPerformed
         
@@ -600,7 +600,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btManageGaraActionPerformed
     
     private void EditPassenger() {
+        FormatString format = new FormatString();
         
+        String phoneNumber = tCellPhone.getText();
+        String firstName = format.FormatName(tFirstName.getText());
+        String lastName = format.FormatName(tLastName.getText());
+        String email = tEmail.getText();
+        
+        //confirm
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận Sửa TT khách hàng", "Thông Báo",0);
+        if (choose == JOptionPane.OK_OPTION) {
+            PassengerFunction psFunction = new PassengerFunction(phoneNumber);
+            psFunction.EditInfor(firstName, lastName, email);
+        }
     }
     
     private void Reset() {
