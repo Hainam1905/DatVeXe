@@ -166,9 +166,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbPicture">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

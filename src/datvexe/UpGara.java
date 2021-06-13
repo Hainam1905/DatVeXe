@@ -31,13 +31,20 @@ public class UpGara extends javax.swing.JDialog {
      * Creates new form AddNewGara
      */
     
-    String garaName0; 
-    String active0; 
-    String account0; 
-    String picture0; 
+    String garaName0=""; 
+    String active0=""; 
+    String account0=""; 
+    String picture0=""; 
+    String busResNum0=""; 
     String saveFolder = System.getProperty("user.dir")+"\\galaryPicture\\";
     String nameofPicture ="";
     File file; 
+    
+    //check infor: 
+    int empty = -1; 
+    int duplicateGaraName = -2;
+    int duplicateAccount = -3; 
+    int duplicateBusResNum = -4; 
     public UpGara(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,8 +55,10 @@ public class UpGara extends javax.swing.JDialog {
         showInfor(garaName, picture, review, BusResNum, active,account, password);
         this.garaName0 = garaName; 
         this.active0 = active; 
-        this.account0 = account;
+        if(account!=null) this.account0 = account;
+        
         this.picture0 = picture;
+        this.busResNum0 = BusResNum;
         nameofPicture = picture; 
     }
    
@@ -96,7 +105,7 @@ public class UpGara extends javax.swing.JDialog {
             }
         });
 
-        cbStatement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hợp tác", "Ngừng hợp tác" }));
+        cbStatement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hợp tác", "Ngừng hợp tác" }));
         cbStatement.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbStatementItemStateChanged(evt);
@@ -206,32 +215,64 @@ public class UpGara extends javax.swing.JDialog {
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
         
+        int resultCheck = checkInfor(garaName, garaReview, BusResNum, account, password, conn);
+        if(resultCheck==empty){
+            JOptionPane.showMessageDialog(rootPane, "Thông tin phải được điền đầy đủ");
+            return; 
+        }
+        
+        
+        else  if(resultCheck==duplicateGaraName){
+            JOptionPane.showMessageDialog(rootPane, "Tên nhà xe đã có trong hệ thống \nVui lòng chọn tên nhà xe khác!");
+            return; 
+        }
+        
+        
+        
+        else  if(resultCheck==duplicateAccount){
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã có trong hệ thống \nVui lòng chọn tên đăng nhập khác!");
+            return; 
+                }
+        
+        
+        
+        else if(resultCheck==duplicateBusResNum){
+            JOptionPane.showMessageDialog(rootPane, "Giấy phép ĐKKD đã có trong hệ thống \nVui lòng kiểm tra lại!");
+            return; 
+        }
+        
+        
+        
         //hop tac: 
-        if(active.equals("Hợp tác")){
+        if(active.equals("Đang hợp tác")){
             //truoc do lam, bay gio van lam: 
             if(active0.equals(active)){
                 
                 
-                
-                String sql = "UPDATE Account SET Account=?,Password=? WHERE Account=?";
+                String sql = "update Account set Account.Account =?,Password =? where Account.Account=?";
                 try {
                     PreparedStatement pstt = conn.prepareStatement(sql);
                     pstt.setString(1, account);
                     pstt.setString(2, password);
-                    pstt.setString(3, this.garaName0);
+                    pstt.setString(3, this.account0);
+                    
+                    int x = pstt.executeUpdate();
+                    if(x>0){
+                        
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Account=? where Gara_Name=?";
+                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
                 try {
                     PreparedStatement pstt2 = conn.prepareStatement(sql2);
                     pstt2.setString(1, garaName);
                     pstt2.setString(2, nameofPicture);
                     pstt2.setString(3, garaReview);
                     pstt2.setString(4, BusResNum);
-                    pstt2.setString(5, account);
-                    pstt2.setString(6, garaName0);
+//                    pstt2.setString(5, account);
+                    pstt2.setString(5, garaName0);
                     int x = pstt2.executeUpdate();
                     if(x>0){
                         JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
@@ -369,7 +410,63 @@ public class UpGara extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_btUpdateActionPerformed
-
+    public int checkInfor(String garaName, String garaReview, String busResNum, String account, String password, Connection conn){
+        
+        
+        if(garaName.trim().equals("")|| garaReview.trim().equals("")|| busResNum.trim().equals("")|| account.trim().equals("")||password.trim().equals("")){
+            return -1; 
+        }
+        
+        if(this.garaName0.equals(garaName)==false){
+            String sql = "select * from Gara where Gara_Name=?";
+        try {
+            PreparedStatement pstt = conn.prepareStatement(sql);
+            pstt.setString(1, garaName);
+            ResultSet rs = pstt.executeQuery(); 
+            if(rs.next()){
+                return -2; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        
+       if(this.account0.equals(account)==false){
+           String sql2 = "select * from account where account.account = ?";
+        try {
+            
+            PreparedStatement pstt2 = conn.prepareStatement(sql2);
+            pstt2.setString(1, account);
+            ResultSet rs = pstt2.executeQuery(); 
+            if(rs.next()){
+                System.out.println("thong tin bi trung roi ne!");
+                return -3; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }
+        
+        if(this.busResNum0.equals(busResNum)==false){
+            String sql3 = "select Bus_Res_number from Gara where Bus_Res_number=?";
+        try {
+            PreparedStatement pstt3 = conn.prepareStatement(sql3);
+            pstt3.setString(1, busResNum);
+            ResultSet rs = pstt3.executeQuery(); 
+            if(rs.next()){
+                return -4; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        
+        
+        return 0;
+    }
+    
     private void cbStatementItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatementItemStateChanged
         if(cbStatement.getSelectedIndex()==0){
             txAccount.setEditable(true);

@@ -21,9 +21,14 @@ public class UpEmp extends javax.swing.JDialog {
     /**
      * Creates new form UpEmp
      */
-    String cmnd0; 
-    String account0; 
-    String active0; 
+    String cmnd0=""; 
+    String account0=""; 
+    String active0="";
+    String phone0 = "";
+    int empty = -1;
+    int duplicateCMND = -2; 
+    int duplicatePhone = -3; 
+    int duplicateAccount = -4; 
     public UpEmp(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -32,8 +37,12 @@ public class UpEmp extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.cmnd0 = cmnd;
+        
         this.active0 = active; 
+        if(account!=null){
         this.account0 = account; 
+        }
+        this.phone0 = phone; 
         showInfor(cmnd, first, last, phone, sex, account, password,kind,active);
     }
     /**
@@ -238,18 +247,18 @@ public class UpEmp extends javax.swing.JDialog {
         Connection conn = datvexe.layKetNoi();
         
         
-        String cmnd = txCmnd.getText(); 
-        String first = txFirst.getText(); 
-        String last = txname.getText();
-        String phone = txPhone.getText(); 
+        String cmnd = txCmnd.getText().trim(); 
+        String first = txFirst.getText().trim(); 
+        String last = txname.getText().trim();
+        String phone = txPhone.getText().trim(); 
         String sex; 
         if(rdMale.isSelected()){
             sex = "Nam";
         }else{
             sex = "Nữ";
         }
-        String account = txAccount.getText(); 
-        String password = txPassword.getText(); 
+        String account = txAccount.getText().trim(); 
+        String password = txPassword.getText().trim(); 
         String kind = (String) cbKind.getSelectedItem(); 
         if(kind.equals("Quản lí")){
             kind = "boss";
@@ -259,6 +268,23 @@ public class UpEmp extends javax.swing.JDialog {
             kind = "gara";
         }
         
+        int checkResult = checkInfor(cmnd, phone, account, conn);
+        if(checkResult==empty){
+            JOptionPane.showMessageDialog(rootPane, "Các thông tin không được để trống!");
+            return ;
+        }
+        else if(checkResult==duplicateCMND){
+            JOptionPane.showMessageDialog(rootPane, "Chứng minh thư đã được đăng kí! \nVui lòng kiếm tra lại");
+            return ;
+        }
+        else if(checkResult==duplicatePhone){
+            JOptionPane.showMessageDialog(rootPane, "Số điện thoại đã được đăng kí!\nVui lòng chọn số điện thoại khác!");
+            return ;
+        }
+        else if(checkResult==duplicateAccount){
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã được sử dụng!\nVui lòng chọn tên đăng nhập khác!");
+            return ;
+        }
         String active = (String) cbActive.getSelectedItem();
         boolean activeBool; 
         if(active.equals("Làm việc")){
@@ -526,6 +552,61 @@ public class UpEmp extends javax.swing.JDialog {
         System.out.println("active la: "+active);
         cbActive.setSelectedItem(active);
     }
+    
+    public int checkInfor(String cmnd, String phone, String account,Connection conn){
+        if(cmnd.trim().equals("")||phone.trim().equals("")||account.trim().equals("")){
+            return -1; 
+        }
+        
+        if(this.cmnd0.equals(cmnd)==false){
+            String sql ="select Staff_CMND from staff where Staff_CMND=?";
+            try {
+                PreparedStatement pstt = conn.prepareStatement(sql);
+                pstt.setString(1, cmnd);
+                ResultSet rs = pstt.executeQuery();
+                if(rs.next()){
+                    return -2; 
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UpEmp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        if(this.phone0.equals(phone)==false){
+            String sql ="select * from staff where Staff_SDT=?";
+            PreparedStatement pstt;
+            try {
+                pstt = conn.prepareStatement(sql);
+                pstt.setString(1, phone);
+                ResultSet rs = pstt.executeQuery();
+                if(rs.next()){
+                    return -3; 
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UpEmp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        if(this.account0.equals(account)==false){
+            String sql ="select * from staff where Staff_Account=?";
+            PreparedStatement pstt;
+            try {
+                pstt = conn.prepareStatement(sql);
+                pstt.setString(1, account);
+                ResultSet rs = pstt.executeQuery();
+                if(rs.next()){
+                    return -4; 
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UpEmp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        return 0;
+        }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btUpEmp;
     private javax.swing.ButtonGroup buttonGroup1;
