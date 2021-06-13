@@ -32,6 +32,7 @@ public class ManageStaff extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btManageStaffLiss = new javax.swing.JButton();
         btAddNewStaff = new javax.swing.JButton();
+        btInventory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +55,13 @@ public class ManageStaff extends javax.swing.JFrame {
             }
         });
 
+        btInventory.setText("Thống kê doanh thu");
+        btInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInventoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,6 +69,7 @@ public class ManageStaff extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
@@ -77,7 +86,9 @@ public class ManageStaff extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddNewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(btInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -98,6 +109,12 @@ public class ManageStaff extends javax.swing.JFrame {
        
         
     }//GEN-LAST:event_btAddNewStaffActionPerformed
+
+    private void btInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInventoryActionPerformed
+        InventoryProfit inventoryProfit = new InventoryProfit(); 
+        inventoryProfit.setLocationRelativeTo(null);
+        inventoryProfit.setVisible(true);
+    }//GEN-LAST:event_btInventoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +153,7 @@ public class ManageStaff extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddNewStaff;
+    private javax.swing.JButton btInventory;
     private javax.swing.JButton btManageStaffLiss;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
