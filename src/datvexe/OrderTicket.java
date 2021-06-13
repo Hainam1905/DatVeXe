@@ -173,12 +173,22 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel10.setText("chọn chuyến xe: ");
 
+        cbb_tripName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_tripNameItemStateChanged(evt);
+            }
+        });
         cbb_tripName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbb_tripNameMouseClicked(evt);
             }
         });
 
+        cbb_bookTime.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_bookTimeItemStateChanged(evt);
+            }
+        });
         cbb_bookTime.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbb_bookTimeMouseClicked(evt);
@@ -192,6 +202,11 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel7.setText("chọn ghế: ");
 
+        cbb_seat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_seatItemStateChanged(evt);
+            }
+        });
         cbb_seat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbb_seatMouseClicked(evt);
@@ -200,7 +215,6 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel8.setText("Loại ghế: ");
 
-        cbb_seatKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loai 1", "loai 2", "loai 3" }));
         cbb_seatKind.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbb_seatKindItemStateChanged(evt);
@@ -340,11 +354,12 @@ public class OrderTicket extends javax.swing.JFrame {
                     .addComponent(label_errLastName)
                     .addComponent(label_errFirstName))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -527,14 +542,7 @@ public class OrderTicket extends javax.swing.JFrame {
         return listTime;
     }
     private void cbb_bookTimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_bookTimeMouseClicked
-        cbb_bookTime.removeAllItems();
-        String GaraName = String.valueOf(cbb_tripName.getSelectedItem());
-        String[] listTime = searchTime(GaraName);
-        for (int i = 0;i<=100;i++){
-            if (listTime[i]!= null){
-                cbb_bookTime.addItem(listTime[i]);
-            }else break;
-        }
+        
     }//GEN-LAST:event_cbb_bookTimeMouseClicked
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -597,26 +605,7 @@ public class OrderTicket extends javax.swing.JFrame {
         return listSeat;
     }
     private void cbb_seatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_seatMouseClicked
-        cbb_seat.removeAllItems();
-        String trip_No = "";
-        String garaName = String.valueOf(cbb_tripName.getSelectedItem());
-        String time = String.valueOf(cbb_bookTime.getSelectedItem());
-        if (!garaName.equals("null") && !time.equals("null")){
-            trip_No = searchTrip_No(garaName, time);
         
-            int seatAmount = searchSeatAmount(trip_No);
-            if (seatAmount == 0){
-                JOptionPane.showMessageDialog(this, "Chưa có xe nào cho chuyến đi này \n Vui lòng thay đổi thông tin chuyến đi khác!","Inane Eror",JOptionPane.ERROR_MESSAGE);
-            }else {
-                Vector listSeat = new Vector();
-                listSeat = searchOrderSeat(trip_No);
-                for (int i=1;i<=seatAmount;i++){
-                    if (!listSeat.contains(String.valueOf(i))){
-                        cbb_seat.addItem(String.valueOf(i));
-                    }
-                }
-            }
-        }
         
     }//GEN-LAST:event_cbb_seatMouseClicked
 
@@ -801,6 +790,49 @@ public class OrderTicket extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btn_orderActionPerformed
+
+    private void cbb_tripNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_tripNameItemStateChanged
+        cbb_bookTime.removeAllItems();
+        String GaraName = String.valueOf(cbb_tripName.getSelectedItem());
+        String[] listTime = searchTime(GaraName);
+        for (int i = 0;i<=100;i++){
+            if (listTime[i]!= null){
+                cbb_bookTime.addItem(listTime[i]);
+            }else break;
+        }
+    }//GEN-LAST:event_cbb_tripNameItemStateChanged
+
+    private void cbb_bookTimeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_bookTimeItemStateChanged
+        cbb_seat.removeAllItems();
+        String trip_No = "";
+        String garaName = String.valueOf(cbb_tripName.getSelectedItem());
+        String time = String.valueOf(cbb_bookTime.getSelectedItem());
+        if (!garaName.equals("null") && !time.equals("null")){
+            trip_No = searchTrip_No(garaName, time);
+        
+            int seatAmount = searchSeatAmount(trip_No);
+            if (seatAmount == 0){
+                JOptionPane.showMessageDialog(this, "Chưa có xe nào cho chuyến đi này \n Vui lòng thay đổi thông tin chuyến đi khác!","Inane Eror",JOptionPane.ERROR_MESSAGE);
+            }else {
+                Vector listSeat = new Vector();
+                listSeat = searchOrderSeat(trip_No);
+                for (int i=1;i<=seatAmount;i++){
+                    if (!listSeat.contains(String.valueOf(i))){
+                        cbb_seat.addItem(String.valueOf(i));
+                    }
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Hãy chọn chuyến xe và thời gian!","Inane Eror",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cbb_bookTimeItemStateChanged
+
+    private void cbb_seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_seatItemStateChanged
+        cbb_seatKind.addItem("Loai 1");
+        cbb_seatKind.addItem("Loai 2");
+        cbb_seatKind.addItem("Loai 3");
+
+    }//GEN-LAST:event_cbb_seatItemStateChanged
 
     /**
      * @param args the command line arguments

@@ -66,6 +66,16 @@ public class ManageTicket extends javax.swing.JFrame {
         btn_back = new javax.swing.JButton();
         btn_orderTicket = new javax.swing.JButton();
         btn_cancelTicket = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txt_sdt = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_noiDi = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txt_noiDen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txt_time = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +104,34 @@ public class ManageTicket extends javax.swing.JFrame {
         });
 
         btn_cancelTicket.setText("Hủy vé");
+        btn_cancelTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelTicketActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Lọc:");
+
+        txt_sdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_sdtActionPerformed(evt);
+            }
+        });
+
+        btn_search.setText("search");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("SDT: ");
+
+        jLabel3.setText("Nơi Đi: ");
+
+        jLabel4.setText("Nơi Đến: ");
+
+        jLabel5.setText("Thời Gian đi: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,12 +142,33 @@ public class ManageTicket extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_back)
-                        .addGap(285, 285, 285)
-                        .addComponent(btn_orderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
-                        .addComponent(btn_cancelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 277, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(61, 61, 61)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_noiDen))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_back)
+                                .addGap(285, 285, 285)
+                                .addComponent(btn_orderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(94, 94, 94)
+                                .addComponent(btn_cancelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_time, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,7 +179,19 @@ public class ManageTicket extends javax.swing.JFrame {
                     .addComponent(btn_back)
                     .addComponent(btn_orderTicket)
                     .addComponent(btn_cancelTicket))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_search)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -138,6 +209,99 @@ public class ManageTicket extends javax.swing.JFrame {
         order.setLocationRelativeTo(null);
         order.setVisible(true);
     }//GEN-LAST:event_btn_orderTicketActionPerformed
+
+    private void btn_cancelTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelTicketActionPerformed
+        this.setVisible(false);
+        InputSDT ip = new InputSDT();
+        ip.setLocationRelativeTo(null);
+        ip.setVisible(true);
+    }//GEN-LAST:event_btn_cancelTicketActionPerformed
+
+    private void txt_sdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_sdtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_sdtActionPerformed
+
+    public void searchListTicketFilter(String sdt, String noiDi, String noiDen, String time){
+        DefaultTableModel dtm = (DefaultTableModel) table_listTicket.getModel();
+        dtm.setNumRows(0);
+        Vector vt;
+        String sqlSDT = "t.Passenger_SDT = '"+sdt+"'";
+        String sqlnoiDi = "st.station_Name = '"+noiDi+"'";
+        String sqlnoiDen = "sta.station_Name = '"+noiDen+"'";
+        String sqltime = "t.Book_Time = '"+time+"'";
+        boolean check = false;
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql = "select Ticket_No,Seat_Position,Seat_Kind,Is_Paid,Passenger_Note, Book_Time, Staff_CMND, Passenger_SDT, t.Trip_No "
+                + "from (Ticket t inner join Trip tr on t.Trip_No = tr.Trip_No) "
+                + "inner join ScheduelOfGara s on tr.TripOfGara_no = s.TripOfGara_no "
+                + "inner join TotalScheduels total on s.Scheduel_no = total.SChedule_no "
+                + "inner join Station st on total.BeginStation = st.station_No "
+                + "inner join Station sta on total.EndStation = sta.station_No "
+                + "where ";
+        if (!sdt.equals("")){
+            if (check == false){
+                check = true;
+                sql += sqlSDT;
+            }else{
+                sql += " and "+sqlSDT;
+            }
+        }
+        if (!noiDi.equals("")){
+            if (check == false){
+                check = true;
+                sql += sqlnoiDi;
+            }else{
+                sql += " and "+sqlnoiDi;
+            }
+        }
+        if (!noiDen.equals("")){
+            if (check == false){
+                check = true;
+                sql += sqlnoiDen;
+            }else{
+                sql += " and "+sqlnoiDen;
+            }
+        }
+        if (!time.equals("")){
+            if (check == false){
+                check = true;
+                sql += sqltime;
+            }else{
+                sql += " and "+sqltime;
+            }
+        }
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                vt = new Vector();
+                vt.add(rs.getString("Ticket_No"));
+                vt.add(rs.getString("Seat_Position"));
+                vt.add(rs.getString("Seat_Kind"));
+                vt.add(rs.getString("Is_Paid"));
+                vt.add(rs.getString("Passenger_Note"));
+                vt.add(rs.getString("Book_Time"));
+                vt.add(rs.getString("Staff_CMND"));
+                vt.add(rs.getString("Passenger_SDT"));
+                vt.add(rs.getString("Trip_No"));
+                dtm.addRow(vt);
+            }
+        } catch (Exception e) {
+            System.out.println("loi getData"+e);
+        }
+        table_listTicket.setModel(dtm);
+    }
+    
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        String sdt = txt_sdt.getText();
+        String noiDi = txt_noiDi.getText();
+        String noiDen = txt_noiDen.getText();
+        String time = txt_time.getText();
+        if (!sdt.equals("") || !noiDi.equals("") || !noiDen.equals("") || !time.equals("")){
+            searchListTicketFilter(sdt, noiDi, noiDen, time);
+        }
+        
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +342,17 @@ public class ManageTicket extends javax.swing.JFrame {
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_cancelTicket;
     private javax.swing.JButton btn_orderTicket;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_listTicket;
+    private javax.swing.JTextField txt_noiDen;
+    private javax.swing.JTextField txt_noiDi;
+    private javax.swing.JTextField txt_sdt;
+    private javax.swing.JTextField txt_time;
     // End of variables declaration//GEN-END:variables
 }
