@@ -27,7 +27,7 @@ public class PassengerFunction {
     private String lastName;
     private String email;
 
-    public PassengerFunction(String phoneNumber, String account, String firstName, String lastName) {
+    public PassengerFunction(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         LoadPassenger();
     }
@@ -55,20 +55,35 @@ public class PassengerFunction {
         }
     }
 
-    public void EditInfor(String phoneNumber, String firstName, String lastName, String account, String email) {
+    public void EditInfor(String firstName, String lastName, String email) {
         Connection connect=datvexe.DatVeXe.layKetNoi();
-        String sql = "UPDATE PASSENGER SET Account = ?, Passenger_Email = ?, Passenger_First_Name = ?, Passenger_Last_Name = ? WHERE Passenger_SDT = '" + phoneNumber + "'";
+        String sql = "UPDATE PASSENGER SET Passenger_Email = ?, Passenger_First_Name = ?, Passenger_Last_Name = ? WHERE Passenger_SDT = '" + phoneNumber + "'";
         
         try {
             PreparedStatement ps=connect.prepareStatement(sql);
-            ps.setString(1, account);
-            ps.setString(2, email);
-            ps.setString(3, firstName);
-            ps.setString(4, lastName);
+            //ps.setString(1, account);
+            ps.setString(1, email);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
             ps.executeUpdate();
             
             ps.close();
             connect.close();
+        } catch (Exception e) {
+            Logger.getLogger(PassengerFunction.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    public void DeletePassenger() {
+        Connection con =datvexe.DatVeXe.layKetNoi();
+        String sql="DELETE FROM Passenger WHERE Passenger_SDT = '" + phoneNumber + "'";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
         } catch (Exception e) {
             Logger.getLogger(PassengerFunction.class.getName()).log(Level.SEVERE, null, e);
         }
