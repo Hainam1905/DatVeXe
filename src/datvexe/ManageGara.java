@@ -29,6 +29,8 @@ public class ManageGara extends javax.swing.JFrame {
 
         btShowGaraList = new javax.swing.JButton();
         btAddNewGara = new javax.swing.JButton();
+        btCensorTrip = new javax.swing.JButton();
+        btExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,15 +48,34 @@ public class ManageGara extends javax.swing.JFrame {
             }
         });
 
+        btCensorTrip.setText("Phê duyệt chuyến xe");
+        btCensorTrip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCensorTripActionPerformed(evt);
+            }
+        });
+
+        btExit.setText("Thoát");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btCensorTrip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btShowGaraList, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,7 +85,11 @@ public class ManageGara extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(btExit)
+                .addContainerGap())
         );
 
         pack();
@@ -82,6 +107,16 @@ public class ManageGara extends javax.swing.JFrame {
             addNewGara.setLocationRelativeTo(null);
             addNewGara.setVisible(true);
     }//GEN-LAST:event_btAddNewGaraActionPerformed
+
+    private void btCensorTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCensorTripActionPerformed
+       CenSorTrip censorTrip = new CenSorTrip();
+       censorTrip.setLocationRelativeTo(null);
+       censorTrip.setVisible(true);
+    }//GEN-LAST:event_btCensorTripActionPerformed
+
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,6 +155,8 @@ public class ManageGara extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddNewGara;
+    private javax.swing.JButton btCensorTrip;
+    private javax.swing.JButton btExit;
     private javax.swing.JButton btShowGaraList;
     // End of variables declaration//GEN-END:variables
 }
