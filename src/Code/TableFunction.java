@@ -52,16 +52,16 @@ public class TableFunction {
                 dtm.addRow(vt);
             }
             
-            if(dtm.getRowCount()==0){
-                vt=new Vector();
-                for(int i=1;i<=dtm.getColumnCount();i++){
-                    if(i==dtm.getColumnCount()/2){
-                        vt.add("(Trống)");
-                    }
-                    else vt.add("");
-                    }
-                dtm.addRow(vt);
-            }
+//            if(dtm.getRowCount()==0){
+//                vt=new Vector();
+//                for(int i=1;i<=dtm.getColumnCount();i++){
+//                    if(i==dtm.getColumnCount()/2){
+//                        vt.add("(Trống)");
+//                    }
+//                    else vt.add("");
+//                    }
+//                dtm.addRow(vt);
+//            }
             
             tb.setModel(dtm);
             rs.close();
