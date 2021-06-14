@@ -178,6 +178,12 @@ public class OrderTicket extends javax.swing.JFrame {
 
         jLabel6.setText("giờ khởi hành: ");
 
+        cbb_noiDen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_noiDenActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("chọn chuyến xe: ");
 
         cbb_tripName.addItemListener(new java.awt.event.ItemListener() {
@@ -380,11 +386,12 @@ public class OrderTicket extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbb_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbb_bookTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbb_tripName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbb_bookTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbb_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbb_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbb_tripName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
@@ -528,8 +535,8 @@ public class OrderTicket extends javax.swing.JFrame {
         String[] listGaraName = new String[100];
         int d = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select GaraName from TotalScheduels t "
-                + "inner join ScheduelOfGara s on t.SChedule_no = s.Scheduel_no "
+        String sql ="select Gara_Name from TotalScheduels t "
+                + "inner join ScheduleOfGara s on t.SChedule_no = s.Schedule_no "
                 + "where BeginStation ='"+noiDi+"' "
                 + "and EndStation = '"+noiDen+"' "
                 + "and DayInWeek ='"+dayOfWeek+"'";
@@ -537,7 +544,7 @@ public class OrderTicket extends javax.swing.JFrame {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                listGaraName[d] = rs.getString("GaraName");
+                listGaraName[d] = rs.getString("Gara_Name");
                 d++;
             }
         } catch (Exception e) {
@@ -564,7 +571,7 @@ public class OrderTicket extends javax.swing.JFrame {
         String[] listTime = new String[100];
         int d = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select DepartTime from ScheduelOfGara where GaraName ='"+garaName+"'";
+        String sql ="select DepartTime from ScheduleOfGara where Gara_Name ='"+garaName+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -591,9 +598,9 @@ public class OrderTicket extends javax.swing.JFrame {
     public String searchTrip_No(String garaName, String time, String dayOfWeek){
         String trip_No = "";
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select Trip_No from trip t inner join ScheduelOfGara s "
+        String sql ="select Trip_No from trip t inner join ScheduleOfGara s "
                 + "on t.TripOfGara_no = s.TripOfGara_no "
-                + "where GaraName = '"+garaName+"' and DepartTime ='"+time+"' "
+                + "where Gara_Name = '"+garaName+"' and DepartTime ='"+time+"' "
                 + "and DayInWeek ='"+dayOfWeek+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
@@ -610,20 +617,20 @@ public class OrderTicket extends javax.swing.JFrame {
     }
     
     public int searchSeatAmount(String trip_No){
-        String seatAmount = "";
+        int seatAmount = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select Car_Seat_Amount from Car c inner join ManageDrive m on c.Car_License_Plates = m.License_Plates where Trip_No = '"+trip_No+"'";
+        String sql ="select Car_Seat_Amount from Car c inner join ManageDrive m on c.Car_License_Plates = m.Car_License_Plates where Trip_No = '"+trip_No+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) return 0;
-            seatAmount = rs.getString("Car_Seat_Amount");
+            seatAmount = rs.getInt("Car_Seat_Amount");
             ps.close();
             rs.close();
         } catch (Exception e) {
             System.out.println("loi searchSeatAmount"+e);
         }
-        return Integer.parseInt(seatAmount);
+        return seatAmount;
     }
     
     public Vector searchOrderSeat(String trip_No){
@@ -664,7 +671,7 @@ public class OrderTicket extends javax.swing.JFrame {
     public String priceTicket(String trip_No){
         String priceTicket = "";
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select TicketPrice from Trip t inner join ScheduelOfGara s on t.TripOfGara_no = s.TripOfGara_no where Trip_No = '"+trip_No+"'";
+        String sql ="select TicketPrice from Trip t inner join ScheduleOfGara s on t.TripOfGara_no = s.TripOfGara_no where Trip_No = '"+trip_No+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -885,6 +892,10 @@ public class OrderTicket extends javax.swing.JFrame {
         cbb_seatKind.addItem("Loai 3");
 
     }//GEN-LAST:event_cbb_seatItemStateChanged
+
+    private void cbb_noiDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_noiDenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbb_noiDenActionPerformed
 
     /**
      * @param args the command line arguments

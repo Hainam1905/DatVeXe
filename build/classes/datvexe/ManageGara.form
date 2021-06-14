@@ -25,7 +25,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="btShowGaraList" min="-2" pref="200" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btShowGaraList" min="-2" pref="200" max="-2" attributes="0"/>
+                  <Component id="btCensorTrip" min="-2" pref="191" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="btAddNewGara" min="-2" pref="182" max="-2" attributes="0"/>
               <EmptySpace pref="74" max="32767" attributes="0"/>
@@ -40,7 +43,9 @@
                   <Component id="btShowGaraList" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
                   <Component id="btAddNewGara" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="205" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="btCensorTrip" min="-2" pref="77" max="-2" attributes="0"/>
+              <EmptySpace pref="76" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,6 +65,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddNewGaraActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btCensorTrip">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ph&#xea; duy&#x1ec7;t chuy&#x1ebf;n xe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCensorTripActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
