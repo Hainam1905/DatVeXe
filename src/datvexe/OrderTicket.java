@@ -828,6 +828,7 @@ public class OrderTicket extends javax.swing.JFrame {
     }//GEN-LAST:event_cbb_bookTimeItemStateChanged
 
     private void cbb_seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_seatItemStateChanged
+        cbb_seatKind.removeAllItems();
         cbb_seatKind.addItem("Loai 1");
         cbb_seatKind.addItem("Loai 2");
         cbb_seatKind.addItem("Loai 3");
