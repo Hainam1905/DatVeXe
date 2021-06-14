@@ -225,23 +225,22 @@ public class ManageTicket extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) table_listTicket.getModel();
         dtm.setNumRows(0);
         Vector vt;
-        String sqlSDT = "t.Passenger_SDT = '"+sdt+"'";
-        String sqlnoiDi = "st.station_Name = '"+noiDi+"'";
-        String sqlnoiDen = "sta.station_Name = '"+noiDen+"'";
+        String sqlSDT = "t.Passenger_SDT = N'"+sdt+"'";
+        String sqlnoiDi = "st.station_Name = N'"+noiDi+"'";
+        String sqlnoiDen = "sta.station_Name = N'"+noiDen+"'";
         String sqltime = "t.Book_Time = '"+time+"'";
         boolean check = false;
         Connection ketNoi = DatVeXe.layKetNoi();
         String sql = "select Ticket_No,Seat_Position,Seat_Kind,Is_Paid,Passenger_Note, Book_Time, Staff_CMND, Passenger_SDT, t.Trip_No "
                 + "from (Ticket t inner join Trip tr on t.Trip_No = tr.Trip_No) "
-                + "inner join ScheduelOfGara s on tr.TripOfGara_no = s.TripOfGara_no "
-                + "inner join TotalScheduels total on s.Scheduel_no = total.SChedule_no "
+                + "inner join ScheduleOfGara s on tr.TripOfGara_no = s.TripOfGara_no "
+                + "inner join TotalScheduels total on s.Schedule_no = total.SChedule_no "
                 + "inner join Station st on total.BeginStation = st.station_No "
-                + "inner join Station sta on total.EndStation = sta.station_No "
-                + "where ";
+                + "inner join Station sta on total.EndStation = sta.station_No ";
         if (!sdt.equals("")){
             if (check == false){
                 check = true;
-                sql += sqlSDT;
+                sql += "where "+sqlSDT;
             }else{
                 sql += " and "+sqlSDT;
             }
@@ -249,7 +248,7 @@ public class ManageTicket extends javax.swing.JFrame {
         if (!noiDi.equals("")){
             if (check == false){
                 check = true;
-                sql += sqlnoiDi;
+                sql += "where "+sqlnoiDi;
             }else{
                 sql += " and "+sqlnoiDi;
             }
@@ -257,7 +256,7 @@ public class ManageTicket extends javax.swing.JFrame {
         if (!noiDen.equals("")){
             if (check == false){
                 check = true;
-                sql += sqlnoiDen;
+                sql += "where "+sqlnoiDen;
             }else{
                 sql += " and "+sqlnoiDen;
             }
@@ -265,7 +264,7 @@ public class ManageTicket extends javax.swing.JFrame {
         if (!time.equals("")){
             if (check == false){
                 check = true;
-                sql += sqltime;
+                sql += "where "+sqltime;
             }else{
                 sql += " and "+sqltime;
             }
@@ -297,10 +296,7 @@ public class ManageTicket extends javax.swing.JFrame {
         String noiDi = txt_noiDi.getText();
         String noiDen = txt_noiDen.getText();
         String time = txt_time.getText();
-        if (!sdt.equals("") || !noiDi.equals("") || !noiDen.equals("") || !time.equals("")){
-            searchListTicketFilter(sdt, noiDi, noiDen, time);
-        }
-        
+        searchListTicketFilter(sdt, noiDi, noiDen, time);
     }//GEN-LAST:event_btn_searchActionPerformed
 
     /**

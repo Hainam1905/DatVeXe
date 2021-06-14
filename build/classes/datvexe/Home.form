@@ -41,16 +41,16 @@
                       <Component id="label_staffName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="btn_managerTicket" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_infoStaff" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btManageStaff" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btManageStaff" min="-2" pref="157" max="-2" attributes="0"/>
                           <Component id="btManageGara" min="-2" pref="157" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="299" max="32767" attributes="0"/>
@@ -68,14 +68,14 @@
                   <Component id="btn_logout" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btManageStaff" max="32767" attributes="0"/>
-                  <Component id="btn_infoStaff" min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_infoStaff" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btManageStaff" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_managerTicket" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="btManageGara" min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_managerTicket" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="btManageGara" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="tpManger" min="-2" pref="594" max="-2" attributes="0"/>
@@ -108,7 +108,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btManageStaff">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xed; nh&#xe2;n vi&#xea;n"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xed; nh&#xe2;n vi&#xea;n(admin)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btManageStaffActionPerformed"/>
@@ -128,7 +128,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btManageGara">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xed; Gara"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xed; Gara(admin)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btManageGaraActionPerformed"/>

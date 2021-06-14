@@ -208,7 +208,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
     private void btAddEmployerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddEmployerActionPerformed
        DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
-        String sql = "INSERT INTO Staff VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO Staff VALUES(?,?,?,?,?,?,?)";
         String cmnd = txCMND.getText().trim(); 
         String firstName= txFirstname.getText().trim();
         String lastname = txLastName.getText().trim();
@@ -279,6 +279,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
             pstt.setString(4, phone);
             pstt.setString(5, sex);
             pstt.setString(6, account);
+            pstt.setBoolean(7, true);
             int x = pstt.executeUpdate();
             if(x>0){
                 JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công!");
