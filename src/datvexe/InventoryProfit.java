@@ -58,6 +58,9 @@ public class InventoryProfit extends javax.swing.JFrame {
         rdMonth = new javax.swing.JRadioButton();
         rdYear = new javax.swing.JRadioButton();
         rdAll = new javax.swing.JRadioButton();
+        rdQuater = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        cbQuater = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,6 +135,23 @@ public class InventoryProfit extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rdQuater);
+        rdQuater.setText("Lọc theo quý và năm");
+        rdQuater.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdQuaterItemStateChanged(evt);
+            }
+        });
+
+        jLabel4.setText("Quý");
+
+        cbQuater.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        cbQuater.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbQuaterItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,25 +167,33 @@ public class InventoryProfit extends javax.swing.JFrame {
                         .addGap(282, 282, 282)
                         .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rdMonth)
-                        .addGap(41, 41, 41)
-                        .addComponent(rdYear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(rdAll, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel4)
+                        .addGap(32, 32, 32)
+                        .addComponent(cbQuater, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rdMonth)
+                        .addGap(57, 57, 57)
+                        .addComponent(rdQuater, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rdYear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdAll, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(33, 33, 33)
-                        .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180))))
+                        .addGap(45, 45, 45)
+                        .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,13 +204,16 @@ public class InventoryProfit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdMonth)
                     .addComponent(rdYear)
-                    .addComponent(rdAll))
+                    .addComponent(rdAll)
+                    .addComponent(rdQuater))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(cbQuater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -204,7 +235,21 @@ public class InventoryProfit extends javax.swing.JFrame {
 //       DatVeXe datvexe = new DatVeXe(); 
 //        Connection connection;
 //        connection = datvexe.layKetNoi(); 
-       showDetailDueYear(dtf, connection, year);
+       if(rdMonth.isSelected()){
+           String monthStr = (String) cbMonth.getSelectedItem();
+            int month = Integer.parseInt(monthStr);
+        
+       showDetailDueMonth(dtf, connection, year,month);
+       }else if(rdQuater.isSelected()==true){
+           String quaterStr = (String) cbQuater.getSelectedItem();
+            int quater = Integer.parseInt(quaterStr); 
+            showDetailDueQuater(dtf, connection, year,quater);
+       }else if(rdYear.isSelected()){
+           showDetailDueYear(dtf, connection, year);
+       }else if(rdAll.isSelected()){
+           return; 
+       }
+       
     }//GEN-LAST:event_cbYearItemStateChanged
 
     private void cbMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMonthItemStateChanged
@@ -227,6 +272,7 @@ public class InventoryProfit extends javax.swing.JFrame {
     }//GEN-LAST:event_rdMonthActionPerformed
 
     private void rdMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdMonthItemStateChanged
+        if(rdMonth.isSelected()==false) return; 
         String monthStr = (String) cbMonth.getSelectedItem();
         int month = Integer.parseInt(monthStr);
        
@@ -250,6 +296,29 @@ public class InventoryProfit extends javax.swing.JFrame {
     private void rdAllItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdAllItemStateChanged
         showDetail(dtf, connection);
     }//GEN-LAST:event_rdAllItemStateChanged
+
+    private void rdQuaterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdQuaterItemStateChanged
+       if(rdQuater.isSelected()==false) return ;
+        String quaterStr = (String) cbQuater.getSelectedItem();
+        int quater = Integer.parseInt(quaterStr);
+       
+       String yearStr = (String) cbYear.getSelectedItem();
+       int year = Integer.parseInt(yearStr);
+       
+       showDetailDueQuater(dtf, connection, year,quater);
+    }//GEN-LAST:event_rdQuaterItemStateChanged
+
+    private void cbQuaterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbQuaterItemStateChanged
+       if(rdQuater.isSelected()==false)  return;
+       String quaterStr = (String) cbQuater.getSelectedItem();
+        int quater = Integer.parseInt(quaterStr);
+       
+       String yearStr = (String) cbYear.getSelectedItem();
+       int year = Integer.parseInt(yearStr);
+       
+       showDetailDueQuater(dtf, connection, year,quater);
+       
+    }//GEN-LAST:event_cbQuaterItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -435,6 +504,83 @@ public class InventoryProfit extends javax.swing.JFrame {
         
         
     }
+    public void showDetailDueQuater(DefaultTableModel dtf, Connection conn, int year,int quater){
+        dtf = new DefaultTableModel();
+        ListSelectionModel listSelectionModel = tbProfit.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbProfit.setModel(dtf);
+        
+        System.out.println(" vào day 150");
+        dtf.addColumn("Tên nhà xe");
+        dtf.addColumn("Số vé bán ra");
+        dtf.addColumn("Doanh thu");
+        
+        String sql = "select * from Gara";
+        String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
+        String sql3 = "select * from Trip where TripOfGara_no=?";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and DATEPART(quarter, Ticket.Book_Time)=?";
+        
+        PreparedStatement pstt;
+        PreparedStatement pstt2;
+        PreparedStatement pstt3;
+        PreparedStatement pstt4;
+        try {
+            pstt = conn.prepareStatement(sql);
+            ResultSet rs = pstt.executeQuery();
+            while(rs.next()){
+                
+                //in ra tam thoi: 
+                String garaname = rs.getString(1);
+                
+                int totalOfTicket =0; 
+                float profit = 0; 
+                int ticketPrice= 0; 
+                float percentProfit =  0.05f; 
+                String garapicture = rs.getString(2); 
+                String review = rs.getString(3);
+                
+                //
+                
+                pstt2 = conn.prepareStatement(sql2);
+                pstt2.setString(1, garaname);
+                ResultSet rs2 = pstt2.executeQuery();
+                while(rs2.next()){
+                   
+                    String tripOfGaraNo = rs2.getString(1);
+                   
+                     ticketPrice = rs2.getInt(6);
+                    pstt3 = conn.prepareStatement(sql3);
+                    pstt3.setString(1, tripOfGaraNo);
+                   ResultSet rs3 = pstt3.executeQuery();
+                   while(rs3.next()){
+                       
+                       String tripNo = rs3.getString(1);
+//                       System.out.println(rs3.getString(1)+"-"+rs3.getString(2));
+                        pstt4 = conn.prepareStatement(sql4);
+                        pstt4.setString(1,tripNo);
+                        pstt4.setInt(2, year);
+                        pstt4.setInt(3, quater);
+                        ResultSet rs4 = pstt4.executeQuery();
+                        while(rs4.next()){
+                            int quantity = rs4.getInt(1);
+//                            System.out.println(garaname+"-"+quantity);
+                            totalOfTicket+=quantity;
+                            profit +=  quantity*ticketPrice*percentProfit;
+                           
+                        }
+                   }
+                }
+                
+                //tam thoi: 
+                dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
     public void showDetailDueMonth(DefaultTableModel dtf, Connection conn, int year, int month){
         dtf = new DefaultTableModel();
         ListSelectionModel listSelectionModel = tbProfit.getSelectionModel(); 
@@ -515,13 +661,16 @@ public class InventoryProfit extends javax.swing.JFrame {
     private javax.swing.JButton btExit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbMonth;
+    private javax.swing.JComboBox<String> cbQuater;
     private javax.swing.JComboBox<String> cbYear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdAll;
     private javax.swing.JRadioButton rdMonth;
+    private javax.swing.JRadioButton rdQuater;
     private javax.swing.JRadioButton rdYear;
     private javax.swing.JTable tbProfit;
     // End of variables declaration//GEN-END:variables
