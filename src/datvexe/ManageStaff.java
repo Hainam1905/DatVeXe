@@ -32,6 +32,7 @@ public class ManageStaff extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btManageStaffLiss = new javax.swing.JButton();
         btAddNewStaff = new javax.swing.JButton();
+        btProfit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +55,13 @@ public class ManageStaff extends javax.swing.JFrame {
             }
         });
 
+        btProfit.setText("Thống kê doanh thu");
+        btProfit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProfitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,23 +69,26 @@ public class ManageStaff extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addGap(62, 62, 62)
                         .addComponent(btAddNewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119)
+                .addGap(88, 88, 88)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddNewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(btProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -98,6 +109,12 @@ public class ManageStaff extends javax.swing.JFrame {
        
         
     }//GEN-LAST:event_btAddNewStaffActionPerformed
+
+    private void btProfitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProfitActionPerformed
+        InventoryProfit inventoryProfit = new InventoryProfit();
+        inventoryProfit.setLocationRelativeTo(null);
+        inventoryProfit.setVisible(true);
+    }//GEN-LAST:event_btProfitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +154,7 @@ public class ManageStaff extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddNewStaff;
     private javax.swing.JButton btManageStaffLiss;
+    private javax.swing.JButton btProfit;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
