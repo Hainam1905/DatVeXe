@@ -124,23 +124,31 @@ public class ShowStaffList extends javax.swing.JFrame{
         
         
         String sql = "UPDATE Staff SET Active='false',Staff_Account=NULL WHERE Staff_CMND=?";
+        String sql1 = "DELETE Account where Account.Account = ?";
         String cmnd = "";
         
         cmnd = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),0);
         String first = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),1);
         String last = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),2);
-        
+        String account = (String) tbListEmp.getValueAt(tbListEmp.getSelectedRow(),5);
+        System.out.println(" account cua nhan vien la 133: "+account);
         int confirm = JOptionPane.showConfirmDialog(rootPane,"Xác nhận thao tác xóa" ,"Bạn có chắc chắn xóa nhân viên \n"+cmnd+"\nHọ tên: "+first+" "+last, JOptionPane.YES_NO_OPTION);
                 
         if(confirm ==JOptionPane.NO_OPTION){        
                 JOptionPane.showMessageDialog(rootPane, "Thao tác xóa bị hủy");
         }else if(confirm ==JOptionPane.YES_OPTION){
             PreparedStatement pstt;
+            PreparedStatement pstt1; 
         try {
             pstt = connection.prepareStatement(sql);
             pstt.setString(1, cmnd);
             int result = pstt.executeUpdate();
-            if(result>0){
+            
+             pstt1 = connection.prepareStatement(sql1);
+            pstt1.setString(1, account);
+            int result1 = pstt1.executeUpdate();
+            
+            if(result>0 && result1>0){
                 JOptionPane.showMessageDialog(rootPane, "Xóa nhân viên thành công!");
                 performed(connection);
             

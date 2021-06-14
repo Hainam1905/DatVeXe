@@ -355,7 +355,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             String statement; 
             if(active==true) statement = "Đang hợp tác";
             else statement = "Ngừng hợp tác";
-            
+               
             dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement});
             }
         } catch (SQLException ex) {
