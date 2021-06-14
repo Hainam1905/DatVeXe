@@ -25,6 +25,7 @@ public class infoStaff extends javax.swing.JFrame {
     String cmnd = "";
     public infoStaff(String userName) {
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         getInfoStaff(userName);
         this.userName = userName;
         clear();
@@ -56,6 +57,7 @@ public class infoStaff extends javax.swing.JFrame {
         label_err2 = new javax.swing.JLabel();
         label_err3 = new javax.swing.JLabel();
         label_err4 = new javax.swing.JLabel();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +103,13 @@ public class infoStaff extends javax.swing.JFrame {
 
         label_err4.setText("jLabel10");
 
+        btn_back.setText("<");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,11 +136,12 @@ public class infoStaff extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
+                                .addComponent(btn_back)
+                                .addGap(36, 36, 36)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_titleStaffName)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(209, 209, 209))
                     .addGroup(layout.createSequentialGroup()
@@ -158,8 +168,9 @@ public class infoStaff extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_titleStaffName))
-                .addGap(23, 23, 23)
+                    .addComponent(txt_titleStaffName)
+                    .addComponent(btn_back))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel6))
@@ -313,6 +324,10 @@ public class infoStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_updateInfoStaffActionPerformed
 
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +364,7 @@ public class infoStaff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_updateInfoStaff;
     private javax.swing.JComboBox<String> cbb_staffGender;
     private javax.swing.JLabel jLabel1;

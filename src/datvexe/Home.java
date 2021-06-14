@@ -520,12 +520,16 @@ public class Home extends javax.swing.JFrame {
         return name;
     }
     private void btn_infoStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_infoStaffActionPerformed
-            new infoStaff(user).setVisible(true);
+        infoStaff info = new infoStaff(user);
+        info.setLocationRelativeTo(null);
+        info.setVisible(true);
     }//GEN-LAST:event_btn_infoStaffActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         this.setVisible(false);
-        new Login().setVisible(true);
+        Login lg = new Login();
+        lg.setLocationRelativeTo(null);
+        lg.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btManageStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageStaffActionPerformed

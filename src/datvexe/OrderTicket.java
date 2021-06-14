@@ -505,7 +505,7 @@ public class OrderTicket extends javax.swing.JFrame {
     public String convertStationNametoStationNo(String station_Name){
         String Station_No = "";
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select station_No from Station where station_Name ='"+station_Name+"'";
+        String sql ="select station_No from Station where station_Name = N'"+station_Name+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -537,9 +537,10 @@ public class OrderTicket extends javax.swing.JFrame {
         Connection ketNoi = DatVeXe.layKetNoi();
         String sql ="select Gara_Name from TotalScheduels t "
                 + "inner join ScheduleOfGara s on t.SChedule_no = s.Schedule_no "
-                + "where BeginStation ='"+noiDi+"' "
-                + "and EndStation = '"+noiDen+"' "
-                + "and DayInWeek ='"+dayOfWeek+"'";
+                + "where BeginStation = N'"+noiDi+"' "
+                + "and EndStation = N'"+noiDen+"' "
+                + "and DayInWeek ='"+dayOfWeek+"' "
+                + "and AdminChecked ='"+1+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -571,7 +572,7 @@ public class OrderTicket extends javax.swing.JFrame {
         String[] listTime = new String[100];
         int d = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select DepartTime from ScheduleOfGara where Gara_Name ='"+garaName+"'";
+        String sql ="select DepartTime from ScheduleOfGara where Gara_Name =N'"+garaName+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -600,7 +601,7 @@ public class OrderTicket extends javax.swing.JFrame {
         Connection ketNoi = DatVeXe.layKetNoi();
         String sql ="select Trip_No from trip t inner join ScheduleOfGara s "
                 + "on t.TripOfGara_no = s.TripOfGara_no "
-                + "where Gara_Name = '"+garaName+"' and DepartTime ='"+time+"' "
+                + "where Gara_Name = N'"+garaName+"' and DepartTime ='"+time+"' "
                 + "and DayInWeek ='"+dayOfWeek+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
@@ -713,13 +714,7 @@ public class OrderTicket extends javax.swing.JFrame {
         return true;
     }
     private void txt_staffCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_staffCMNDFocusLost
-        String staffCMND = txt_staffCMND.getText();
-        staffCMND.trim();
-        if (!staffCMND.equals("")){
-            if (!checkStaffCMND(staffCMND)){
-                JOptionPane.showMessageDialog(this, "CMND của nhân viên vừa nhập không tồn tại","Inane Eror",JOptionPane.ERROR_MESSAGE);
-            }
-        }
+       
     }//GEN-LAST:event_txt_staffCMNDFocusLost
     
     public String sinhMa(String cotMa,String tenBang){
@@ -830,7 +825,11 @@ public class OrderTicket extends javax.swing.JFrame {
             check4 = false;
             label_errCMND.setText("nhập CMND nhân viên");
         }else{
-            check4 = true;
+            staffCMND.trim();
+                if (!checkStaffCMND(staffCMND)){
+                    JOptionPane.showMessageDialog(this, "CMND của nhân viên vừa nhập không tồn tại","Inane Eror",JOptionPane.ERROR_MESSAGE);
+                    check4 = false;
+                }else check4 = true;
             label_errCMND.setText("");
         }
         if (check1 == true && check2 == true && check3 == true && check4 == true){
@@ -840,10 +839,9 @@ public class OrderTicket extends javax.swing.JFrame {
                     addNewPassenger(sdt,firstName,lastName);
                 }
                 String dateTime = date +" "+ time.substring(0,8);
-                txt_note.setText(dateTime);
                 orderTicket(seatPosition, seatKind, isPaid, note, dateTime, staffCMND, sdt, trip_No);
                 JOptionPane.showMessageDialog(this, "Đã đặt vé thành công");
-                //btn_backActionPerformed(evt);
+                btn_backActionPerformed(evt);
             }else{
                 JOptionPane.showMessageDialog(this, "Hãy chọn ghế và loại ghế trước khi đặt vé!","Inane Warning",JOptionPane.ERROR_MESSAGE);
             }
