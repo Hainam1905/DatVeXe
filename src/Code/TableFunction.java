@@ -52,16 +52,57 @@ public class TableFunction {
                 dtm.addRow(vt);
             }
             
-//            if(dtm.getRowCount()==0){
-//                vt=new Vector();
-//                for(int i=1;i<=dtm.getColumnCount();i++){
-//                    if(i==dtm.getColumnCount()/2){
-//                        vt.add("(Trống)");
-//                    }
-//                    else vt.add("");
-//                    }
-//                dtm.addRow(vt);
-//            }
+            if(dtm.getRowCount()==0){
+                vt=new Vector();
+                for(int i=1;i<=dtm.getColumnCount();i++){
+                    if(i==dtm.getColumnCount()/2){
+                        vt.add("(Trống)");
+                    }
+                    else vt.add("");
+                    }
+                dtm.addRow(vt);
+            }
+            
+            tb.setModel(dtm);
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database đến bảng");
+        }
+    }
+    public void LoadData(JTable tb, String sql, boolean haveDayInWeek) {
+        DefaultTableModel dtm = (DefaultTableModel)tb.getModel();
+        dtm.setNumRows(0);
+        
+        Connection conn = datvexe.DatVeXe.layKetNoi();
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            Vector vt;
+            
+            while(rs.next()) {
+                vt = new Vector();
+                for (int i = 1; i <= tb.getColumnCount(); i++) {
+                    if (i == 4) vt.add(Integer.toString(Integer.parseInt(rs.getString(i).trim()) + 1));
+                    else vt.add(rs.getString(i));
+                }
+                
+                dtm.addRow(vt);
+            }
+            
+            if(dtm.getRowCount()==0){
+                vt=new Vector();
+                for(int i=1;i<=dtm.getColumnCount();i++){
+                    if(i==dtm.getColumnCount()/2){
+                        vt.add("(Trống)");
+                    }
+                    else vt.add("");
+                    }
+                dtm.addRow(vt);
+            }
             
             tb.setModel(dtm);
             rs.close();
@@ -77,6 +118,39 @@ public class TableFunction {
             return tb.getValueAt(tb.getSelectedRow(), numRow).toString();
         } catch (NullPointerException e) {
             return null;
+        }
+    }
+    
+    
+    //Sort
+    public void Sort(JTable tb ,int xepTheoCot,int kieuXep)// xepTheo: cột cần xếp, kieuXep: 0=tăng hoặc 1=giảm
+    {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tb.getModel());
+        tb.setRowSorter(sorter);
+
+        ArrayList <RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
+        if(kieuXep==0){
+            sortKeys.add(new RowSorter.SortKey(xepTheoCot, SortOrder.ASCENDING));
+        }
+        else if(kieuXep==1){
+            sortKeys.add(new RowSorter.SortKey(xepTheoCot, SortOrder.DESCENDING));
+        }
+        sorter.setSortKeys(sortKeys); 
+    }  
+    
+    // Lọc tất cả các hàng có dữ liệu ở cột cotLoc là str
+    public void Search(JTable tb, String str, int cotLoc){
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tb.getModel())); 
+        tb.setRowSorter(sorter);
+        try {
+            if(cotLoc>-1){//nếu cột lọc -1 thì lọc tất cả các cột xem cột nào = str
+                sorter.setRowFilter(RowFilter.regexFilter(str,cotLoc));
+            }else {
+                sorter.setRowFilter(RowFilter.regexFilter(str));
+            }
+        } 
+        catch(PatternSyntaxException pse) {
+            System.out.println("Bad regex pattern");
         }
     }
 }
