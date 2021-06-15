@@ -141,6 +141,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
         });
 
         tEmail.setEditable(false);
+        tEmail.setToolTipText("á232");
         tEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tEmailActionPerformed(evt);
@@ -338,7 +339,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(spPassengerManager, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pFunction, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(pFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 327, Short.MAX_VALUE)
                 .addGap(98, 98, 98))
         );
     }// </editor-fold>//GEN-END:initComponents
