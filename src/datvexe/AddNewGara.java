@@ -55,11 +55,9 @@ public class AddNewGara extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btAddGara = new javax.swing.JButton();
         txGaraName = new javax.swing.JTextField();
-        txGaraReview = new javax.swing.JTextField();
         txBusResNum = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -73,8 +71,6 @@ public class AddNewGara extends javax.swing.JDialog {
         jLabel1.setText("Tên nhà xe");
 
         jLabel2.setText("Hình ảnh");
-
-        jLabel3.setText("Đánh giá");
 
         jLabel4.setText("Giấy phép đăng kí kinh doanh");
 
@@ -104,7 +100,6 @@ public class AddNewGara extends javax.swing.JDialog {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
@@ -116,7 +111,6 @@ public class AddNewGara extends javax.swing.JDialog {
                         .addComponent(btAddGara, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txGaraName)
-                        .addComponent(txGaraReview)
                         .addComponent(txBusResNum, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                         .addComponent(txAccount)
                         .addComponent(txPassword))
@@ -145,11 +139,7 @@ public class AddNewGara extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(btPickPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txGaraReview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
+                        .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txBusResNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +161,7 @@ public class AddNewGara extends javax.swing.JDialog {
 
     private void btAddGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddGaraActionPerformed
         String garaName = txGaraName.getText().trim(); 
-        String garaReview = txGaraReview.getText().trim();
+        String garaReview = "";
         String BusResNum = txBusResNum.getText().trim(); 
         String account = txAccount.getText().trim();
         String password = txPassword.getText().trim();
@@ -346,7 +336,7 @@ public class AddNewGara extends javax.swing.JDialog {
 public int checkInfor(String garaName, String garaReview, String busResNum, String account, String password, Connection conn){
         
         
-        if(garaName.trim().equals("")|| garaReview.trim().equals("")|| busResNum.trim().equals("")|| account.trim().equals("")||password.trim().equals("")){
+        if(garaName.trim().equals("")||  busResNum.trim().equals("")|| account.trim().equals("")||password.trim().equals("")){
             return -1; 
         }
         
@@ -405,7 +395,6 @@ public int checkInfor(String garaName, String garaReview, String busResNum, Stri
     private javax.swing.JButton btPickPicture;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -413,7 +402,6 @@ public int checkInfor(String garaName, String garaReview, String busResNum, Stri
     private javax.swing.JTextField txAccount;
     private javax.swing.JTextField txBusResNum;
     private javax.swing.JTextField txGaraName;
-    private javax.swing.JTextField txGaraReview;
     private javax.swing.JTextField txPassword;
     // End of variables declaration//GEN-END:variables
 }
