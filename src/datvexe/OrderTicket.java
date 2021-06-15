@@ -1415,11 +1415,11 @@ public class OrderTicket extends javax.swing.JFrame {
             }else break;  
         }
     }//GEN-LAST:event_cbb_tripNameMouseClicked
-    public String[] searchTime(String garaName){
+    public String[] searchTime(String garaName, String dayInWeek){
         String[] listTime = new String[100];
         int d = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select DepartTime from ScheduleOfGara where Gara_Name =N'"+garaName+"'";
+        String sql ="select DepartTime from ScheduleOfGara where Gara_Name =N'"+garaName+"' and DayInWeek = '"+dayInWeek+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -1671,7 +1671,8 @@ public class OrderTicket extends javax.swing.JFrame {
     private void cbb_tripNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_tripNameItemStateChanged
         cbb_bookTime.removeAllItems();
         String GaraName = String.valueOf(cbb_tripName.getSelectedItem());
-        String[] listTime = searchTime(GaraName);
+        String dayInWeek = getDate(false);
+        String[] listTime = searchTime(GaraName,dayInWeek);
         for (int i = 0;i<=100;i++){
             if (listTime[i]!= null){
                 String time = listTime[i].substring(0,8);
