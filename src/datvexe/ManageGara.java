@@ -30,6 +30,7 @@ public class ManageGara extends javax.swing.JFrame {
         btShowGaraList = new javax.swing.JButton();
         btAddNewGara = new javax.swing.JButton();
         btCensorTrip = new javax.swing.JButton();
+        btAppreciate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +55,13 @@ public class ManageGara extends javax.swing.JFrame {
             }
         });
 
+        btAppreciate.setText("Đánh giá nhà xe");
+        btAppreciate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAppreciateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,8 +72,10 @@ public class ManageGara extends javax.swing.JFrame {
                     .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +85,9 @@ public class ManageGara extends javax.swing.JFrame {
                     .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
-                .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
@@ -104,6 +116,12 @@ public class ManageGara extends javax.swing.JFrame {
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btExitActionPerformed
+
+    private void btAppreciateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAppreciateActionPerformed
+        ShowGaraListForAppreciate showGaraList = new ShowGaraListForAppreciate();
+        showGaraList.setLocationRelativeTo(null);
+        showGaraList.setVisible(true);
+    }//GEN-LAST:event_btAppreciateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,6 +160,7 @@ public class ManageGara extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddNewGara;
+    private javax.swing.JButton btAppreciate;
     private javax.swing.JButton btCensorTrip;
     private javax.swing.JButton btShowGaraList;
     // End of variables declaration//GEN-END:variables

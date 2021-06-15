@@ -25,7 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author huynh
  */
-public class UpGara extends javax.swing.JDialog {
+public class AppreciateGara extends javax.swing.JDialog {
 
     /**
      * Creates new form AddNewGara
@@ -46,11 +46,11 @@ public class UpGara extends javax.swing.JDialog {
     int duplicateGaraName = -2;
     int duplicateAccount = -3; 
     int duplicateBusResNum = -4; 
-    public UpGara(java.awt.Frame parent, boolean modal) {
+    public AppreciateGara(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    public UpGara(java.awt.Frame parent, boolean modal, String garaName, String picture, String review,float garaPoint, String BusResNum ,String active, String account, String password) {
+    public AppreciateGara(java.awt.Frame parent, boolean modal, String garaName, String picture, String review,float garaPoint, String BusResNum ,String active, String account, String password) {
         super(parent, modal);
         initComponents();
         showInfor(garaName, picture, review, BusResNum, active,account, password);
@@ -63,7 +63,14 @@ public class UpGara extends javax.swing.JDialog {
         nameofPicture = picture; 
         this.garaPoint0 = garaPoint;
         
+        txGaraName.setEditable(false);
         txGaraReview.setEditable(false);
+        btPickPicture.setEnabled(false);
+        txBusResNum.setEditable(false);
+        cbStatement.setEditable(false);
+        txAccount.setEditable(false);
+        txPassword.setEditable(false);
+        
     }
    
     /**
@@ -79,7 +86,7 @@ public class UpGara extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btUpdate = new javax.swing.JButton();
+        btAppreciate = new javax.swing.JButton();
         txGaraName = new javax.swing.JTextField();
         txGaraReview = new javax.swing.JTextField();
         txBusResNum = new javax.swing.JTextField();
@@ -104,19 +111,14 @@ public class UpGara extends javax.swing.JDialog {
 
         jLabel4.setText("Giấy phép đăng kí kinh doanh");
 
-        btUpdate.setText("Cập nhật thông tin nhà xe");
-        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btAppreciate.setText("Đánh giá nhà xe");
+        btAppreciate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btUpdateActionPerformed(evt);
+                btAppreciateActionPerformed(evt);
             }
         });
 
         cbStatement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hợp tác", "Ngừng hợp tác" }));
-        cbStatement.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbStatementItemStateChanged(evt);
-            }
-        });
 
         jLabel5.setText("Trạng thái");
 
@@ -156,8 +158,8 @@ public class UpGara extends javax.swing.JDialog {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(148, 148, 148)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -168,11 +170,11 @@ public class UpGara extends javax.swing.JDialog {
                                 .addComponent(txAccount)
                                 .addComponent(txPassword)
                                 .addComponent(btPickPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)))
                 .addComponent(lbshowPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(144, Short.MAX_VALUE))
@@ -217,14 +219,14 @@ public class UpGara extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(txPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+    private void btAppreciateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAppreciateActionPerformed
         String garaName = txGaraName.getText(); 
         
         String garaReview = txGaraReview.getText();
@@ -293,7 +295,7 @@ public class UpGara extends javax.swing.JDialog {
                         
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
@@ -312,7 +314,7 @@ public class UpGara extends javax.swing.JDialog {
                     }
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
@@ -333,7 +335,7 @@ public class UpGara extends javax.swing.JDialog {
                     }
                  
                 } catch (SQLException ex) {
-                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Active=?,Account=? where Gara_Name=?";
                 try {
@@ -352,7 +354,7 @@ public class UpGara extends javax.swing.JDialog {
                     }
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 
@@ -378,7 +380,7 @@ public class UpGara extends javax.swing.JDialog {
                     }
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
@@ -441,7 +443,7 @@ public class UpGara extends javax.swing.JDialog {
         
         
         
-    }//GEN-LAST:event_btUpdateActionPerformed
+    }//GEN-LAST:event_btAppreciateActionPerformed
     public int checkInfor(String garaName, String garaReview, String busResNum, String account, String password, Connection conn){
         
         
@@ -459,7 +461,7 @@ public class UpGara extends javax.swing.JDialog {
                 return -2; 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         
@@ -476,7 +478,7 @@ public class UpGara extends javax.swing.JDialog {
                 return -3; 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
         }
        }
         
@@ -490,7 +492,7 @@ public class UpGara extends javax.swing.JDialog {
                 return -4; 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         
@@ -499,16 +501,6 @@ public class UpGara extends javax.swing.JDialog {
         return 0;
     }
     
-    private void cbStatementItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatementItemStateChanged
-        if(cbStatement.getSelectedIndex()==0){
-            txAccount.setEditable(true);
-            txPassword.setEditable(true);
-        }else{
-            txAccount.setEditable(false);
-            txPassword.setEditable(false);
-        }
-    }//GEN-LAST:event_cbStatementItemStateChanged
-
     private void btPickPictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPickPictureActionPerformed
        JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter extension = new FileNameExtensionFilter("Hình ảnh", "jpg","jpeg","png");
@@ -572,21 +564,23 @@ public class UpGara extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppreciateGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppreciateGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppreciateGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppreciateGara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpGara dialog = new UpGara(new javax.swing.JFrame(), true);
+                AppreciateGara dialog = new AppreciateGara(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -599,8 +593,8 @@ public class UpGara extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAppreciate;
     private javax.swing.JButton btPickPicture;
-    private javax.swing.JButton btUpdate;
     private javax.swing.JComboBox<String> cbAppreciate;
     private javax.swing.JComboBox<String> cbStatement;
     private javax.swing.JLabel jLabel1;
