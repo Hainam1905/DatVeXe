@@ -61,7 +61,6 @@ public class PassengerFunction {
         
         try {
             PreparedStatement ps=connect.prepareStatement(sql);
-            //ps.setString(1, account);
             ps.setString(1, email);
             ps.setString(2, firstName);
             ps.setString(3, lastName);

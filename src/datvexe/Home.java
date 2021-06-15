@@ -135,12 +135,11 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(176, 176, 176))))
-
+                        .addContainerGap(430, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +173,11 @@ public class Home extends javax.swing.JFrame {
             pnPassengerManager pn = new pnPassengerManager();
             AddPanel(pn, "Quản lý khách hàng");
             
-            pnScheduelManager pn2 = new pnScheduelManager(this.kind);
+            pnScheduelManager pn2 = new pnScheduelManager(this.kind, this.user);
+            AddPanel(pn2, "Quản lý chuyến xe");
+        }
+        else if (kind.equals("gara")) {
+            pnScheduelManager pn2 = new pnScheduelManager(this.kind, this.user);
             AddPanel(pn2, "Quản lý chuyến xe");
         }
     }

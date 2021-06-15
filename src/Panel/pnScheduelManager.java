@@ -6,6 +6,14 @@
 package Panel;
 
 import Code.TableFunction;
+import datvexe.DatVeXe;
+import datvexe.Home;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +21,7 @@ import Code.TableFunction;
  */
 public class pnScheduelManager extends javax.swing.JPanel {
     private String kind;
+    private String account;
     
     //To handle Table
     TableFunction tbFunction = new TableFunction();
@@ -21,8 +30,9 @@ public class pnScheduelManager extends javax.swing.JPanel {
     /**
      * Creates new form pnScheduelManager
      */
-    public pnScheduelManager(String kind) {
+    public pnScheduelManager(String kind, String account) {
         this.kind = kind;
+        this.account = account;
         initComponents();
         Start();
     }
@@ -32,7 +42,26 @@ public class pnScheduelManager extends javax.swing.JPanel {
         else btAddScheduel.setVisible(false);
         
         //Load database to table passenger manager
-        tbFunction.LoadData(tbScheduelManager, sqlLoadData);
+        tbFunction.LoadData(tbScheduelManager, sqlLoadData, true);
+        
+        //Lock textfield and button
+        tGaraName.setVisible(false);
+        lbGaraName.setVisible(false);
+        lbBeginPlace.setVisible(false);
+        cbBeginPlace.setVisible(false);
+        lbDayInWeed.setVisible(false);
+        cbDayInWeek.setVisible(false);
+        lbEndPlace.setVisible(false);
+        cbEndPlace.setVisible(false);
+        lbTickerPrice.setVisible(false);
+        tTicketPrice.setVisible(false);
+        lbTimeDepart.setVisible(false);
+        tTimeDepart.setVisible(false);
+        btESC.setVisible(false);
+        btSave.setVisible(false);
+        lbErrorTicketPrice.setVisible(false);
+        lbErrorTimeDepart.setVisible(false);
+        
     }
 
     /**
@@ -47,24 +76,24 @@ public class pnScheduelManager extends javax.swing.JPanel {
         spScheduelManager = new javax.swing.JScrollPane();
         tbScheduelManager = new javax.swing.JTable();
         btAddScheduel = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        tLastName = new javax.swing.JTextField();
-        tAccount = new javax.swing.JTextField();
+        lbBeginPlace = new javax.swing.JLabel();
+        lbEndPlace = new javax.swing.JLabel();
+        tGaraName = new javax.swing.JTextField();
+        tTimeDepart = new javax.swing.JTextField();
+        lbTimeDepart = new javax.swing.JLabel();
+        lbDayInWeed = new javax.swing.JLabel();
+        lbGaraName = new javax.swing.JLabel();
+        lbTickerPrice = new javax.swing.JLabel();
+        tTicketPrice = new javax.swing.JTextField();
+        cbBeginPlace = new javax.swing.JComboBox<>();
+        cbEndPlace = new javax.swing.JComboBox<>();
+        cbDayInWeek = new javax.swing.JComboBox<>();
+        btSave = new javax.swing.JButton();
+        btESC = new javax.swing.JButton();
+        lbErrorTimeDepart = new javax.swing.JLabel();
+        lbErrorTicketPrice = new javax.swing.JLabel();
+        tSearch = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lbPassword = new javax.swing.JLabel();
-        tPassword = new javax.swing.JTextField();
-        lbErrorFirstName = new javax.swing.JLabel();
-        lbErrorEmail = new javax.swing.JLabel();
-        lbErrorNumber = new javax.swing.JLabel();
-        lbErrorPassword = new javax.swing.JLabel();
-        lbErrorAccout = new javax.swing.JLabel();
-        lbErrorLastName = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
 
         tbScheduelManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,43 +120,54 @@ public class pnScheduelManager extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("Điểm đi*");
+        lbBeginPlace.setText("Điểm đi*");
 
-        jLabel5.setText("Điểm đến*");
+        lbEndPlace.setText("Điểm đến*");
 
-        tLastName.setEditable(false);
+        tGaraName.setEditable(false);
 
-        jLabel1.setText("Thời gian*");
+        lbTimeDepart.setText("Thời gian*");
 
-        jLabel2.setText("Thứ*");
+        lbDayInWeed.setText("Thứ*");
 
-        jLabel3.setText("Tên nhà xe");
+        lbGaraName.setText("Tên nhà xe");
 
-        lbPassword.setText("Giá vé*");
+        lbTickerPrice.setText("Giá vé*");
 
-        lbErrorFirstName.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorFirstName.setText("Tên không được bỏ trống");
+        cbDayInWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8" }));
 
-        lbErrorEmail.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorEmail.setText("Email không hợp lệ");
+        btSave.setText("Lưu");
+        btSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSaveActionPerformed(evt);
+            }
+        });
 
-        lbErrorNumber.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorNumber.setText("Số điện thoại không được bỏ trống");
+        btESC.setText("Hủy");
+        btESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btESCActionPerformed(evt);
+            }
+        });
 
-        lbErrorPassword.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorPassword.setText("Mật khẩu không hợp lệ");
+        lbErrorTimeDepart.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorTimeDepart.setText("Thời gian không được để trống");
 
-        lbErrorAccout.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorAccout.setText("Tài khoản không hợp lệ");
+        lbErrorTicketPrice.setForeground(new java.awt.Color(255, 0, 51));
+        lbErrorTicketPrice.setText("Giá vé không được để trống");
 
-        lbErrorLastName.setForeground(new java.awt.Color(255, 0, 51));
-        lbErrorLastName.setText("Họ không được bỏ trống");
+        tSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tSearchActionPerformed(evt);
+            }
+        });
+        tSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tSearchKeyReleased(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,119 +177,439 @@ public class pnScheduelManager extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(btAddScheduel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(101, 101, 101)
+                                .addComponent(btESC, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(254, 254, 254)
+                                .addComponent(btAddScheduel)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lbErrorFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                    .addComponent(lbGaraName)
+                                    .addComponent(lbDayInWeed))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(lbErrorLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lbErrorEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lbErrorAccout))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tGaraName, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(cbDayInWeek, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbErrorTimeDepart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lbBeginPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cbBeginPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(lbTimeDepart)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(tTimeDepart, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbErrorNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbErrorPassword))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(tSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbEndPlace)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbEndPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lbTickerPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tTicketPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbErrorTicketPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(spScheduelManager, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btAddScheduel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jComboBox1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbErrorFirstName)
-                    .addComponent(lbErrorEmail)
-                    .addComponent(lbErrorNumber))
-                .addGap(43, 43, 43)
+                    .addComponent(tSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addComponent(btAddScheduel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbEndPlace)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbBeginPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbEndPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(cbBeginPlace)))
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(lbDayInWeed, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tTimeDepart, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbTimeDepart, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbDayInWeek, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbErrorLastName)
-                            .addComponent(lbErrorAccout)))
+                        .addComponent(lbErrorTimeDepart)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tTicketPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbTickerPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbErrorPassword)))
-                .addGap(0, 214, Short.MAX_VALUE))
+                        .addComponent(lbErrorTicketPrice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btESC, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 151, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAddScheduelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddScheduelActionPerformed
-        // TODO add your handling code here:
+        //unlock
+        tGaraName.setVisible(true);
+        lbGaraName.setVisible(true);
+        lbBeginPlace.setVisible(true);
+        cbBeginPlace.setVisible(true);
+        lbDayInWeed.setVisible(true);
+        cbDayInWeek.setVisible(true);
+        lbEndPlace.setVisible(true);
+        cbEndPlace.setVisible(true);
+        lbTickerPrice.setVisible(true);
+        tTicketPrice.setVisible(true);
+        lbTimeDepart.setVisible(true);
+        tTimeDepart.setVisible(true);
+        btESC.setVisible(true);
+        btSave.setVisible(true);
+        
+        //Load garaName
+        tGaraName.setText(TakeGaraName());
+        //Load startPlace and  endPlace
+        LoadPlace();
+        //set index combobox
+        cbBeginPlace.setSelectedIndex(1);
+        cbEndPlace.setSelectedIndex(1);
+        cbDayInWeek.setSelectedIndex(1);
+        
     }//GEN-LAST:event_btAddScheduelActionPerformed
 
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+        //Check input
+        if (!CheckInput()) return;
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận thêm chuyến xe", "Thông Báo",0);
+        if (choose == JOptionPane.OK_OPTION) {
+            AddScheduel(tGaraName.getText(), cbBeginPlace.getEditor().getItem().toString(), 
+                cbEndPlace.getEditor().getItem().toString(), 
+                cbDayInWeek.getEditor().getItem().toString(), tTimeDepart.getText(),
+                tTicketPrice.getText());
+        }
+        else return;
+        
+        Reset();
+    }//GEN-LAST:event_btSaveActionPerformed
+
+    private void btESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btESCActionPerformed
+        Reset();
+    }//GEN-LAST:event_btESCActionPerformed
+
+    private void tSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tSearchActionPerformed
+
+    private void tSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tSearchKeyReleased
+        // TODO add your handling code here:
+        if(!tSearch.getText().isEmpty()){
+            tbFunction.Search(tbScheduelManager,tSearch.getText(),-1);
+        }
+        else tbFunction.Search(tbScheduelManager,"",-1);
+    }//GEN-LAST:event_tSearchKeyReleased
+    
+    private void Reset() {
+        tbFunction.LoadData(tbScheduelManager, sqlLoadData, true);
+        
+        //Lock textfield and button
+        tGaraName.setVisible(false);
+        lbGaraName.setVisible(false);
+        lbBeginPlace.setVisible(false);
+        cbBeginPlace.setVisible(false);
+        lbDayInWeed.setVisible(false);
+        cbDayInWeek.setVisible(false);
+        lbEndPlace.setVisible(false);
+        cbEndPlace.setVisible(false);
+        lbTickerPrice.setVisible(false);
+        tTicketPrice.setVisible(false);
+        lbTimeDepart.setVisible(false);
+        tTimeDepart.setVisible(false);
+        btESC.setVisible(false);
+        btSave.setVisible(false);
+        lbErrorTicketPrice.setVisible(false);
+        lbErrorTimeDepart.setVisible(false);
+    }
+    
+    private void AddScheduel(String garaName, String startPlace, String endPlace, String dayInWeek, String timeDepart, String ticketPrice) {
+        Connection conn = DatVeXe.layKetNoi();
+        boolean insertTotalScheduel = false;
+        dayInWeek = Integer.toString(Integer.parseInt(dayInWeek) - 1);
+        System.out.println(dayInWeek);
+        //Take station_no
+        String stationStart = null;
+        String stationEnd = null;
+        String sqlStationStart = "SELECT station_No FROM Station WHERE station_Name = N'" + startPlace + "'";
+        String sqlStationEnd = "SELECT station_No FROM Station WHERE station_Name = N'" + endPlace + "'";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sqlStationStart);
+            ResultSet rs =ps.executeQuery();
+            rs.next();
+            stationStart = rs.getString(1);
+            
+            ps = conn.prepareStatement(sqlStationEnd);
+            rs =ps.executeQuery();
+            rs.next();
+            stationEnd = rs.getString(1);
+            
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        System.out.println(stationStart + " " + stationStart);
+        
+        //take Scheduel_No
+        String scheduelNo = null;
+        String sqlCheckScheduel = "SELECT SChedule_no FROM TotalScheduels WHERE BeginStation = '" + stationStart +"' AND EndStation = '" + stationEnd + "'";
+        String sqlGenerScheduel = "SELECT Max(SChedule_no) FROM TotalScheduels";
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sqlCheckScheduel);
+            ResultSet rs =ps.executeQuery();
+            
+            if(rs.next()){
+                scheduelNo = rs.getString(1);
+                insertTotalScheduel = false;
+                rs.close();
+                ps.close();
+            }
+            else {
+                ps = conn.prepareStatement(sqlGenerScheduel);
+                rs = ps.executeQuery();
+                
+                insertTotalScheduel =true;
+                rs.next();
+                scheduelNo = Integer.toString(Integer.parseInt(rs.getString(1).trim()) + 1);
+                //scheduelNo = rs.getString(1).trim() + 1;
+                rs.close();
+                ps.close();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        System.out.println(scheduelNo);
+        
+        //Insert TotalScheduel
+        if (insertTotalScheduel) {
+            String sqlInsertTotalScheduel = "INSERT INTO TotalScheduels VALUES (?,?,?)";
+            
+            try {
+                PreparedStatement ps = conn.prepareStatement(sqlInsertTotalScheduel);
+                ps.setString(1, scheduelNo);
+                ps.setString(2, stationStart);
+                ps.setString(3, stationEnd);
+                System.out.println(scheduelNo + " " + stationStart + " " + stationEnd);
+                ps.executeUpdate();
+                
+                ps.close();
+            } catch (Exception e) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+                return;
+            }
+        }
+        
+        //Generate TripOfGara_No
+        String tripOfGaraNo = null;
+        String sqlGenerTripOfGara = "SELECT Max(TripOfGara_no) FROM ScheduleOfGara";
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sqlGenerTripOfGara);
+            ResultSet rs =ps.executeQuery();
+            
+            rs.next();
+            System.out.println(rs.getString(1).trim() + 1);
+            //tripOfGaraNo = Integer.toString(Integer.parseInt(rs.getString(1)) + 1);
+            tripOfGaraNo = rs.getString(1).trim() + 1;
+            
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        System.out.println(tripOfGaraNo);
+        
+        //Insert ScheduelOfGara
+        String sqlInsertScheduel = "INSERT INTO ScheduleOfGara VALUES (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sqlInsertScheduel);
+            ps.setString(1, tripOfGaraNo);
+            ps.setString(2, garaName);
+            ps.setString(3, scheduelNo);
+            ps.setString(4, dayInWeek);
+            ps.setString(5, timeDepart);
+            ps.setString(6, ticketPrice);
+            ps.setString(7, "false");
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        
+        //Generate Trip_No
+        String tripNo = null;
+        String sqlGenerTrip = "SELECT Max(Trip_No) FROM Trip";
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sqlGenerTrip);
+            ResultSet rs =ps.executeQuery();
+            
+            rs.next();
+            tripNo = Integer.toString(Integer.parseInt(rs.getString(1)) + 1);
+
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        System.out.println(tripNo);
+        
+        //Insert trip
+        String sqlInsertTrip = "INSERT INTO Trip VALUES (?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sqlInsertTrip);
+            ps.setString(1, tripNo);
+            ps.setString(2, tripOfGaraNo);
+            ps.executeUpdate();
+            
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+        System.out.println("thành công");
+        JOptionPane.showMessageDialog(this, "Thêm chuyến xe thành công");
+    }
+    
+    private boolean CheckInput() {
+        if (tTimeDepart.getText().equals("")) {
+            lbErrorTimeDepart.setVisible(true);
+            return false;
+        }
+        else {
+            lbErrorTimeDepart.setVisible(false);
+        }
+        
+        if (tTicketPrice.getText().equals("")) {
+            lbErrorTicketPrice.setVisible(true);
+            return false;
+        }
+        else {
+            lbErrorTicketPrice.setVisible(false);
+        }
+        
+        if (cbBeginPlace.getEditor().getItem().toString().equals("")) {
+            return false;
+        }
+        
+        if (cbEndPlace.getEditor().getItem().toString().equals("")) {
+            return false;
+        }
+        
+        if (cbDayInWeek.getEditor().getItem().toString().equals("")) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void LoadPlace() {
+        Connection conn = DatVeXe.layKetNoi();
+        String sql = "SELECT station_Name FROM Station";
+        
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+            
+            while(rs.next()){
+                cbBeginPlace.addItem(rs.getString(1));
+                cbEndPlace.addItem(rs.getString(1));
+            }
+            
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    private String TakeGaraName() {
+        Connection conn = DatVeXe.layKetNoi();
+        String sql = "SELECT Gara_Name FROM Gara WHERE ACCOUNT = '" + account + "'";
+        String garaName = null;
+        try {
+            //active sql
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+            
+            if(rs.next()){
+                garaName = rs.getString(1);
+                rs.close();
+                ps.close();
+                conn.close();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        return garaName;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddScheduel;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton btESC;
+    private javax.swing.JButton btSave;
+    private javax.swing.JComboBox<String> cbBeginPlace;
+    private javax.swing.JComboBox<String> cbDayInWeek;
+    private javax.swing.JComboBox<String> cbEndPlace;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lbErrorAccout;
-    private javax.swing.JLabel lbErrorEmail;
-    private javax.swing.JLabel lbErrorFirstName;
-    private javax.swing.JLabel lbErrorLastName;
-    private javax.swing.JLabel lbErrorNumber;
-    private javax.swing.JLabel lbErrorPassword;
-    private javax.swing.JLabel lbPassword;
+    private javax.swing.JLabel lbBeginPlace;
+    private javax.swing.JLabel lbDayInWeed;
+    private javax.swing.JLabel lbEndPlace;
+    private javax.swing.JLabel lbErrorTicketPrice;
+    private javax.swing.JLabel lbErrorTimeDepart;
+    private javax.swing.JLabel lbGaraName;
+    private javax.swing.JLabel lbTickerPrice;
+    private javax.swing.JLabel lbTimeDepart;
     private javax.swing.JScrollPane spScheduelManager;
-    private javax.swing.JTextField tAccount;
-    private javax.swing.JTextField tLastName;
-    private javax.swing.JTextField tPassword;
+    private javax.swing.JTextField tGaraName;
+    private javax.swing.JTextField tSearch;
+    private javax.swing.JTextField tTicketPrice;
+    private javax.swing.JTextField tTimeDepart;
     private javax.swing.JTable tbScheduelManager;
     // End of variables declaration//GEN-END:variables
 }

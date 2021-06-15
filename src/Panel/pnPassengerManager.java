@@ -44,7 +44,9 @@ public class pnPassengerManager extends javax.swing.JPanel {
         lbErrorNumber.setVisible(false);
         lbErrorPassword.setVisible(false);
         lbPassword.setVisible(false);
-        tPassword.setVisible(false);
+        pPassword.setVisible(false);
+        pPassword.setEchoChar('\u25cf');
+        btPassword.setVisible(false);
     }
     
     public enum Function {
@@ -83,7 +85,6 @@ public class pnPassengerManager extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btSetting = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btDelete = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btSave = new javax.swing.JButton();
         btESC = new javax.swing.JButton();
@@ -92,9 +93,12 @@ public class pnPassengerManager extends javax.swing.JPanel {
         lbErrorEmail = new javax.swing.JLabel();
         lbErrorAccout = new javax.swing.JLabel();
         lbErrorNumber = new javax.swing.JLabel();
-        tPassword = new javax.swing.JTextField();
         lbPassword = new javax.swing.JLabel();
         lbErrorPassword = new javax.swing.JLabel();
+        pPassword = new javax.swing.JPasswordField();
+        btPassword = new javax.swing.JButton();
+        tSearch = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         tbPassengerManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,14 +176,6 @@ public class pnPassengerManager extends javax.swing.JPanel {
 
         jLabel2.setText("Họ*");
 
-        btDelete.setText("Xóa");
-        btDelete.setEnabled(false);
-        btDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDeleteActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Tên*");
 
         btSave.setText("Lưu");
@@ -216,6 +212,19 @@ public class pnPassengerManager extends javax.swing.JPanel {
         lbErrorPassword.setForeground(new java.awt.Color(255, 0, 51));
         lbErrorPassword.setText("Mật khẩu không hợp lệ");
 
+        pPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pPasswordActionPerformed(evt);
+            }
+        });
+
+        btPassword.setText("Hiện");
+        btPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pFunctionLayout = new javax.swing.GroupLayout(pFunction);
         pFunction.setLayout(pFunctionLayout);
         pFunctionLayout.setHorizontalGroup(
@@ -247,9 +256,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
                         .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pFunctionLayout.createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pFunctionLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,18 +272,24 @@ public class pnPassengerManager extends javax.swing.JPanel {
                                             .addComponent(tAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(lbErrorAccout))
                                 .addGap(39, 39, 39)
-                                .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pFunctionLayout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbErrorNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pFunctionLayout.createSequentialGroup()
                                         .addComponent(lbPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lbErrorPassword))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(pPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pFunctionLayout.createSequentialGroup()
+                                        .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(pFunctionLayout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pFunctionLayout.createSequentialGroup()
+                                                .addComponent(lbErrorPassword)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btPassword)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addContainerGap())
         );
         pFunctionLayout.setVerticalGroup(
             pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,22 +320,41 @@ public class pnPassengerManager extends javax.swing.JPanel {
                             .addComponent(lbErrorLastName)
                             .addComponent(lbErrorAccout)))
                     .addGroup(pFunctionLayout.createSequentialGroup()
-                        .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                            .addComponent(pPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbErrorPassword)))
-                .addGap(53, 53, 53)
+                        .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbErrorPassword))))
+                .addGap(48, 48, 48)
                 .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAddAcount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btESC, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(165, 165, 165))
         );
+
+        tSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tSearchMouseReleased(evt);
+            }
+        });
+        tSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tSearchActionPerformed(evt);
+            }
+        });
+        tSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tSearchKeyReleased(evt);
+            }
+        });
+
+        jLabel6.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -333,14 +365,24 @@ public class pnPassengerManager extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(pFunction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(243, 243, 243))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spPassengerManager, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 327, Short.MAX_VALUE)
-                .addGap(98, 98, 98))
+                .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -355,7 +397,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
             tbFunction.selectRow(tbPassengerManager, 4));
 
         btSetting.setEnabled(true);
-        btDelete.setEnabled(true);
+        //btDelete.setEnabled(true);
         if (tAccount.getText().isEmpty()) {
             btAddAcount.setEnabled(true);
         }
@@ -374,16 +416,22 @@ public class pnPassengerManager extends javax.swing.JPanel {
 
     private void btAddAcountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddAcountActionPerformed
         userFunction = Function.Add;
-
+        btAddAcount.setEnabled(false);
+        btSetting.setEnabled(false);
+        
         //Unlock
         tAccount.setEditable(true);
         btSave.setVisible(true);
         btESC.setVisible(true);
         lbPassword.setVisible(true);
-        tPassword.setVisible(true);
+        pPassword.setVisible(true);
+        btPassword.setVisible(true);
     }//GEN-LAST:event_btAddAcountActionPerformed
 
     private void btSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSettingActionPerformed
+        btAddAcount.setEnabled(false);
+        btSetting.setEnabled(false);
+        
         //Only Edit Name and Email
         tFirstName.setEditable(true);
         tLastName.setEditable(true);
@@ -395,25 +443,11 @@ public class pnPassengerManager extends javax.swing.JPanel {
         userFunction = Function.Edit;
     }//GEN-LAST:event_btSettingActionPerformed
 
-    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-        userFunction = Function.Delete;
-
-        //Confirm
-        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận xóa khách hàng", "Thông báo", 0);
-        if (choose == JOptionPane.OK_OPTION) {
-            PassengerFunction psFunction = new PassengerFunction(tCellPhone.getText());
-
-            psFunction.DeletePassenger();
-        }
-
-        Reset();
-    }//GEN-LAST:event_btDeleteActionPerformed
-
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
         //Check input
         if (!CheckInput()) return;
 
-        if (userFunction == Function.Add) AddAccount(tAccount.getText(), tPassword.getText(), tCellPhone.getText());
+        if (userFunction == Function.Add) AddAccount(tAccount.getText(), pPassword.getText(), tCellPhone.getText());
         else if (userFunction == Function.Edit) EditPassenger();
 
         Reset();
@@ -422,6 +456,39 @@ public class pnPassengerManager extends javax.swing.JPanel {
     private void btESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btESCActionPerformed
         Reset();
     }//GEN-LAST:event_btESCActionPerformed
+
+    private void tSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tSearchActionPerformed
+
+    private void tSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSearchMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tSearchMouseReleased
+
+    private void tSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tSearchKeyReleased
+        // TODO add your handling code here:
+        if(!tSearch.getText().isEmpty()){
+            tbFunction.Search(tbPassengerManager,tSearch.getText(),-1);
+        }
+        else tbFunction.Search(tbPassengerManager,"",-1);
+    }//GEN-LAST:event_tSearchKeyReleased
+
+    private void btPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPasswordActionPerformed
+        // TODO add your handling code here:
+        if (btPassword.getText().equals("Hiện")) {
+            btPassword.setText("Ẩn");
+            pPassword.setEchoChar((char)0);
+        }
+        else  {
+            btPassword.setText("Hiện");
+            pPassword.setEchoChar('\u25cf');
+        }
+    }//GEN-LAST:event_btPasswordActionPerformed
+
+    private void pPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pPasswordActionPerformed
     
     private void EditPassenger() {
         FormatString format = new FormatString();
@@ -441,7 +508,9 @@ public class pnPassengerManager extends javax.swing.JPanel {
     
     private void Reset() {
         userFunction = Function.None;
-
+        btAddAcount.setEnabled(true);
+        btSetting.setEnabled(true);
+        
         //reload table
         tbFunction.LoadData(tbPassengerManager, sqlLoadData);
         tAccount.setText("");
@@ -449,7 +518,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
         tEmail.setText("");
         tFirstName.setText("");
         tLastName.setText("");
-        tPassword.setText("");
+        pPassword.setText("");
         
         //Lock
         tAccount.setEditable(false);
@@ -457,10 +526,11 @@ public class pnPassengerManager extends javax.swing.JPanel {
         btESC.setVisible(false);
         lbErrorPassword.setVisible(false);
         lbPassword.setVisible(false);
-        tPassword.setVisible(false);
+        pPassword.setVisible(false);
         btAddAcount.setEnabled(false);
-        btDelete.setEnabled(false);
+        //btDelete.setEnabled(false);
         btSetting.setEnabled(false);
+        btPassword.setVisible(false);
     }
     
     private Boolean CheckInput() {
@@ -472,13 +542,13 @@ public class pnPassengerManager extends javax.swing.JPanel {
             } 
             else lbErrorAccout.setVisible(false);
             
-            if (tPassword.getText().isEmpty()) {
+            if (pPassword.getText().isEmpty()) {
                 lbErrorPassword.setVisible(true);
                 return false;
             }
             else {
                 lbErrorPassword.setVisible(false);
-                tPassword.setVisible(false);
+                pPassword.setVisible(false);
                 lbPassword.setVisible(false);
             }
             return true;
@@ -563,8 +633,8 @@ public class pnPassengerManager extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddAcount;
-    private javax.swing.JButton btDelete;
     private javax.swing.JButton btESC;
+    private javax.swing.JButton btPassword;
     private javax.swing.JButton btSave;
     private javax.swing.JButton btSetting;
     private javax.swing.JLabel jLabel1;
@@ -572,6 +642,7 @@ public class pnPassengerManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbErrorAccout;
     private javax.swing.JLabel lbErrorEmail;
     private javax.swing.JLabel lbErrorFirstName;
@@ -580,13 +651,14 @@ public class pnPassengerManager extends javax.swing.JPanel {
     private javax.swing.JLabel lbErrorPassword;
     private javax.swing.JLabel lbPassword;
     private javax.swing.JPanel pFunction;
+    private javax.swing.JPasswordField pPassword;
     private javax.swing.JScrollPane spPassengerManager;
     private javax.swing.JTextField tAccount;
     private javax.swing.JTextField tCellPhone;
     private javax.swing.JTextField tEmail;
     private javax.swing.JTextField tFirstName;
     private javax.swing.JTextField tLastName;
-    private javax.swing.JTextField tPassword;
+    private javax.swing.JTextField tSearch;
     private javax.swing.JTable tbPassengerManager;
     // End of variables declaration//GEN-END:variables
 }

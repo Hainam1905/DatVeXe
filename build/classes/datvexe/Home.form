@@ -48,12 +48,12 @@
                           <Component id="btn_managerTicket" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_infoStaff" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="138" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btManageStaff" min="-2" pref="157" max="-2" attributes="0"/>
                           <Component id="btManageGara" min="-2" pref="157" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="299" max="32767" attributes="0"/>
+                      <EmptySpace pref="430" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
