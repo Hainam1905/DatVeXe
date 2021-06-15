@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author huynh
  */
-public class ShowGaraList extends javax.swing.JFrame {
+public class ShowGaraListForAppreciate extends javax.swing.JFrame {
     DefaultTableModel dtf;
     DatVeXe datvexe = new DatVeXe(); 
         Connection connection = datvexe.layKetNoi();
@@ -28,7 +28,7 @@ public class ShowGaraList extends javax.swing.JFrame {
     /**
      * Creates new form ManageGara
      */
-    public ShowGaraList() {
+    public ShowGaraListForAppreciate() {
         initComponents();
         
         performed(connection);
@@ -46,9 +46,7 @@ public class ShowGaraList extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListGaras = new javax.swing.JTable();
-        btDelGara = new javax.swing.JButton();
-        btUpdateGara = new javax.swing.JButton();
-        btViewDetail = new javax.swing.JButton();
+        btAppreciate = new javax.swing.JButton();
         ckShowAll = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         txgaraName = new javax.swing.JTextField();
@@ -73,24 +71,10 @@ public class ShowGaraList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbListGaras);
 
-        btDelGara.setText("Xòa nhà xe");
-        btDelGara.addActionListener(new java.awt.event.ActionListener() {
+        btAppreciate.setText("Đánh giá nhà xe");
+        btAppreciate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDelGaraActionPerformed(evt);
-            }
-        });
-
-        btUpdateGara.setText("Cập nhật thông tin nhà xe");
-        btUpdateGara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btUpdateGaraActionPerformed(evt);
-            }
-        });
-
-        btViewDetail.setText("Xem chi tiết");
-        btViewDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btViewDetailActionPerformed(evt);
+                btAppreciateActionPerformed(evt);
             }
         });
 
@@ -128,17 +112,14 @@ public class ShowGaraList extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btDelGara, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btUpdateGara, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ckShowAll)
                         .addGap(31, 31, 31))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,81 +136,14 @@ public class ShowGaraList extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btUpdateGara, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDelGara, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btDelGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelGaraActionPerformed
-        if(tbListGaras.getSelectedRow()==-1) return;
-        
-        
-        
-        String sql = "UPDATE Gara SET Active='false',Account=NULL WHERE Gara_Name=?";
-        String sql2 = "SELECT Account from Gara where Gara_Name=?";
-        String sql3 = "DELETE Account where Account=?";
-        String garaName = "";
-        String account = ""; 
-        garaName = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),0);
-        
-        
-        int confirm = JOptionPane.showConfirmDialog(rootPane,"Xác nhận thao tác xóa" ,"Bạn có chắc chắn xóa nhà xe \n"+garaName, JOptionPane.YES_NO_OPTION);
-                
-        if(confirm ==JOptionPane.NO_OPTION){        
-                JOptionPane.showMessageDialog(rootPane, "Thao tác xóa bị hủy");
-        }else if(confirm ==JOptionPane.YES_OPTION){
-            PreparedStatement pstt;
-        try {
-            PreparedStatement pstt2 = connection.prepareStatement(sql2);
-            pstt2.setString(1, garaName);
-            ResultSet rs2 = pstt2.executeQuery(); 
-            if(rs2.next()){
-                account = rs2.getString(1);
-            }
-         } catch (SQLException ex) {
-                Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
-        
-        
-        
-            //cap nhat trang thai: active = false, account = NULL
-        try {
-            pstt = connection.prepareStatement(sql);
-            pstt.setString(1, garaName);
-            int result = pstt.executeUpdate();
-            if(result>0){
-                
-            
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        PreparedStatement pstt3;
-            try {
-                pstt3 = connection.prepareStatement(sql3);
-                pstt3.setString(1, account);
-                int x= pstt3.executeUpdate();
-                if(x>0){
-                    JOptionPane.showMessageDialog(rootPane, "Xóa nhà xe thành công!");
-                    performed(connection);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-                
-    }//GEN-LAST:event_btDelGaraActionPerformed
-
-    private void btUpdateGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateGaraActionPerformed
+    private void btAppreciateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAppreciateActionPerformed
         if(tbListGaras.getSelectedRow()==-1) return ; 
         
         
@@ -256,7 +170,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             garaPoint = rs.getFloat(3);
         }
         } catch (SQLException ex) {
-            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -270,63 +184,20 @@ public class ShowGaraList extends javax.swing.JFrame {
                 password = rs.getString(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-        UpGara upGara = new UpGara(this, rootPaneCheckingEnabled,garaName,picture,review,garaPoint,BusResNum,active,account, password);
-        upGara.setLocationRelativeTo(null);
-        upGara.setVisible(true);
-        performed(connection);
-    }//GEN-LAST:event_btUpdateGaraActionPerformed
+//        UpGara upGara = new UpGara(this, rootPaneCheckingEnabled,garaName,picture,review,garaPoint,BusResNum,active,account, password);
+//        upGara.setLocationRelativeTo(null);
+//        upGara.setVisible(true);
 
-    private void btViewDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btViewDetailActionPerformed
-        
-        if(tbListGaras.getSelectedRow()==-1) return; 
-       
-        
-        String sql = "select Gara_Picture,Account from Gara where Gara_Name=?";
-        String sql2= "select password from Account where account = ?"; 
-        
-        String garaName = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),0);
-        String picture ="";
-        String review = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),1);
-        String BusResNum = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),2);
-        String active = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),3);
-        String account=""; 
-        String password=""; 
-        PreparedStatement pstt;
-        try {
-            pstt = connection.prepareStatement(sql);
-        pstt.setString(1, garaName);
-        ResultSet rs = pstt.executeQuery(); 
-        if(rs.next()){
-            picture = rs.getString(1);
-            account = rs.getString(2);
-        }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        PreparedStatement pstt2;
-        try {
-            pstt2 = connection.prepareStatement(sql2);
-            pstt2.setString(1, account);
-            ResultSet rs = pstt2.executeQuery();
-            if(rs.next()){
-                password = rs.getString(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        ViewDetailGara viewDetailGara = new ViewDetailGara(this, rootPaneCheckingEnabled,garaName,picture,review,BusResNum,active,account, password);
-        viewDetailGara.setLocationRelativeTo(null);
-        viewDetailGara.setVisible(true);
-    }//GEN-LAST:event_btViewDetailActionPerformed
+
+        AppreciateGara appreciate = new AppreciateGara(this, rootPaneCheckingEnabled, garaName, picture, review, garaPoint, BusResNum, active, account, password);
+        appreciate.setLocationRelativeTo(null);
+        appreciate.setVisible(true);
+        performed(connection);
+    }//GEN-LAST:event_btAppreciateActionPerformed
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
        String garaName = txgaraName.getText();
@@ -361,14 +232,18 @@ public class ShowGaraList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShowGaraList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShowGaraList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShowGaraList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShowGaraList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowGaraListForAppreciate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -377,7 +252,7 @@ public class ShowGaraList extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShowGaraList().setVisible(true);
+                new ShowGaraListForAppreciate().setVisible(true);
             }
         });
     }
@@ -524,10 +399,8 @@ public class ShowGaraList extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btDelGara;
+    private javax.swing.JButton btAppreciate;
     private javax.swing.JButton btSearch;
-    private javax.swing.JButton btUpdateGara;
-    private javax.swing.JButton btViewDetail;
     private javax.swing.JCheckBox ckShowAll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

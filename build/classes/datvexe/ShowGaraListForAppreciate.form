@@ -39,20 +39,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btViewDetail" min="-2" pref="183" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btDelGara" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="btUpdateGara" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="ckShowAll" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+              <Component id="btAppreciate" min="-2" pref="173" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,11 +70,7 @@
               <EmptySpace pref="54" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="214" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btUpdateGara" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="btDelGara" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="btViewDetail" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btAppreciate" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -143,28 +136,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btDelGara">
+    <Component class="javax.swing.JButton" name="btAppreciate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="X&#xf2;a nh&#xe0; xe"/>
+        <Property name="text" type="java.lang.String" value="&#x110;&#xe1;nh gi&#xe1; nh&#xe0; xe"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDelGaraActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btUpdateGara">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t th&#xf4;ng tin nh&#xe0; xe"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btUpdateGaraActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btViewDetail">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btViewDetailActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAppreciateActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="ckShowAll">

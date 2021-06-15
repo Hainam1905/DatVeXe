@@ -161,7 +161,7 @@ public class AddNewGara extends javax.swing.JDialog {
 
     private void btAddGaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddGaraActionPerformed
         String garaName = txGaraName.getText().trim(); 
-        String garaReview = "";
+        float garaReview = -1f;
         String BusResNum = txBusResNum.getText().trim(); 
         String account = txAccount.getText().trim();
         String password = txPassword.getText().trim();
@@ -226,7 +226,7 @@ public class AddNewGara extends javax.swing.JDialog {
             pstt2 = conn.prepareStatement(sql2);
             pstt2.setString(1, garaName);
             pstt2.setString(2, nameofPicture);
-            pstt2.setString(3, garaReview);
+            pstt2.setFloat(3, garaReview);
             pstt2.setString(4, BusResNum);
             pstt2.setBoolean(5,true);
             pstt2.setString(6,account);
@@ -333,7 +333,7 @@ public class AddNewGara extends javax.swing.JDialog {
             }
         });
     }
-public int checkInfor(String garaName, String garaReview, String busResNum, String account, String password, Connection conn){
+public int checkInfor(String garaName, float garaReview, String busResNum, String account, String password, Connection conn){
         
         
         if(garaName.trim().equals("")||  busResNum.trim().equals("")|| account.trim().equals("")||password.trim().equals("")){
