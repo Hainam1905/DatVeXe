@@ -8,6 +8,9 @@ package datvexe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -107,7 +110,7 @@ public class CancelTicket extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -154,10 +157,27 @@ public class CancelTicket extends javax.swing.JFrame {
         int row = table_listTicket.getSelectedRow();
         if (row != -1){
             String ticket_No = String.valueOf(table_listTicket.getValueAt(row, 0));
-            deleteTicket(ticket_No);
-            JOptionPane.showMessageDialog(this, "Đã hủy vé thành công");
-            getData(sdt);
-            
+            String dateTicket = String.valueOf(table_listTicket.getValueAt(row, 5));
+            LocalDateTime today = LocalDateTime.now();
+            String now = String.valueOf(today);
+            now = now.substring(0,10)+" "+ now.substring(11,19);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date d2 = null;
+            Date d1 = null;
+            try {
+                d2 = format.parse(dateTicket);
+                d1 = format.parse(now);
+            } catch (Exception e) {
+            }
+            long diff = d2.getTime() - d1.getTime();
+            long diffMinutes = diff / (60 * 1000);
+            if (diffMinutes >= 0 && diffMinutes <= 30){
+                JOptionPane.showMessageDialog(this, "Phải hủy vé trước khi xe chạy 30 phút","Inane Error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                deleteTicket(ticket_No);
+                JOptionPane.showMessageDialog(this, "Đã hủy vé thành công");
+                getData(sdt);
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Hãy chọn vé muốn hủy trên bảng vé","Inane Error",JOptionPane.ERROR_MESSAGE);
         }
