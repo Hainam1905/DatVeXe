@@ -47,6 +47,10 @@ public class ShowStaffList extends javax.swing.JFrame{
         tbListEmp = new javax.swing.JTable();
         btDel = new javax.swing.JButton();
         btUpdate = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txPhoneCMND = new javax.swing.JTextField();
+        btSearch = new javax.swing.JButton();
+        ckShowAll = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,6 +80,22 @@ public class ShowStaffList extends javax.swing.JFrame{
             }
         });
 
+        jLabel2.setText("Tìm nhân viên bằng CMND hoặc số điện thoại");
+
+        btSearch.setText("Tìm");
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSearchActionPerformed(evt);
+            }
+        });
+
+        ckShowAll.setText("Xem toàn bộ danh sách");
+        ckShowAll.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ckShowAllItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,25 +103,42 @@ public class ShowStaffList extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txPhoneCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(87, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ckShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(ckShowAll))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txPhoneCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSearch))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,6 +226,32 @@ public class ShowStaffList extends javax.swing.JFrame{
         upEmp.setVisible(true);
         performed(connection);
     }//GEN-LAST:event_btUpdateActionPerformed
+
+    private void ckShowAllItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ckShowAllItemStateChanged
+        
+        if(ckShowAll.isSelected()){
+            DatVeXe datvexe = new DatVeXe(); 
+            Connection connection;
+            connection = datvexe.layKetNoi();
+            performed(connection);
+        }else return ;
+    }//GEN-LAST:event_ckShowAllItemStateChanged
+
+    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
+       
+        ckShowAll.setSelected(false);
+        
+        dtf =new DefaultTableModel();
+        ListSelectionModel listSelectionModel = tbListEmp.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbListEmp.setModel(dtf);
+        
+       DatVeXe datvexe = new DatVeXe(); 
+       Connection connection;
+        connection = datvexe.layKetNoi();
+        performedViaTrack(dtf, connection);
+       
+    }//GEN-LAST:event_btSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +353,70 @@ public class ShowStaffList extends javax.swing.JFrame{
         
         
     }
+    public void performedViaTrack(DefaultTableModel dtf,Connection conn){
+         String track = txPhoneCMND.getText();
+        track = track.trim();
+        String sql = "SELECT * FROM Staff  where Staff_CMND like '%"+track+"%' or Staff_SDT like '%"+track+"%'"; 
+        
+       
+        
+        
+        dtf.addColumn("CMND");
+        dtf.addColumn("Họ");
+        dtf.addColumn("Tên");
+        dtf.addColumn("SĐT");
+        dtf.addColumn("Giới tính");
+        dtf.addColumn("Tên đăng nhập");
+        dtf.addColumn("Mật khẩu");
+        dtf.addColumn("Chức vụ");
+        dtf.addColumn("Tình trạng làm việc"); 
+        ResultSet rs; 
+        try { 
+            PreparedStatement pstt = conn.prepareStatement(sql);
+            
+            rs = pstt.executeQuery(); 
+            while(rs.next()){
+            String cmnd = rs.getString(1);
+            String firstName = rs.getString(2);
+            String lastName = rs.getString(3);
+            String phone = rs.getString(4);
+            String sex = rs.getString(5);
+            String account = rs.getString(6);
+            String password="";
+            String kind = "";
+            String sql2 = "SELECT Password,Kind from Account where Account.Account=?";
+            boolean active = rs.getBoolean(7); 
+            
+            String activeString = "Làm việc";
+            if(active==false) activeString = "Đã nghỉ việc";
+            
+            PreparedStatement pstt2 = conn.prepareStatement(sql2);
+            pstt2.setString(1, account);
+            ResultSet rs2 = pstt2.executeQuery();
+            
+            if(rs2.next()){
+            password = rs2.getString(1);
+            
+            kind = rs2.getString(2); 
+            if(kind.equals("noneactive")){
+                kind = " ";
+            }else if(kind.equals("boss")){
+                kind="Quản lí";
+            }else if(kind.equals("staff")){
+                kind = "Nhân viên"; 
+            }
+            }
+            
+            
+            
+            dtf.addRow(new Object[]{cmnd,firstName,lastName,phone,sex,account,password,kind,activeString});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
     public void performedInActive(DefaultTableModel dtf, Connection conn){
         String sql = "SELECT * FROM Staff where active = 'false'"; 
         
@@ -354,9 +481,13 @@ public class ShowStaffList extends javax.swing.JFrame{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDel;
+    private javax.swing.JButton btSearch;
     private javax.swing.JButton btUpdate;
+    private javax.swing.JCheckBox ckShowAll;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListEmp;
+    private javax.swing.JTextField txPhoneCMND;
     // End of variables declaration//GEN-END:variables
 }

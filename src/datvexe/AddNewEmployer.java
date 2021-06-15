@@ -96,7 +96,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
 
         jLabel9.setText("Vai trò nhân viên");
 
-        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên", "Chủ nhà xe" }));
+        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên" }));
 
         lbErrAcc.setForeground(new java.awt.Color(255, 51, 51));
         lbErrAcc.setText("Tên đăng nhập đã tồn tại");
