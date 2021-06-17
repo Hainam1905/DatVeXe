@@ -295,168 +295,18 @@ public class AppreciateGara extends javax.swing.JDialog {
         }
         
         
-        //hop tac: 
-        if(active.equals("Đang hợp tác")){
-            //truoc do lam, bay gio van lam: 
-            if(active0.equals(active)){
-                
-                
-                String sql = "update Account set Account.Account =?,Password =? where Account.Account=?";
-                try {
-                    PreparedStatement pstt = conn.prepareStatement(sql);
-                    pstt.setString(1, account);
-                    pstt.setString(2, password);
-                    pstt.setString(3, this.account0);
-                    
-                    int x = pstt.executeUpdate();
-                    if(x>0){
-                        
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
-                try {
-                    PreparedStatement pstt2 = conn.prepareStatement(sql2);
-                    pstt2.setString(1, garaName);
-                    pstt2.setString(2, nameofPicture);
-                    pstt2.setFloat(3, garaPoint0);
-                    pstt2.setString(4, BusResNum);
-//                    pstt2.setString(5, account);
-                    pstt2.setString(5, garaName0);
-                    int x = pstt2.executeUpdate();
-                    if(x>0){
-                        JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
-                        this.dispose();
-                    }
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            
-            
-            //truoc do nghi, bay gio lam: 
-            else{
-                
-                String sql = "INSERT INTO ACCOUNT values(?,?,?)";
-                PreparedStatement pstt;
-                try {
-                    pstt = conn.prepareStatement(sql);
-                    pstt.setString(1, account);
-                    pstt.setString(2, password);
-                    pstt.setString(3, "Gara");
-                    int x = pstt.executeUpdate();
-                    if(x>0){
-                        
-                    }
-                 
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Active=?,Account=? where Gara_Name=?";
-                try {
-                    PreparedStatement pstt2 = conn.prepareStatement(sql2);
-                    pstt2.setString(1, garaName);
-                    pstt2.setString(2, nameofPicture);
-                    pstt2.setFloat(3, this.garaPoint0);
-                    pstt2.setString(4, BusResNum);
-                    pstt2.setBoolean(5, true);
-                    pstt2.setString(6, account);
-                    pstt2.setString(7, garaName0);
-                    int x = pstt2.executeUpdate();
-                    if(x>0){
-                        JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
-                        this.dispose();
-                    }
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
-            }
-        }
-        
-        //ngung hop tac: 
-        else{
-            //truoc do nghi, bay gio nghi: 
-            if(active0.equals(active)){
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
-                try {
-                    PreparedStatement pstt2 = conn.prepareStatement(sql2);
-                    pstt2.setString(1, garaName);
-                    pstt2.setString(2, nameofPicture);
-                    pstt2.setFloat(3, this.garaPoint0);
-                    pstt2.setString(4, BusResNum);
-                    pstt2.setString(5, garaName0);
-                    int x = pstt2.executeUpdate();
-                    if(x>0){
-                        JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
-                        this.dispose();
-                    }
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            
-            
-            //truoc do lam, bay gio nghi: 
-            else{
-                
-             String sql = "UPDATE Gara SET Active='false',Account=NULL WHERE Gara_Name=?";
-             String sql2 = "DELETE Account where Account=?";
-            
-             PreparedStatement pstt;
-        
-          //cap nhat trang thai: active = false, account = NULL
+       String sql = "UPDATE Gara SET Gara_Review=? WHERE Gara_Name = ?";
         try {
-            pstt = conn.prepareStatement(sql);
-            pstt.setString(1, garaName0);
-            int result = pstt.executeUpdate();
-            if(result>0){
-                
-            
+            PreparedStatement pstt = conn.prepareStatement(sql);
+            pstt.setFloat(1, this.garaPoint0);
+            pstt.setString(2, garaName0);
+            int x = pstt.executeUpdate();
+            if(x>0){
+                JOptionPane.showMessageDialog(rootPane, "Đánh giá nhà xe thành công");
+                this.dispose();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        PreparedStatement pstt3;
-            try {
-                pstt3 = conn.prepareStatement(sql2);
-                pstt3.setString(1, this.account0);
-                int x= pstt3.executeUpdate();
-                if(x>0){
-                    JOptionPane.showMessageDialog(rootPane, "Cập nhật nhà xe thành công!");
-                    this.dispose();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ShowGaraList.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-            }
-        }
-        
-        if(nameofPicture.equals(picture0)==false){
-            //save file ra thu muc galaryPicture: 
-            //luu file anh ra vung nho
-            BufferedImage bImage = null;
-            try {
-
-                bImage = ImageIO.read(file);
-                ImageIO.write(bImage, "jpg", new File(saveFolder+nameofPicture));
-                ImageIO.write(bImage, "png", new File(saveFolder+nameofPicture));
-                ImageIO.write(bImage, "jpeg", new File(saveFolder+nameofPicture));
- 
-         } catch (IOException e) {
-               System.out.println("Exception occured :" + e.getMessage());
-         }
-         System.out.println("Images were written succesfully.");
+            Logger.getLogger(AppreciateGara.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         

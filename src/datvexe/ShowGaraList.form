@@ -109,7 +109,7 @@
                 <Column editable="true" title="T&#xea;n nh&#xe0; xe" type="java.lang.Object"/>
                 <Column editable="true" title="&#x110;&#xe1;nh gi&#xe1;" type="java.lang.Object"/>
                 <Column editable="true" title="Gi&#x1ea5;y ph&#xe9;p kinh doanh" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -68,7 +68,7 @@ public class ShowGaraList extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh", "Title 4"
+                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh", "Số điện thoại"
             }
         ));
         jScrollPane1.setViewportView(tbListGaras);
@@ -241,10 +241,12 @@ public class ShowGaraList extends javax.swing.JFrame {
         String picture ="";
         String account="";
         String password="";
+        
         String review = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),1);
         float garaPoint = 0;
         String BusResNum = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),2);
         String active = (String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),3);
+        String phone =(String) tbListGaras.getValueAt(tbListGaras.getSelectedRow(),4);
         PreparedStatement pstt;
         try {
             pstt = connection.prepareStatement(sql);
@@ -274,7 +276,7 @@ public class ShowGaraList extends javax.swing.JFrame {
         }
         
         
-        UpGara upGara = new UpGara(this, rootPaneCheckingEnabled,garaName,picture,review,garaPoint,BusResNum,active,account, password);
+        UpGara upGara = new UpGara(this, rootPaneCheckingEnabled,garaName,picture,review,garaPoint,BusResNum,active,account, password,phone);
         upGara.setLocationRelativeTo(null);
         upGara.setVisible(true);
         performed(connection);
@@ -344,6 +346,14 @@ public class ShowGaraList extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ckShowAllItemStateChanged
 
+    private void ckShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckShowAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ckShowAllActionPerformed
+
+    private void txgaraNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txgaraNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txgaraNameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +403,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             while(rs.next()){
             String garaName = rs.getString(1);
             float garaPoint = rs.getFloat(3);
+            String phone = rs.getString(7);
             String garaReview=""; 
             if(garaPoint>=1 && garaPoint<2){
                 garaReview = "Rất tệ";
@@ -413,7 +424,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             if(active==true) statement = "Đang hợp tác";
             else statement = "Ngừng hợp tác";
                
-            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement});
+            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement,phone});
             }
         } catch (SQLException ex) {
             Logger.getLogger(ShowStaffList.class.getName()).log(Level.SEVERE, null, ex);
@@ -431,6 +442,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             while(rs.next()){
             String garaName = rs.getString(1);
             float garaPoint = rs.getFloat(3);
+            String phone = rs.getString(7);
             String garaReview=""; 
             if(garaPoint>=1 && garaPoint<2){
                 garaReview = "Rất tệ";
@@ -450,7 +462,7 @@ public class ShowGaraList extends javax.swing.JFrame {
             String statement = "Ngừng hợp tác";
             
             
-            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement});
+            dtf.addRow(new Object[]{garaName,garaReview,Bus_Res_number,statement,phone});
             
             }
         } catch (SQLException ex) {
@@ -470,6 +482,7 @@ public class ShowGaraList extends javax.swing.JFrame {
         dtf.addColumn("Đánh giá");
         dtf.addColumn("Giấy phép kinh doanh");
         dtf.addColumn("Trạng thái");
+        dtf.addColumn("Số điện thoại");
         performedActiveGaras(dtf, conn);
         performedInActiveGaras(dtf,conn);
     }

@@ -68,6 +68,8 @@ public class AddNewGara extends javax.swing.JDialog {
         lbPicture = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txPhone = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -76,13 +78,13 @@ public class AddNewGara extends javax.swing.JDialog {
 
         txGaraName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(txGaraName);
-        txGaraName.setBounds(200, 270, 370, 30);
+        txGaraName.setBounds(200, 250, 370, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("Tên nhà xe");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(200, 240, 180, 20);
+        jLabel1.setBounds(200, 220, 180, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -104,24 +106,29 @@ public class AddNewGara extends javax.swing.JDialog {
         btPickPicture.setBounds(910, 150, 180, 30);
 
         txBusResNum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txBusResNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txBusResNumActionPerformed(evt);
+            }
+        });
         jPanel1.add(txBusResNum);
-        txBusResNum.setBounds(200, 360, 370, 30);
+        txBusResNum.setBounds(200, 410, 370, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Giấy phép đăng kí kinh doanh");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(200, 330, 300, 30);
+        jLabel4.setBounds(200, 360, 300, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("Tên đăng nhập");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(200, 410, 250, 30);
+        jLabel5.setBounds(200, 460, 250, 30);
 
         txAccount.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(txAccount);
-        txAccount.setBounds(200, 440, 370, 30);
+        txAccount.setBounds(200, 500, 370, 30);
 
         txPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -130,13 +137,13 @@ public class AddNewGara extends javax.swing.JDialog {
             }
         });
         jPanel1.add(txPassword);
-        txPassword.setBounds(200, 510, 370, 30);
+        txPassword.setBounds(200, 590, 370, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
         jLabel6.setText("Mật khẩu");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(200, 480, 120, 30);
+        jLabel6.setBounds(200, 540, 120, 30);
 
         btAddGara.setBackground(new java.awt.Color(27, 102, 177));
         btAddGara.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -149,7 +156,7 @@ public class AddNewGara extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btAddGara);
-        btAddGara.setBounds(240, 570, 300, 40);
+        btAddGara.setBounds(240, 660, 300, 40);
         jPanel1.add(lbPicture);
         lbPicture.setBounds(780, 190, 410, 410);
 
@@ -162,13 +169,21 @@ public class AddNewGara extends javax.swing.JDialog {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
         jPanel1.add(jLabel12);
         jLabel12.setBounds(50, 20, 160, 123);
+        jPanel1.add(txPhone);
+        txPhone.setBounds(200, 320, 360, 40);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("Số Điện Thoại");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(204, 294, 100, 20);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 1280, 730);
+        jLabel3.setBounds(0, -40, 1280, 830);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,7 +205,7 @@ public class AddNewGara extends javax.swing.JDialog {
         String BusResNum = txBusResNum.getText().trim(); 
         String account = txAccount.getText().trim();
         String password = txPassword.getText().trim();
-        
+        String phone = txPhone.getText();
         
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
@@ -243,7 +258,7 @@ public class AddNewGara extends javax.swing.JDialog {
         
         
         
-        String sql2 = "INSERT INTO Gara VALUES(?,?,?,?,?,?)";
+        String sql2 = "INSERT INTO Gara VALUES(?,?,?,?,?,?,?)";
         
         PreparedStatement pstt2;
         try {
@@ -255,6 +270,7 @@ public class AddNewGara extends javax.swing.JDialog {
             pstt2.setString(4, BusResNum);
             pstt2.setBoolean(5,true);
             pstt2.setString(6,account);
+            pstt2.setString(7,phone);
             int x = pstt2.executeUpdate();
             if(x>0){
                 JOptionPane.showMessageDialog(rootPane, "Thêm nhà xe thành công!");
@@ -320,6 +336,10 @@ public class AddNewGara extends javax.swing.JDialog {
     private void txPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txPasswordActionPerformed
+
+    private void txBusResNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txBusResNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txBusResNumActionPerformed
     
     /**
      * @param args the command line arguments
@@ -430,11 +450,13 @@ public int checkInfor(String garaName, float garaReview, String busResNum, Strin
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbPicture;
     private javax.swing.JTextField txAccount;
     private javax.swing.JTextField txBusResNum;
     private javax.swing.JTextField txGaraName;
     private javax.swing.JTextField txPassword;
+    private javax.swing.JTextField txPhone;
     // End of variables declaration//GEN-END:variables
 }

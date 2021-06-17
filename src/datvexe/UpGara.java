@@ -50,10 +50,10 @@ public class UpGara extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    public UpGara(java.awt.Frame parent, boolean modal, String garaName, String picture, String review,float garaPoint, String BusResNum ,String active, String account, String password) {
+    public UpGara(java.awt.Frame parent, boolean modal, String garaName, String picture, String review,float garaPoint, String BusResNum ,String active, String account, String password, String phone) {
         super(parent, modal);
         initComponents();
-        showInfor(garaName, picture, review, BusResNum, active,account, password);
+        showInfor(garaName, picture, review, BusResNum, active,account, password,phone);
         this.garaName0 = garaName; 
         this.active0 = active; 
         if(account!=null) this.account0 = account;
@@ -96,6 +96,8 @@ public class UpGara extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txPhone = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -104,7 +106,7 @@ public class UpGara extends javax.swing.JDialog {
 
         cbAppreciate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rất tệ", "Tệ", "Ổn", "Tốt", "Tuyệt vời" }));
         jPanel1.add(cbAppreciate);
-        cbAppreciate.setBounds(400, 330, 170, 20);
+        cbAppreciate.setBounds(440, 330, 170, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -112,7 +114,7 @@ public class UpGara extends javax.swing.JDialog {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(200, 230, 140, 30);
         jPanel1.add(txGaraName);
-        txGaraName.setBounds(200, 260, 370, 30);
+        txGaraName.setBounds(200, 260, 410, 30);
 
         lbshowPicture.setText("jLabel8");
         jPanel1.add(lbshowPicture);
@@ -124,15 +126,15 @@ public class UpGara extends javax.swing.JDialog {
             }
         });
         jPanel1.add(txPassword);
-        txPassword.setBounds(200, 560, 370, 30);
+        txPassword.setBounds(200, 560, 410, 30);
         jPanel1.add(txBusResNum);
-        txBusResNum.setBounds(200, 390, 370, 30);
+        txBusResNum.setBounds(200, 390, 410, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Đánh giá lại");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(400, 300, 150, 17);
+        jLabel8.setBounds(440, 300, 150, 17);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
@@ -174,7 +176,7 @@ public class UpGara extends javax.swing.JDialog {
         jPanel1.add(btPickPicture);
         btPickPicture.setBounds(850, 180, 210, 30);
         jPanel1.add(txAccount);
-        txAccount.setBounds(200, 500, 370, 30);
+        txAccount.setBounds(200, 500, 410, 30);
 
         cbStatement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hợp tác", "Ngừng hợp tác" }));
         cbStatement.addItemListener(new java.awt.event.ItemListener() {
@@ -183,7 +185,7 @@ public class UpGara extends javax.swing.JDialog {
             }
         });
         jPanel1.add(cbStatement);
-        cbStatement.setBounds(330, 430, 240, 40);
+        cbStatement.setBounds(280, 440, 140, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -219,6 +221,14 @@ public class UpGara extends javax.swing.JDialog {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(200, 170, 270, 40);
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel11.setText("SĐT");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(440, 450, 30, 14);
+        jPanel1.add(txPhone);
+        txPhone.setBounds(480, 440, 130, 30);
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
         jPanel1.add(jLabel9);
         jLabel9.setBounds(0, 0, 1280, 720);
@@ -250,6 +260,8 @@ public class UpGara extends javax.swing.JDialog {
         
         String account = txAccount.getText();
         String password = txPassword.getText();
+        
+        String phone = txPhone.getText();
         
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
@@ -309,7 +321,7 @@ public class UpGara extends javax.swing.JDialog {
                     Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
+                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Phone=? where Gara_Name=?";
                 try {
                     PreparedStatement pstt2 = conn.prepareStatement(sql2);
                     pstt2.setString(1, garaName);
@@ -317,7 +329,9 @@ public class UpGara extends javax.swing.JDialog {
                     pstt2.setFloat(3, garaPoint0);
                     pstt2.setString(4, BusResNum);
 //                    pstt2.setString(5, account);
-                    pstt2.setString(5, garaName0);
+                    pstt2.setString(5, phone);
+                    pstt2.setString(6, garaName0);
+                    
                     int x = pstt2.executeUpdate();
                     if(x>0){
                         JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
@@ -348,7 +362,7 @@ public class UpGara extends javax.swing.JDialog {
                 } catch (SQLException ex) {
                     Logger.getLogger(UpGara.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Active=?,Account=? where Gara_Name=?";
+                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Active=?,Account=?,Phone=? where Gara_Name=?";
                 try {
                     PreparedStatement pstt2 = conn.prepareStatement(sql2);
                     pstt2.setString(1, garaName);
@@ -357,7 +371,8 @@ public class UpGara extends javax.swing.JDialog {
                     pstt2.setString(4, BusResNum);
                     pstt2.setBoolean(5, true);
                     pstt2.setString(6, account);
-                    pstt2.setString(7, garaName0);
+                    pstt2.setString(7, phone);
+                    pstt2.setString(8, garaName0);
                     int x = pstt2.executeUpdate();
                     if(x>0){
                         JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
@@ -376,14 +391,15 @@ public class UpGara extends javax.swing.JDialog {
         else{
             //truoc do nghi, bay gio nghi: 
             if(active0.equals(active)){
-                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=? where Gara_Name=?";
+                String sql2 = "UPDATE Gara SET Gara_Name=?,Gara_Picture=?,Gara_Review=?,Bus_Res_number=?,Phone=? where Gara_Name=?";
                 try {
                     PreparedStatement pstt2 = conn.prepareStatement(sql2);
                     pstt2.setString(1, garaName);
                     pstt2.setString(2, nameofPicture);
                     pstt2.setFloat(3, this.garaPoint0);
                     pstt2.setString(4, BusResNum);
-                    pstt2.setString(5, garaName0);
+                    pstt2.setString(5, phone);
+                    pstt2.setString(6, garaName0);
                     int x = pstt2.executeUpdate();
                     if(x>0){
                         JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin thành công!");
@@ -559,13 +575,14 @@ public class UpGara extends javax.swing.JDialog {
     private void txPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txPasswordActionPerformed
-    public void showInfor(String garaName, String picture, String review, String BusResNum, String active,String account, String password){
+    public void showInfor(String garaName, String picture, String review, String BusResNum, String active,String account, String password,String phone){
         txGaraName.setText(garaName);
         txGaraReview.setText(review);
         txBusResNum.setText(BusResNum);
         cbStatement.setSelectedItem(active);
         txAccount.setText(account);
         txPassword.setText(password);
+        txPhone.setText(phone);
         ImageIcon icon  = new ImageIcon(saveFolder+picture);
             Image image = icon.getImage();
             Image newImage = image.getScaledInstance(540,370, java.awt.Image.SCALE_SMOOTH);
@@ -622,6 +639,7 @@ public class UpGara extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbStatement;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -638,5 +656,6 @@ public class UpGara extends javax.swing.JDialog {
     private javax.swing.JTextField txGaraName;
     private javax.swing.JTextField txGaraReview;
     private javax.swing.JTextField txPassword;
+    private javax.swing.JTextField txPhone;
     // End of variables declaration//GEN-END:variables
 }
