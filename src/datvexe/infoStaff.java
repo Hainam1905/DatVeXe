@@ -40,68 +40,46 @@ public class infoStaff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txt_lastName = new javax.swing.JTextField();
-        txt_staffSDT = new javax.swing.JTextField();
-        txt_staffCMND = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cbb_staffGender = new javax.swing.JComboBox<>();
-        btn_updateInfoStaff = new javax.swing.JButton();
-        txt_titleStaffName = new javax.swing.JLabel();
-        txt_firstName = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        label_err1 = new javax.swing.JLabel();
-        label_err2 = new javax.swing.JLabel();
-        label_err3 = new javax.swing.JLabel();
+        txt_lastName = new javax.swing.JTextField();
         label_err4 = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
+        txt_firstName = new javax.swing.JTextField();
+        txt_staffCMND = new javax.swing.JTextField();
+        label_err2 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        label_err3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbb_staffGender = new javax.swing.JComboBox<>();
+        label_err1 = new javax.swing.JLabel();
+        txt_titleStaffName = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_staffSDT = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btn_updateInfoStaff = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Thông tin nhân viên:");
+        jPanel1.setLayout(null);
 
-        txt_staffSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_staffSDTActionPerformed(evt);
-            }
-        });
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText("Số điện thoại");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(420, 320, 200, 17);
 
-        jLabel2.setText("Họ (Last name): ");
-
-        jLabel3.setText("CMND: ");
-
-        jLabel4.setText("Số điện thoại:");
-
-        jLabel5.setText("Giới tính:");
-
-        cbb_staffGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nam", "nu" }));
-        cbb_staffGender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbb_staffGenderActionPerformed(evt);
-            }
-        });
-
-        btn_updateInfoStaff.setText("cập nhật thông tin ");
-        btn_updateInfoStaff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateInfoStaffActionPerformed(evt);
-            }
-        });
-
-        txt_titleStaffName.setText("jLabel6");
-
-        jLabel6.setText("Tên (First Name):");
-
-        label_err1.setText("jLabel7");
-
-        label_err2.setText("jLabel8");
-
-        label_err3.setText("jLabel9");
+        txt_lastName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_lastName);
+        txt_lastName.setBounds(420, 250, 200, 30);
 
         label_err4.setText("jLabel10");
+        jPanel1.add(label_err4);
+        label_err4.setBounds(680, 380, 187, 14);
 
         btn_back.setText("<");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
@@ -109,98 +87,118 @@ public class infoStaff extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_back);
+        btn_back.setBounds(10, 40, 41, 23);
+
+        txt_firstName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_firstName);
+        txt_firstName.setBounds(680, 250, 220, 30);
+
+        txt_staffCMND.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_staffCMND);
+        txt_staffCMND.setBounds(680, 340, 220, 30);
+
+        label_err2.setText("jLabel8");
+        jPanel1.add(label_err2);
+        label_err2.setBounds(680, 290, 210, 14);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Họ");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(420, 210, 80, 20);
+
+        label_err3.setText("jLabel9");
+        jPanel1.add(label_err3);
+        label_err3.setBounds(420, 380, 200, 14);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Tên");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(680, 210, 84, 17);
+
+        cbb_staffGender.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cbb_staffGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nam", "nu" }));
+        cbb_staffGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_staffGenderActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbb_staffGender);
+        cbb_staffGender.setBounds(420, 450, 200, 30);
+
+        label_err1.setText("jLabel7");
+        jPanel1.add(label_err1);
+        label_err1.setBounds(420, 290, 200, 14);
+
+        txt_titleStaffName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_titleStaffName.setForeground(new java.awt.Color(255, 0, 0));
+        txt_titleStaffName.setText("jLabel6");
+        jPanel1.add(txt_titleStaffName);
+        txt_titleStaffName.setBounds(940, 60, 290, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("THÔNG TIN NHÂN VIÊN");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(490, 120, 310, 50);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("CMND/Căn cước công dân");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(680, 320, 210, 17);
+
+        txt_staffSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_staffSDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_staffSDTActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_staffSDT);
+        txt_staffSDT.setBounds(420, 340, 200, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Giới tính:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(420, 420, 200, 17);
+
+        btn_updateInfoStaff.setBackground(new java.awt.Color(5, 87, 169));
+        btn_updateInfoStaff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_updateInfoStaff.setForeground(new java.awt.Color(255, 255, 255));
+        btn_updateInfoStaff.setText("cập nhật thông tin ");
+        btn_updateInfoStaff.setBorderPainted(false);
+        btn_updateInfoStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateInfoStaffActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_updateInfoStaff);
+        btn_updateInfoStaff.setBounds(490, 540, 350, 37);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/IconNhanVien.png"))); // NOI18N
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(850, 30, 83, 90);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_lastName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(txt_staffSDT))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(107, 107, 107))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txt_staffCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_back)
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_titleStaffName)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(209, 209, 209))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(cbb_staffGender, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label_err1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(label_err3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(label_err4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(label_err2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(btn_updateInfoStaff)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_titleStaffName)
-                    .addComponent(btn_back))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_err1)
-                    .addComponent(label_err2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_staffSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_staffCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_err3)
-                    .addComponent(label_err4))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbb_staffGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(btn_updateInfoStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -368,11 +366,15 @@ public class infoStaff extends javax.swing.JFrame {
     private javax.swing.JButton btn_updateInfoStaff;
     private javax.swing.JComboBox<String> cbb_staffGender;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label_err1;
     private javax.swing.JLabel label_err2;
     private javax.swing.JLabel label_err3;

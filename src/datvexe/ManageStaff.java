@@ -29,24 +29,35 @@ public class ManageStaff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btManageStaffLiss = new javax.swing.JButton();
         btAddNewStaff = new javax.swing.JButton();
         btProfit = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Quản lí nhân viên trang chính");
+        jPanel1.setLayout(null);
 
-        btManageStaffLiss.setText("Quản lí danh sách nhân viên");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("QUẢN LÍ NHÂN VIÊN");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(430, 150, 420, 70);
+
+        btManageStaffLiss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/QuanLiNhanVienIcon.png"))); // NOI18N
         btManageStaffLiss.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btManageStaffLiss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btManageStaffLissActionPerformed(evt);
             }
         });
+        jPanel1.add(btManageStaffLiss);
+        btManageStaffLiss.setBounds(190, 290, 230, 310);
 
-        btAddNewStaff.setText("Thêm nhân viên mới");
+        btAddNewStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThemNhanVienIcon.png"))); // NOI18N
         btAddNewStaff.setMaximumSize(new java.awt.Dimension(171, 23));
         btAddNewStaff.setMinimumSize(new java.awt.Dimension(171, 23));
         btAddNewStaff.addActionListener(new java.awt.event.ActionListener() {
@@ -54,41 +65,35 @@ public class ManageStaff extends javax.swing.JFrame {
                 btAddNewStaffActionPerformed(evt);
             }
         });
+        jPanel1.add(btAddNewStaff);
+        btAddNewStaff.setBounds(520, 290, 230, 310);
 
-        btProfit.setText("Thống kê doanh thu");
+        btProfit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThongKeIcon.png"))); // NOI18N
         btProfit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btProfitActionPerformed(evt);
             }
         });
+        jPanel1.add(btProfit);
+        btProfit.setBounds(860, 290, 230, 310);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(btAddNewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(192, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btManageStaffLiss, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAddNewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addComponent(btProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -156,5 +161,8 @@ public class ManageStaff extends javax.swing.JFrame {
     private javax.swing.JButton btManageStaffLiss;
     private javax.swing.JButton btProfit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,19 +42,28 @@ public class ShowStaffList extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListEmp = new javax.swing.JTable();
-        btDel = new javax.swing.JButton();
-        btUpdate = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         txPhoneCMND = new javax.swing.JTextField();
-        btSearch = new javax.swing.JButton();
         ckShowAll = new javax.swing.JCheckBox();
+        btUpdate = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btSearch = new javax.swing.JButton();
+        btDel = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Hiển thị danh sách nhân viên");
+        jPanel1.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Tìm nhân viên bằng CMND hoặc số điện thoại");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(70, 240, 340, 20);
 
         tbListEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,84 +75,85 @@ public class ShowStaffList extends javax.swing.JFrame{
         ));
         jScrollPane1.setViewportView(tbListEmp);
 
-        btDel.setText("Xóa nhân viên");
-        btDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDelActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(34, 310, 1210, 374);
+        jPanel1.add(txPhoneCMND);
+        txPhoneCMND.setBounds(80, 270, 310, 30);
 
-        btUpdate.setText("Cập nhật thông tin nhân viên");
-        btUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btUpdateActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Tìm nhân viên bằng CMND hoặc số điện thoại");
-
-        btSearch.setText("Tìm");
-        btSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSearchActionPerformed(evt);
-            }
-        });
-
+        ckShowAll.setBackground(new java.awt.Color(255, 255, 255));
+        ckShowAll.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ckShowAll.setForeground(new java.awt.Color(255, 0, 0));
         ckShowAll.setText("Xem toàn bộ danh sách");
         ckShowAll.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ckShowAllItemStateChanged(evt);
             }
         });
+        jPanel1.add(ckShowAll);
+        ckShowAll.setBounds(1021, 270, 210, 30);
+
+        btUpdate.setBackground(new java.awt.Color(5, 87, 169));
+        btUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btUpdate.setText("Cập nhật thông tin nhân viên");
+        btUpdate.setBorderPainted(false);
+        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btUpdate);
+        btUpdate.setBounds(720, 270, 260, 30);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("DANH SÁCH NHÂN VIÊN");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(500, 120, 300, 70);
+
+        btSearch.setBackground(new java.awt.Color(5, 87, 169));
+        btSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btSearch.setForeground(new java.awt.Color(255, 255, 255));
+        btSearch.setText("Tìm");
+        btSearch.setBorderPainted(false);
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSearchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btSearch);
+        btSearch.setBounds(410, 270, 90, 30);
+
+        btDel.setBackground(new java.awt.Color(5, 87, 169));
+        btDel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btDel.setForeground(new java.awt.Color(255, 255, 255));
+        btDel.setText("Xóa nhân viên");
+        btDel.setBorderPainted(false);
+        btDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btDel);
+        btDel.setBounds(530, 270, 160, 30);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txPhoneCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ckShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ckShowAll))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txPhoneCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSearch))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -485,7 +495,10 @@ public class ShowStaffList extends javax.swing.JFrame{
     private javax.swing.JButton btUpdate;
     private javax.swing.JCheckBox ckShowAll;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListEmp;
     private javax.swing.JTextField txPhoneCMND;

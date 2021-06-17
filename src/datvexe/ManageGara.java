@@ -27,68 +27,78 @@ public class ManageGara extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         btShowGaraList = new javax.swing.JButton();
         btAddNewGara = new javax.swing.JButton();
-        btCensorTrip = new javax.swing.JButton();
         btAppreciate = new javax.swing.JButton();
+        btCensorTrip = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btShowGaraList.setText("Quản lí danh sách nhà xe");
+        jPanel1.setLayout(null);
+
+        btShowGaraList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/DanhSachNhaXeIcon.png"))); // NOI18N
         btShowGaraList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btShowGaraListActionPerformed(evt);
             }
         });
+        jPanel1.add(btShowGaraList);
+        btShowGaraList.setBounds(140, 280, 180, 250);
 
-        btAddNewGara.setText("Thêm nhà xe mới");
+        btAddNewGara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThemNhaXeIcon.png"))); // NOI18N
         btAddNewGara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddNewGaraActionPerformed(evt);
             }
         });
+        jPanel1.add(btAddNewGara);
+        btAddNewGara.setBounds(410, 280, 180, 250);
 
-        btCensorTrip.setText("Phê duyệt chuyến xe");
-        btCensorTrip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCensorTripActionPerformed(evt);
-            }
-        });
-
-        btAppreciate.setText("Đánh giá nhà xe");
+        btAppreciate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/DanhGiaNhaXeIcon.png"))); // NOI18N
         btAppreciate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAppreciateActionPerformed(evt);
             }
         });
+        jPanel1.add(btAppreciate);
+        btAppreciate.setBounds(940, 280, 180, 250);
+
+        btCensorTrip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/DuyetChuyenXeIcon.png"))); // NOI18N
+        btCensorTrip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCensorTripActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btCensorTrip);
+        btCensorTrip.setBounds(680, 280, 180, 250);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel7.setText("QUẢN LÍ NHÀ XE");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(530, 130, 220, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btShowGaraList, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAddNewGara, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCensorTrip, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,5 +173,9 @@ public class ManageGara extends javax.swing.JFrame {
     private javax.swing.JButton btAppreciate;
     private javax.swing.JButton btCensorTrip;
     private javax.swing.JButton btShowGaraList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

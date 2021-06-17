@@ -64,13 +64,16 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         label_staffName = new javax.swing.JLabel();
         btn_infoStaff = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
         btManageStaff = new javax.swing.JButton();
+        btManageGara = new javax.swing.JButton();
         btn_managerTicket = new javax.swing.JButton();
         tpManger = new javax.swing.JTabbedPane();
-        btManageGara = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton3.setText("Thêm tài khoản");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -81,84 +84,88 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label_staffName.setText("jLabel1");
+        jPanel1.setLayout(null);
 
-        btn_infoStaff.setText("Thông tin \nnhân viên"); // NOI18N
+        label_staffName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        label_staffName.setForeground(new java.awt.Color(255, 0, 0));
+        label_staffName.setText("jLabel1");
+        jPanel1.add(label_staffName);
+        label_staffName.setBounds(160, 34, 300, 40);
+
+        btn_infoStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThongTinCaNhanIcon.png"))); // NOI18N
         btn_infoStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_infoStaffActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_infoStaff);
+        btn_infoStaff.setBounds(310, 120, 160, 200);
 
+        btn_logout.setBackground(new java.awt.Color(27, 102, 177));
+        btn_logout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(255, 255, 255));
         btn_logout.setText("Đăng xuất");
+        btn_logout.setBorderPainted(false);
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_logout);
+        btn_logout.setBounds(160, 80, 150, 25);
 
-        btManageStaff.setText("Quản lí nhân viên(admin)");
+        btManageStaff.setBackground(new java.awt.Color(27, 102, 177));
+        btManageStaff.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btManageStaff.setForeground(new java.awt.Color(255, 255, 255));
+        btManageStaff.setText("Quản lí nhân viên");
+        btManageStaff.setBorderPainted(false);
         btManageStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btManageStaffActionPerformed(evt);
             }
         });
+        jPanel1.add(btManageStaff);
+        btManageStaff.setBounds(860, 40, 350, 40);
 
-        btn_managerTicket.setText("Quản lý vé");
-        btn_managerTicket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_managerTicketActionPerformed(evt);
-            }
-        });
-
-        btManageGara.setText("Quản lí Gara(admin)");
+        btManageGara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/QuanLiNhaXeIcon.png"))); // NOI18N
         btManageGara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btManageGaraActionPerformed(evt);
             }
         });
+        jPanel1.add(btManageGara);
+        btManageGara.setBounds(830, 120, 157, 200);
+
+        btn_managerTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/QuanLiVeIcon.png"))); // NOI18N
+        btn_managerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_managerTicketActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_managerTicket);
+        btn_managerTicket.setBounds(570, 120, 160, 200);
+        jPanel1.add(tpManger);
+        tpManger.setBounds(40, 330, 1190, 370);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/IconNhanVien.png"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(70, 20, 83, 90);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpManger)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_staffName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_logout)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btn_managerTicket, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_infoStaff, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(430, Short.MAX_VALUE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_staffName)
-                    .addComponent(btn_logout))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_infoStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_managerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btManageGara, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tpManger, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -417,6 +424,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_managerTicket;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label_staffName;
     private javax.swing.JTabbedPane tpManger;
     // End of variables declaration//GEN-END:variables

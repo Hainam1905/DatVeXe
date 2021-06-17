@@ -82,145 +82,163 @@ public class AppreciateGara extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btAppreciate = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         txGaraName = new javax.swing.JTextField();
-        txGaraReview = new javax.swing.JTextField();
-        txBusResNum = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btAppreciate = new javax.swing.JButton();
         cbStatement = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        lbshowPicture = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txAccount = new javax.swing.JTextField();
-        txPassword = new javax.swing.JTextField();
-        lbshowPicture = new javax.swing.JLabel();
-        btPickPicture = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        txBusResNum = new javax.swing.JTextField();
         cbAppreciate = new javax.swing.JComboBox<>();
+        txGaraReview = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txPassword = new javax.swing.JTextField();
+        txAccount = new javax.swing.JTextField();
+        btPickPicture = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Tên nhà xe");
+        jPanel1.setLayout(null);
+        jPanel1.add(txGaraName);
+        txGaraName.setBounds(200, 260, 360, 30);
 
-        jLabel2.setText("Hình ảnh");
-
-        jLabel3.setText("Đánh giá");
-
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Giấy phép đăng kí kinh doanh");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(200, 370, 240, 20);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("Tên nhà xe");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(200, 230, 90, 17);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("Đánh giá lại");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(380, 300, 103, 20);
+
+        btAppreciate.setBackground(new java.awt.Color(5, 87, 169));
+        btAppreciate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btAppreciate.setForeground(new java.awt.Color(255, 255, 255));
         btAppreciate.setText("Đánh giá nhà xe");
+        btAppreciate.setBorderPainted(false);
         btAppreciate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAppreciateActionPerformed(evt);
             }
         });
+        jPanel1.add(btAppreciate);
+        btAppreciate.setBounds(204, 620, 340, 40);
 
         cbStatement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hợp tác", "Ngừng hợp tác" }));
-
-        jLabel5.setText("Trạng thái");
-
-        jLabel6.setText("Tên đăng nhập");
-
-        jLabel7.setText("Mật khẩu");
+        jPanel1.add(cbStatement);
+        cbStatement.setBounds(300, 440, 170, 30);
 
         lbshowPicture.setText("jLabel8");
+        jPanel1.add(lbshowPicture);
+        lbshowPicture.setBounds(720, 240, 414, 420);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Tên đăng nhập");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(200, 480, 130, 20);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel7.setText("Mật khẩu");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(200, 544, 110, 20);
+        jPanel1.add(txBusResNum);
+        txBusResNum.setBounds(200, 400, 360, 30);
+
+        cbAppreciate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rất tệ", "Tệ", "Ổn", "Tốt", "Tuyệt vời" }));
+        cbAppreciate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAppreciateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbAppreciate);
+        cbAppreciate.setBounds(380, 330, 180, 30);
+        jPanel1.add(txGaraReview);
+        txGaraReview.setBounds(200, 330, 166, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Đánh giá");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(200, 300, 80, 20);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Trạng thái");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(200, 440, 110, 30);
+        jPanel1.add(txPassword);
+        txPassword.setBounds(200, 570, 360, 30);
+
+        txAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txAccountActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txAccount);
+        txAccount.setBounds(200, 510, 360, 30);
+
+        btPickPicture.setBackground(new java.awt.Color(5, 87, 169));
+        btPickPicture.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btPickPicture.setForeground(new java.awt.Color(255, 255, 255));
         btPickPicture.setText("Chọn hình ảnh khác");
+        btPickPicture.setBorderPainted(false);
         btPickPicture.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPickPictureActionPerformed(evt);
             }
         });
+        jPanel1.add(btPickPicture);
+        btPickPicture.setBounds(840, 200, 190, 30);
 
-        jLabel8.setText("Đánh giá lại");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Hình ảnh");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(720, 200, 110, 30);
 
-        cbAppreciate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rất tệ", "Tệ", "Ổn", "Tốt", "Tuyệt vời" }));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel10.setText("THÔNG TIN NHÀ XE");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(200, 170, 270, 40);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(148, 148, 148)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbStatement, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txGaraName)
-                                .addComponent(txGaraReview)
-                                .addComponent(txBusResNum, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                .addComponent(txAccount)
-                                .addComponent(txPassword)
-                                .addComponent(btPickPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)))
-                .addComponent(lbshowPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lbshowPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txGaraName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btPickPicture)
-                    .addComponent(jLabel2))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txGaraReview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txBusResNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbStatement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -534,6 +552,14 @@ public class AppreciateGara extends javax.swing.JDialog {
             
         }
     }//GEN-LAST:event_btPickPictureActionPerformed
+
+    private void cbAppreciateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAppreciateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAppreciateActionPerformed
+
+    private void txAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txAccountActionPerformed
     public void showInfor(String garaName, String picture, String review, String BusResNum, String active,String account, String password){
         txGaraName.setText(garaName);
         txGaraReview.setText(review);
@@ -598,6 +624,8 @@ public class AppreciateGara extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbAppreciate;
     private javax.swing.JComboBox<String> cbStatement;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -605,6 +633,8 @@ public class AppreciateGara extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbshowPicture;
     private javax.swing.JTextField txAccount;
     private javax.swing.JTextField txBusResNum;

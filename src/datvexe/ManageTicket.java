@@ -65,23 +65,28 @@ public class ManageTicket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_listTicket = new javax.swing.JTable();
-        btn_back = new javax.swing.JButton();
-        btn_orderTicket = new javax.swing.JButton();
-        btn_cancelTicket = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txt_sdt = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txt_noiDi = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txt_noiDen = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        btn_cancelTicket = new javax.swing.JButton();
         txt_time = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txt_noiDi = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btn_orderTicket = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
+        txt_noiDen = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(null);
 
         table_listTicket.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,112 +98,127 @@ public class ManageTicket extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table_listTicket);
 
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 320, 1240, 370);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("SDT: ");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(180, 250, 150, 17);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("TÌM KIẾM");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(30, 250, 120, 40);
+
+        txt_sdt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_sdt.setForeground(new java.awt.Color(255, 0, 0));
+        txt_sdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_sdtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_sdt);
+        txt_sdt.setBounds(180, 280, 190, 30);
+
+        btn_search.setBackground(new java.awt.Color(27, 102, 177));
+        btn_search.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setText("search");
+        btn_search.setBorderPainted(false);
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_search);
+        btn_search.setBounds(1130, 280, 110, 30);
+
+        btn_cancelTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/HuyVeIcon.png"))); // NOI18N
+        btn_cancelTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelTicketActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_cancelTicket);
+        btn_cancelTicket.setBounds(680, 110, 170, 130);
+
+        txt_time.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_time.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(txt_time);
+        txt_time.setBounds(880, 280, 220, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Thời Gian đi: ");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(880, 250, 220, 17);
+
+        txt_noiDi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_noiDi.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(txt_noiDi);
+        txt_noiDi.setBounds(400, 280, 200, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Nơi Đi: ");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(400, 250, 200, 17);
+
+        btn_orderTicket.setBackground(new java.awt.Color(255, 255, 255));
+        btn_orderTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/DatVeIcon.png"))); // NOI18N
+        btn_orderTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderTicketActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_orderTicket);
+        btn_orderTicket.setBounds(400, 110, 170, 130);
+
         btn_back.setText("<");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_back);
+        btn_back.setBounds(10, 10, 41, 23);
 
-        btn_orderTicket.setText("Đặt vé");
-        btn_orderTicket.addActionListener(new java.awt.event.ActionListener() {
+        txt_noiDen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_noiDen.setForeground(new java.awt.Color(255, 0, 0));
+        txt_noiDen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_orderTicketActionPerformed(evt);
+                txt_noiDenActionPerformed(evt);
             }
         });
+        jPanel1.add(txt_noiDen);
+        txt_noiDen.setBounds(640, 280, 210, 30);
 
-        btn_cancelTicket.setText("Hủy vé");
-        btn_cancelTicket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelTicketActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Lọc:");
-
-        txt_sdt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_sdtActionPerformed(evt);
-            }
-        });
-
-        btn_search.setText("search");
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("SDT: ");
-
-        jLabel3.setText("Nơi Đi: ");
-
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Nơi Đến: ");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(640, 250, 210, 17);
 
-        jLabel5.setText("Thời Gian đi: ");
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(0, 0, 1280, 710);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_back)
-                                .addGap(285, 285, 285)
-                                .addComponent(btn_orderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94)
-                                .addComponent(btn_cancelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_time, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 156, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_back)
-                    .addComponent(btn_orderTicket)
-                    .addComponent(btn_cancelTicket))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_noiDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_noiDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
         );
 
         pack();
@@ -305,6 +325,10 @@ public class ManageTicket extends javax.swing.JFrame {
         searchListTicketFilter(sdt, noiDi, noiDen, time);
     }//GEN-LAST:event_btn_searchActionPerformed
 
+    private void txt_noiDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_noiDenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_noiDenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -346,10 +370,13 @@ public class ManageTicket extends javax.swing.JFrame {
     private javax.swing.JButton btn_orderTicket;
     private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_listTicket;
     private javax.swing.JTextField txt_noiDen;

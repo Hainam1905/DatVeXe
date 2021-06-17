@@ -39,167 +39,190 @@ public class AddNewEmployer extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        cbKind = new javax.swing.JComboBox<>();
         txCMND = new javax.swing.JTextField();
         txLastName = new javax.swing.JTextField();
-        txPhone = new javax.swing.JTextField();
-        txFirstname = new javax.swing.JTextField();
-        txAccount = new javax.swing.JTextField();
-        txPassword = new javax.swing.JTextField();
-        rdMale = new javax.swing.JRadioButton();
-        rdFemale = new javax.swing.JRadioButton();
-        btAddEmployer = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        cbKind = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
         lbErrAcc = new javax.swing.JLabel();
+        txPhone = new javax.swing.JTextField();
         lbErrCMND = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txFirstname = new javax.swing.JTextField();
         lbErrPhone = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txAccount = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txPassword = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        rdMale = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        rdFemale = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        btAddEmployer = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Thêm nhân viên mới");
+        jPanel1.setLayout(null);
 
-        jLabel2.setText("CMND");
-
-        jLabel3.setText("Họ");
-
-        jLabel4.setText("Tên");
-
-        jLabel5.setText("SĐT");
-
-        jLabel6.setText("Giới tính");
-
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
         jLabel7.setText("Tên đăng nhập");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(790, 260, 170, 17);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("Vai trò nhân viên");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(790, 440, 140, 20);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Mật khẩu");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(790, 350, 110, 20);
+
+        cbKind.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên" }));
+        jPanel1.add(cbKind);
+        cbKind.setBounds(790, 470, 190, 30);
+
+        txCMND.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txCMND);
+        txCMND.setBounds(160, 370, 220, 30);
+
+        txLastName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txLastNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txLastName);
+        txLastName.setBounds(420, 290, 240, 30);
+
+        lbErrAcc.setForeground(new java.awt.Color(255, 51, 51));
+        lbErrAcc.setText("Tên đăng nhập đã tồn tại");
+        jPanel1.add(lbErrAcc);
+        lbErrAcc.setBounds(790, 330, 187, 14);
+
+        txPhone.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txPhone);
+        txPhone.setBounds(420, 370, 240, 30);
+
+        lbErrCMND.setForeground(new java.awt.Color(255, 51, 51));
+        lbErrCMND.setText("CMND đã được đăng kí trước đó");
+        jPanel1.add(lbErrCMND);
+        lbErrCMND.setBounds(160, 410, 187, 14);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("THÔNG TIN NHÂN VIÊN MỚI");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(140, 200, 380, 40);
+
+        txFirstname.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txFirstname);
+        txFirstname.setBounds(160, 290, 220, 30);
+
+        lbErrPhone.setForeground(new java.awt.Color(255, 51, 51));
+        lbErrPhone.setText("SĐT đã được đăng kí trước đó");
+        jPanel1.add(lbErrPhone);
+        lbErrPhone.setBounds(420, 410, 187, 14);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("CMND/Căn Cước Công Dân");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(160, 340, 230, 20);
+
+        txAccount.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txAccount);
+        txAccount.setBounds(790, 290, 330, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Họ");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(160, 260, 70, 20);
+
+        txPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txPassword);
+        txPassword.setBounds(790, 380, 330, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText("Tên");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(420, 260, 80, 17);
 
         buttonGroup1.add(rdMale);
+        rdMale.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rdMale.setText("Nam");
+        jPanel1.add(rdMale);
+        rdMale.setBounds(160, 470, 93, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("SĐT");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(420, 340, 70, 14);
 
         buttonGroup1.add(rdFemale);
+        rdFemale.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rdFemale.setText("Nữ");
+        jPanel1.add(rdFemale);
+        rdFemale.setBounds(300, 470, 93, 30);
 
-        btAddEmployer.setText("Thêm nhân viên");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Giới tính");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(160, 440, 110, 17);
+
+        btAddEmployer.setBackground(new java.awt.Color(27, 102, 177));
+        btAddEmployer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btAddEmployer.setForeground(new java.awt.Color(255, 255, 255));
+        btAddEmployer.setText("+ Thêm nhân viên");
+        btAddEmployer.setBorderPainted(false);
         btAddEmployer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddEmployerActionPerformed(evt);
             }
         });
+        jPanel1.add(btAddEmployer);
+        btAddEmployer.setBounds(400, 580, 530, 40);
 
-        jLabel9.setText("Vai trò nhân viên");
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel10.setText("THÔNG TIN TÀI KHOẢN");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(750, 220, 200, 40);
 
-        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên" }));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
 
-        lbErrAcc.setForeground(new java.awt.Color(255, 51, 51));
-        lbErrAcc.setText("Tên đăng nhập đã tồn tại");
-
-        lbErrCMND.setForeground(new java.awt.Color(255, 51, 51));
-        lbErrCMND.setText("CMND đã được đăng kí trước đó");
-
-        lbErrPhone.setForeground(new java.awt.Color(255, 51, 51));
-        lbErrPhone.setText("SĐT đã được đăng kí trước đó");
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(0, 4, 1280, 710);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rdMale, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(48, 48, 48)
-                                        .addComponent(rdFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbKind, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lbErrAcc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                                    .addComponent(lbErrCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbErrPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(btAddEmployer, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(189, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbErrCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbErrPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rdMale)
-                        .addComponent(rdFemale)))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbErrAcc)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(cbKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(btAddEmployer)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -294,6 +317,10 @@ public class AddNewEmployer extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_btAddEmployerActionPerformed
+
+    private void txLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txLastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLastNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,6 +422,8 @@ public class AddNewEmployer extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbKind;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -403,6 +432,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbErrAcc;
     private javax.swing.JLabel lbErrCMND;
     private javax.swing.JLabel lbErrPhone;
