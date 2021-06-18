@@ -43,19 +43,65 @@ public class CenSorTrip extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btDelete = new javax.swing.JButton();
+        btAgree = new javax.swing.JButton();
+        btExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTrip = new javax.swing.JTable();
-        btExit = new javax.swing.JButton();
-        btAgree = new javax.swing.JButton();
-        btDelete = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("PHÊ DUYỆT CHUYẾN XE");
+        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jPanel1.setLayout(null);
 
+        btDelete.setBackground(new java.awt.Color(0, 0, 255));
+        btDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btDelete.setText("Xóa");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btDelete);
+        btDelete.setBounds(890, 630, 160, 40);
+
+        btAgree.setBackground(new java.awt.Color(0, 0, 255));
+        btAgree.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btAgree.setForeground(new java.awt.Color(255, 255, 255));
+        btAgree.setText("Phê duyệt");
+        btAgree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgreeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btAgree);
+        btAgree.setBounds(560, 630, 160, 40);
+
+        btExit.setBackground(new java.awt.Color(0, 0, 255));
+        btExit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btExit.setForeground(new java.awt.Color(255, 255, 255));
+        btExit.setText("Thoát");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btExit);
+        btExit.setBounds(200, 630, 160, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("PHÊ DUYỆT CHUYẾN XE");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(510, 72, 330, 60);
+
+        tbTrip.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tbTrip.setForeground(new java.awt.Color(0, 0, 255));
         tbTrip.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -69,60 +115,30 @@ public class CenSorTrip extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbTrip);
 
-        btExit.setText("Thoát");
-        btExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExitActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 190, 1240, 410);
 
-        btAgree.setText("Phê duyệt");
-        btAgree.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAgreeActionPerformed(evt);
-            }
-        });
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
 
-        btDelete.setText("Xóa");
-        btDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDeleteActionPerformed(evt);
-            }
-        });
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(143, 143, 143)
-                        .addComponent(btAgree, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106)
-                        .addComponent(btDelete))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btExit)
-                    .addComponent(btAgree)
-                    .addComponent(btDelete))
-                .addGap(43, 43, 43))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -304,6 +320,9 @@ public class CenSorTrip extends javax.swing.JFrame {
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btExit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbTrip;
     // End of variables declaration//GEN-END:variables

@@ -1391,11 +1391,13 @@ public class OrderTicket extends javax.swing.JFrame {
             }else break;  
         }
     }//GEN-LAST:event_cbb_tripNameMouseClicked
-    public String[] searchTime(String garaName, String dayInWeek){
+    public String[] searchTime(String garaName, String dayInWeek, String schedule_no){
         String[] listTime = new String[100];
         int d = 0;
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select DepartTime from ScheduleOfGara where Gara_Name =N'"+garaName+"' and DayInWeek = '"+dayInWeek+"'";
+        String sql ="select DepartTime from ScheduleOfGara where Gara_Name =N'"+garaName+"'"
+                + " and DayInWeek = '"+dayInWeek+"' "
+                + "and Schedule_no ='"+schedule_no+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -1419,13 +1421,13 @@ public class OrderTicket extends javax.swing.JFrame {
         mt.setVisible(true);
     }//GEN-LAST:event_btn_backActionPerformed
 
-    public String searchTrip_No(String garaName, String time, String dayOfWeek){
+    public String searchTrip_No(String garaName, String time, String dayOfWeek, String schedule_No){
         String trip_No = "";
         Connection ketNoi = DatVeXe.layKetNoi();
         String sql ="select Trip_No from trip t inner join ScheduleOfGara s "
                 + "on t.TripOfGara_no = s.TripOfGara_no "
                 + "where Gara_Name = N'"+garaName+"' and DepartTime ='"+time+"' "
-                + "and DayInWeek ='"+dayOfWeek+"'";
+                + "and DayInWeek ='"+dayOfWeek+"' and SChedule_no = '"+schedule_No+"'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -1457,10 +1459,10 @@ public class OrderTicket extends javax.swing.JFrame {
         return seatAmount;
     }
     
-    public Vector searchOrderSeat(String trip_No){
+    public Vector searchOrderSeat(String trip_No,String date){
         Vector listSeat = new Vector();
         Connection ketNoi = DatVeXe.layKetNoi();
-        String sql ="select Seat_Position from Ticket where Trip_No = '"+trip_No+"'";
+        String sql ="select Seat_Position from Ticket where Trip_No = '"+trip_No+"'and CONVERT(VARCHAR(25),Book_Time, 126) LIKE '%"+date+"%'";
         try {
             PreparedStatement ps = ketNoi.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -1568,6 +1570,21 @@ public class OrderTicket extends javax.swing.JFrame {
             System.out.println("Loi addNewPassenger"+e);
         }
     }
+    public String searchSchedule_No(String maNoiDi, String maNoiDen){
+        String Schedule_No = "";
+        Connection ketNoi = DatVeXe.layKetNoi();
+        String sql ="select SChedule_no from TotalScheduels where BeginStation ='"+maNoiDi+"' and EndStation ='"+maNoiDen+"'";
+        try {
+            PreparedStatement ps = ketNoi.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Schedule_No = rs.getString("SChedule_no");
+            }
+        } catch (Exception e) {
+            System.out.println("loi seaechSchedule_No"+e);
+        }
+        return Schedule_No;
+    }
     private void btn_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderActionPerformed
         String sdt = txt_SDT.getText();
         String garaName = String.valueOf(cbb_tripName.getSelectedItem());
@@ -1629,14 +1646,19 @@ public class OrderTicket extends javax.swing.JFrame {
             if (!seatPosition.equals("") && !txt_price.getText().equals("")){
                 int soGhe = Integer.parseInt(seatPosition.substring(1));
                 seatKind = soGhe%2 == 0 ? "Tầng trên" : "Tầng dưới";
-                String trip_No = searchTrip_No(garaName, time,dayOfWeek);
+                String noiDi = String.valueOf(cbb_noiDi.getSelectedItem());
+                String noiDen = String.valueOf(cbb_noiDen.getSelectedItem());
+                String ma_NoiDi = convertStationNametoStationNo(noiDi);
+                String ma_NoiDen = convertStationNametoStationNo(noiDen);
+                String schedule_No = searchSchedule_No(ma_NoiDi, ma_NoiDen);
+                String trip_No = searchTrip_No(garaName, time,dayOfWeek,schedule_No);
                 if (checkNewUser == true){
                     addNewPassenger(sdt,firstName,lastName);
                 }
                 String dateTime = date +" "+ time.substring(0,8);
                 orderTicket(seatPosition, seatKind, isPaid, note, dateTime, staffCMND, sdt, trip_No);
                 JOptionPane.showMessageDialog(this, "Đã đặt vé thành công");
-                btn_backActionPerformed(evt);
+                //btn_backActionPerformed(evt);
             }else{
                 JOptionPane.showMessageDialog(this, "Hãy chọn ghế trước khi đặt vé!","Inane Warning",JOptionPane.ERROR_MESSAGE);
             }
@@ -1648,7 +1670,13 @@ public class OrderTicket extends javax.swing.JFrame {
         cbb_bookTime.removeAllItems();
         String GaraName = String.valueOf(cbb_tripName.getSelectedItem());
         String dayInWeek = getDate(false);
-        String[] listTime = searchTime(GaraName,dayInWeek);
+        String noiDi = String.valueOf(cbb_noiDi.getSelectedItem());
+        String noiDen = String.valueOf(cbb_noiDen.getSelectedItem());
+        String ma_NoiDi = convertStationNametoStationNo(noiDi);
+        String ma_NoiDen = convertStationNametoStationNo(noiDen);
+        String schedule_No = searchSchedule_No(ma_NoiDi, ma_NoiDen);
+        
+        String[] listTime = searchTime(GaraName,dayInWeek,schedule_No);
         for (int i = 0;i<=100;i++){
             if (listTime[i]!= null){
                 String time = listTime[i].substring(0,8);
@@ -1663,8 +1691,15 @@ public class OrderTicket extends javax.swing.JFrame {
         String garaName = String.valueOf(cbb_tripName.getSelectedItem());
         String time = String.valueOf(cbb_bookTime.getSelectedItem());
         String dayOfWeek = getDate(false);
+        String date = getDate(true);
         if (!garaName.equals("null") && !time.equals("null")){
-            trip_No = searchTrip_No(garaName, time,dayOfWeek);
+            String noiDi = String.valueOf(cbb_noiDi.getSelectedItem());
+            String noiDen = String.valueOf(cbb_noiDen.getSelectedItem());
+            String ma_NoiDi = convertStationNametoStationNo(noiDi);
+            String ma_NoiDen = convertStationNametoStationNo(noiDen);
+            String schedule_No = searchSchedule_No(ma_NoiDi, ma_NoiDen);
+            trip_No = searchTrip_No(garaName, time,dayOfWeek,schedule_No);
+            
             int seatAmount = searchSeatAmount(trip_No);
             if (seatAmount == 0){
                 hideSeat(0);
@@ -1672,7 +1707,7 @@ public class OrderTicket extends javax.swing.JFrame {
             }else {
                 txt_price.setText(priceTicket(trip_No));
                 Vector listSeat = new Vector();
-                listSeat = searchOrderSeat(trip_No);
+                listSeat = searchOrderSeat(trip_No,date);
                 int demGheDaDat = demGheDaDat(listSeat, 0);
                 if (seatAmount == 35){
                     hideSeat(35);

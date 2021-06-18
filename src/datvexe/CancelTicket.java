@@ -68,76 +68,79 @@ public class CancelTicket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btn_cancelTicket = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_listTicket = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
-        btn_cancelTicket = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        table_listTicket.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jPanel1.setLayout(null);
 
-            },
-            new String [] {
-                "Ticket_No", "Seat_Position", "Seat_Kind", "Is_Paid", "Passenger_Note", "Book_Time", "Staff_CMND", "Passenger_SDT", "Trip_No"
-            }
-        ));
-        jScrollPane1.setViewportView(table_listTicket);
-
-        jLabel1.setText("Danh sách vé của hành khách ");
-
-        btn_back.setText("<");
-        btn_back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_backActionPerformed(evt);
-            }
-        });
-
+        btn_cancelTicket.setBackground(new java.awt.Color(0, 0, 255));
+        btn_cancelTicket.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_cancelTicket.setForeground(new java.awt.Color(255, 255, 255));
         btn_cancelTicket.setText("Hủy vé");
         btn_cancelTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelTicketActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_cancelTicket);
+        btn_cancelTicket.setBounds(960, 590, 140, 40);
+
+        table_listTicket.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        table_listTicket.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã số vé", "Vị trí ghế", "Loại ghế", "Thanh toán", "Lưu ý của khách hàng", "Thời gian xe chạy", "CMND của nhân viên", "SĐT của khách hàng", "Mã chuyến đi"
+            }
+        ));
+        jScrollPane1.setViewportView(table_listTicket);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(60, 222, 1040, 340);
+
+        btn_back.setBackground(new java.awt.Color(0, 0, 255));
+        btn_back.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setText("Trở về");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_back);
+        btn_back.setBounds(980, 70, 130, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Danh sách vé của hành khách:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(60, 160, 210, 40);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(231, 231, 231)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btn_back)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_cancelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_back)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_cancelTicket)
-                .addGap(7, 7, 7))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -230,6 +233,9 @@ public class CancelTicket extends javax.swing.JFrame {
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_cancelTicket;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_listTicket;
     // End of variables declaration//GEN-END:variables

@@ -43,6 +43,7 @@ public class ShowGaraListForAppreciate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListGaras = new javax.swing.JTable();
@@ -51,13 +52,20 @@ public class ShowGaraListForAppreciate extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txgaraName = new javax.swing.JTextField();
         btSearch = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("DANH SÁCH NHÀ XE");
+        jPanel1.setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("DANH SÁCH NHÀ XE");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(470, 40, 270, 40);
+
+        tbListGaras.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbListGaras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -66,78 +74,91 @@ public class ShowGaraListForAppreciate extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh", "Title 4"
+                "Tên nhà xe", "Đánh giá", "Giấy phép kinh doanh", "Trạng thái"
             }
         ));
         jScrollPane1.setViewportView(tbListGaras);
 
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(160, 232, 930, 340);
+
+        btAppreciate.setBackground(new java.awt.Color(0, 0, 255));
+        btAppreciate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btAppreciate.setForeground(new java.awt.Color(255, 255, 255));
         btAppreciate.setText("Đánh giá nhà xe");
         btAppreciate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAppreciateActionPerformed(evt);
             }
         });
+        jPanel1.add(btAppreciate);
+        btAppreciate.setBounds(500, 600, 270, 50);
 
+        ckShowAll.setBackground(new java.awt.Color(0, 0, 255));
+        ckShowAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ckShowAll.setForeground(new java.awt.Color(255, 255, 255));
         ckShowAll.setText("Hiển thị toàn bộ danh sách");
         ckShowAll.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ckShowAllItemStateChanged(evt);
             }
         });
+        ckShowAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ckShowAllActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ckShowAll);
+        ckShowAll.setBounds(880, 80, 210, 40);
 
-        jLabel2.setText("Tìm kiếm theo tên nhà xe");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel2.setText("Nhập tên nhà xe:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(70, 160, 120, 30);
 
+        txgaraName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txgaraName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txgaraNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txgaraName);
+        txgaraName.setBounds(190, 160, 260, 30);
+
+        btSearch.setBackground(new java.awt.Color(0, 0, 255));
+        btSearch.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btSearch.setForeground(new java.awt.Color(255, 255, 255));
         btSearch.setText("Tìm");
         btSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSearchActionPerformed(evt);
             }
         });
+        jPanel1.add(btSearch);
+        btSearch.setBounds(490, 150, 150, 50);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txgaraName, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ckShowAll)
-                        .addGap(31, 31, 31))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ckShowAll))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txgaraName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btAppreciate, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,6 +235,14 @@ public class ShowGaraListForAppreciate extends javax.swing.JFrame {
             performed(connection);
         }
     }//GEN-LAST:event_ckShowAllItemStateChanged
+
+    private void txgaraNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txgaraNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txgaraNameActionPerformed
+
+    private void ckShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckShowAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ckShowAllActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,7 +432,10 @@ public class ShowGaraListForAppreciate extends javax.swing.JFrame {
     private javax.swing.JButton btSearch;
     private javax.swing.JCheckBox ckShowAll;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListGaras;
     private javax.swing.JTextField txgaraName;

@@ -47,27 +47,159 @@ public class InventoryProfit extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        cbQuater = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        rdQuater = new javax.swing.JRadioButton();
+        rdAll = new javax.swing.JRadioButton();
+        rdYear = new javax.swing.JRadioButton();
+        rdMonth = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbYear = new javax.swing.JComboBox<>();
+        cbMonth = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        lbTotalProfit = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProfit = new javax.swing.JTable();
         btExit = new javax.swing.JButton();
-        cbMonth = new javax.swing.JComboBox<>();
-        cbYear = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        rdMonth = new javax.swing.JRadioButton();
-        rdYear = new javax.swing.JRadioButton();
-        rdAll = new javax.swing.JRadioButton();
-        rdQuater = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        cbQuater = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("THỐNG KÊ DOANH THU");
+        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setLayout(null);
 
+        cbQuater.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbQuater.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        cbQuater.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbQuaterItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbQuater);
+        cbQuater.setBounds(670, 140, 60, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel4.setText("Quý");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(620, 140, 60, 30);
+
+        buttonGroup1.add(rdQuater);
+        rdQuater.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdQuater.setText("Lọc theo quý và năm");
+        rdQuater.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdQuaterItemStateChanged(evt);
+            }
+        });
+        rdQuater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdQuaterActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rdQuater);
+        rdQuater.setBounds(600, 200, 150, 30);
+
+        buttonGroup1.add(rdAll);
+        rdAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdAll.setText("Không lọc");
+        rdAll.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdAllItemStateChanged(evt);
+            }
+        });
+        rdAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdAllActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rdAll);
+        rdAll.setBounds(950, 200, 120, 30);
+
+        buttonGroup1.add(rdYear);
+        rdYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdYear.setText("Lọc theo năm");
+        rdYear.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdYearItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(rdYear);
+        rdYear.setBounds(800, 200, 120, 30);
+
+        buttonGroup1.add(rdMonth);
+        rdMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdMonth.setText("Lọc theo tháng và năm");
+        rdMonth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdMonthItemStateChanged(evt);
+            }
+        });
+        rdMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdMonthActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rdMonth);
+        rdMonth.setBounds(400, 200, 170, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel3.setText("Năm");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(820, 140, 60, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel2.setText("Tháng");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(440, 140, 60, 30);
+
+        cbYear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022" }));
+        cbYear.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbYearItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbYear);
+        cbYear.setBounds(880, 140, 70, 30);
+
+        cbMonth.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cbMonth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMonthItemStateChanged(evt);
+            }
+        });
+        cbMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMonthActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbMonth);
+        cbMonth.setBounds(490, 140, 60, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 50, 50));
+        jLabel7.setText("TỔNG DOANH THU: ");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(10, 260, 180, 22);
+
+        lbTotalProfit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbTotalProfit.setForeground(new java.awt.Color(255, 50, 50));
+        jPanel1.add(lbTotalProfit);
+        lbTotalProfit.setBounds(180, 260, 130, 20);
+
+        tbProfit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbProfit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -81,144 +213,56 @@ public class InventoryProfit extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbProfit);
 
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(390, 250, 670, 400);
+
+        btExit.setBackground(new java.awt.Color(0, 0, 255));
+        btExit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btExit.setForeground(new java.awt.Color(255, 255, 255));
         btExit.setText("Thoát");
         btExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExitActionPerformed(evt);
             }
         });
+        jPanel1.add(btExit);
+        btExit.setBounds(1060, 40, 140, 50);
 
-        cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cbMonth.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbMonthItemStateChanged(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("THỐNG KÊ DOANH THU");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(520, 30, 320, 70);
 
-        cbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", " " }));
-        cbYear.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbYearItemStateChanged(evt);
-            }
-        });
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(jDateChooser1);
+        jDateChooser1.setBounds(250, 140, 140, 30);
 
-        jLabel2.setText("Tháng");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel6.setText("Ngày");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(200, 140, 70, 30);
 
-        jLabel3.setText("Năm");
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(50, 20, 160, 123);
 
-        buttonGroup1.add(rdMonth);
-        rdMonth.setText("Lọc theo tháng và năm");
-        rdMonth.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdMonthItemStateChanged(evt);
-            }
-        });
-        rdMonth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdMonthActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(rdYear);
-        rdYear.setText("Lọc theo năm");
-        rdYear.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdYearItemStateChanged(evt);
-            }
-        });
-
-        buttonGroup1.add(rdAll);
-        rdAll.setText("Không lọc");
-        rdAll.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdAllItemStateChanged(evt);
-            }
-        });
-
-        buttonGroup1.add(rdQuater);
-        rdQuater.setText("Lọc theo quý và năm");
-        rdQuater.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdQuaterItemStateChanged(evt);
-            }
-        });
-
-        jLabel4.setText("Quý");
-
-        cbQuater.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        cbQuater.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbQuaterItemStateChanged(evt);
-            }
-        });
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/BackGround.jpg"))); // NOI18N
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(0, 10, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel4)
-                        .addGap(32, 32, 32)
-                        .addComponent(cbQuater, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rdMonth)
-                        .addGap(57, 57, 57)
-                        .addComponent(rdQuater, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rdYear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdAll, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(45, 45, 45)
-                        .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdMonth)
-                    .addComponent(rdYear)
-                    .addComponent(rdAll)
-                    .addComponent(rdQuater))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(cbQuater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btExit)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -320,6 +364,18 @@ public class InventoryProfit extends javax.swing.JFrame {
        
     }//GEN-LAST:event_cbQuaterItemStateChanged
 
+    private void cbMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMonthActionPerformed
+
+    private void rdAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdAllActionPerformed
+
+    private void rdQuaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdQuaterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdQuaterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -360,7 +416,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         ListSelectionModel listSelectionModel = tbProfit.getSelectionModel(); 
         listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
         tbProfit.setModel(dtf);
-        
+        float totalProfit = 0; 
        
         dtf.addColumn("Tên nhà xe");
         dtf.addColumn("Số vé bán ra");
@@ -421,8 +477,9 @@ public class InventoryProfit extends javax.swing.JFrame {
                 
                 //tam thoi: 
                 dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
-                
+                totalProfit+=profit; 
             }
+            lbTotalProfit.setText(totalProfit+" VND");
         } catch (SQLException ex) {
             Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -449,6 +506,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         PreparedStatement pstt2;
         PreparedStatement pstt3;
         PreparedStatement pstt4;
+        float totalProfit = 0; 
         try {
             pstt = conn.prepareStatement(sql);
             ResultSet rs = pstt.executeQuery();
@@ -496,8 +554,9 @@ public class InventoryProfit extends javax.swing.JFrame {
                 
                 //tam thoi: 
                 dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
-                
+                totalProfit+=profit; 
             }
+            lbTotalProfit.setText(totalProfit+" VND");
         } catch (SQLException ex) {
             Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -509,7 +568,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         ListSelectionModel listSelectionModel = tbProfit.getSelectionModel(); 
         listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
         tbProfit.setModel(dtf);
-        
+        float totalProfit = 0; 
         System.out.println(" vào day 150");
         dtf.addColumn("Tên nhà xe");
         dtf.addColumn("Số vé bán ra");
@@ -573,12 +632,12 @@ public class InventoryProfit extends javax.swing.JFrame {
                 
                 //tam thoi: 
                 dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
-                
+                totalProfit+=profit; 
             }
         } catch (SQLException ex) {
             Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        lbTotalProfit.setText(totalProfit+" VND");
         
     }
     public void showDetailDueMonth(DefaultTableModel dtf, Connection conn, int year, int month){
@@ -587,7 +646,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
         tbProfit.setModel(dtf);
         
-        
+        float totalProfit  =0; 
         dtf.addColumn("Tên nhà xe");
         dtf.addColumn("Số vé bán ra");
         dtf.addColumn("Doanh thu");
@@ -649,12 +708,12 @@ public class InventoryProfit extends javax.swing.JFrame {
                 
                 //tam thoi: 
                 dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
-                
+                totalProfit += profit; 
             }
         } catch (SQLException ex) {
             Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        lbTotalProfit.setText(totalProfit+" VND");
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -663,11 +722,18 @@ public class InventoryProfit extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbMonth;
     private javax.swing.JComboBox<String> cbQuater;
     private javax.swing.JComboBox<String> cbYear;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbTotalProfit;
     private javax.swing.JRadioButton rdAll;
     private javax.swing.JRadioButton rdMonth;
     private javax.swing.JRadioButton rdQuater;
