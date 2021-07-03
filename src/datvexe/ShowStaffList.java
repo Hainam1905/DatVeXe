@@ -51,6 +51,7 @@ public class ShowStaffList extends javax.swing.JFrame{
         btUpdate = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btSearch = new javax.swing.JButton();
+        btExit = new javax.swing.JButton();
         btDel = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -123,6 +124,17 @@ public class ShowStaffList extends javax.swing.JFrame{
         });
         jPanel1.add(btSearch);
         btSearch.setBounds(410, 270, 90, 30);
+
+        btExit.setBackground(new java.awt.Color(0, 0, 255));
+        btExit.setForeground(new java.awt.Color(255, 255, 255));
+        btExit.setText("Quay lại");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btExit);
+        btExit.setBounds(1023, 120, 120, 23);
 
         btDel.setBackground(new java.awt.Color(5, 87, 169));
         btDel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -262,6 +274,13 @@ public class ShowStaffList extends javax.swing.JFrame{
         performedViaTrack(dtf, connection);
        
     }//GEN-LAST:event_btSearchActionPerformed
+
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+       this.dispose();
+       ManageStaff manageStaff = new ManageStaff();
+       manageStaff.setLocationRelativeTo(null);
+       manageStaff.setVisible(true);
+    }//GEN-LAST:event_btExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -491,6 +510,7 @@ public class ShowStaffList extends javax.swing.JFrame{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDel;
+    private javax.swing.JButton btExit;
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btUpdate;
     private javax.swing.JCheckBox ckShowAll;

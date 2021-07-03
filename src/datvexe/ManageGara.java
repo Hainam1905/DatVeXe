@@ -32,6 +32,7 @@ public class ManageGara extends javax.swing.JFrame {
         btAddNewGara = new javax.swing.JButton();
         btAppreciate = new javax.swing.JButton();
         btCensorTrip = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -75,6 +76,17 @@ public class ManageGara extends javax.swing.JFrame {
         });
         jPanel1.add(btCensorTrip);
         btCensorTrip.setBounds(680, 280, 180, 250);
+
+        jButton1.setBackground(new java.awt.Color(5, 87, 169));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Thoát");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(1000, 90, 130, 50);
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
         jPanel1.add(jLabel12);
@@ -133,6 +145,11 @@ public class ManageGara extends javax.swing.JFrame {
         showGaraList.setVisible(true);
     }//GEN-LAST:event_btAppreciateActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,6 +190,7 @@ public class ManageGara extends javax.swing.JFrame {
     private javax.swing.JButton btAppreciate;
     private javax.swing.JButton btCensorTrip;
     private javax.swing.JButton btShowGaraList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel7;

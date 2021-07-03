@@ -45,6 +45,7 @@ public class ShowGaraList extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListGaras = new javax.swing.JTable();
         btDelGara = new javax.swing.JButton();
@@ -67,6 +68,16 @@ public class ShowGaraList extends javax.swing.JFrame {
         jLabel1.setText("DANH SÁCH NHÀ XE");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(470, 60, 290, 40);
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 255));
+        jButton1.setText("Quay lại");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(1060, 50, 120, 40);
 
         tbListGaras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -374,6 +385,15 @@ public class ShowGaraList extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txgaraNameActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        
+        ManageStaff managerStaff = new ManageStaff();
+        managerStaff.setLocationRelativeTo(null);
+        managerStaff.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -562,6 +582,7 @@ public class ShowGaraList extends javax.swing.JFrame {
     private javax.swing.JButton btUpdateGara;
     private javax.swing.JButton btViewDetail;
     private javax.swing.JCheckBox ckShowAll;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

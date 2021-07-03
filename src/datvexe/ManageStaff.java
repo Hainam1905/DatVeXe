@@ -100,7 +100,7 @@ public class ManageStaff extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btManageStaffLissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageStaffLissActionPerformed
-        
+        this.dispose();
         ShowStaffList showStaffList = new ShowStaffList(this, rootPaneCheckingEnabled);
         showStaffList.setLocationRelativeTo(null);
         showStaffList.setVisible(true);
@@ -108,6 +108,7 @@ public class ManageStaff extends javax.swing.JFrame {
 
     private void btAddNewStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddNewStaffActionPerformed
         
+        this.dispose();
         AddNewEmployer newEmployer  = new AddNewEmployer(this, rootPaneCheckingEnabled);
         newEmployer.setLocationRelativeTo(null);
         newEmployer.setVisible(true);

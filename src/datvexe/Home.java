@@ -67,6 +67,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_staffName = new javax.swing.JLabel();
         btn_infoStaff = new javax.swing.JButton();
+        btInventor = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
         btManageStaff = new javax.swing.JButton();
         btManageGara = new javax.swing.JButton();
@@ -100,6 +101,15 @@ public class Home extends javax.swing.JFrame {
         });
         jPanel1.add(btn_infoStaff);
         btn_infoStaff.setBounds(310, 120, 160, 200);
+
+        btInventor.setText("Thống kê doanh thu");
+        btInventor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInventorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btInventor);
+        btInventor.setBounds(1050, 130, 160, 180);
 
         btn_logout.setBackground(new java.awt.Color(27, 102, 177));
         btn_logout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -243,6 +253,12 @@ public class Home extends javax.swing.JFrame {
         manageGara.setLocationRelativeTo(null);
         manageGara.setVisible(true);
     }//GEN-LAST:event_btManageGaraActionPerformed
+
+    private void btInventorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInventorActionPerformed
+        InventoryProfit inventoryProfit = new InventoryProfit();
+        inventoryProfit.setLocationRelativeTo(null);
+        inventoryProfit.setVisible(true);
+    }//GEN-LAST:event_btInventorActionPerformed
     
 //    private void EditPassenger() {
 //        FormatString format = new FormatString();
@@ -418,6 +434,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btInventor;
     private javax.swing.JButton btManageGara;
     private javax.swing.JButton btManageStaff;
     private javax.swing.JButton btn_infoStaff;

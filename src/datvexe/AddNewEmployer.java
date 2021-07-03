@@ -43,6 +43,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btExit = new javax.swing.JButton();
         cbKind = new javax.swing.JComboBox<>();
         txCMND = new javax.swing.JTextField();
         txLastName = new javax.swing.JTextField();
@@ -87,6 +88,17 @@ public class AddNewEmployer extends javax.swing.JDialog {
         jLabel8.setText("Mật khẩu");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(790, 350, 110, 20);
+
+        btExit.setBackground(new java.awt.Color(0, 0, 255));
+        btExit.setForeground(new java.awt.Color(255, 255, 255));
+        btExit.setText("Quay lại");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btExit);
+        btExit.setBounds(983, 90, 160, 23);
 
         cbKind.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên" }));
@@ -322,6 +334,14 @@ public class AddNewEmployer extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txLastNameActionPerformed
 
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        this.dispose();
+        
+        ManageStaff manageStaff = new ManageStaff();
+        manageStaff.setLocationRelativeTo(null);
+        manageStaff.setVisible(true);
+    }//GEN-LAST:event_btExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,6 +438,7 @@ public class AddNewEmployer extends javax.swing.JDialog {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddEmployer;
+    private javax.swing.JButton btExit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbKind;
     private javax.swing.JLabel jLabel1;

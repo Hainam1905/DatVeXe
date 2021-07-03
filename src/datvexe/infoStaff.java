@@ -81,14 +81,16 @@ public class infoStaff extends javax.swing.JFrame {
         jPanel1.add(label_err4);
         label_err4.setBounds(680, 380, 187, 14);
 
-        btn_back.setText("<");
+        btn_back.setBackground(new java.awt.Color(5, 87, 169));
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setText("Thoát");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
             }
         });
         jPanel1.add(btn_back);
-        btn_back.setBounds(10, 40, 41, 23);
+        btn_back.setBounds(1020, 140, 150, 50);
 
         txt_firstName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(txt_firstName);
@@ -323,7 +325,7 @@ public class infoStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_updateInfoStaffActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_backActionPerformed
 
     /**

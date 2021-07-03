@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,18 +55,19 @@ public class InventoryProfit extends javax.swing.JFrame {
         rdQuater = new javax.swing.JRadioButton();
         rdAll = new javax.swing.JRadioButton();
         rdYear = new javax.swing.JRadioButton();
-        rdMonth = new javax.swing.JRadioButton();
+        rddate = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbYear = new javax.swing.JComboBox<>();
         cbMonth = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         lbTotalProfit = new javax.swing.JLabel();
+        rdMonth1 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProfit = new javax.swing.JTable();
         btExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdatechooser = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -135,21 +138,21 @@ public class InventoryProfit extends javax.swing.JFrame {
         jPanel1.add(rdYear);
         rdYear.setBounds(800, 200, 120, 30);
 
-        buttonGroup1.add(rdMonth);
-        rdMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rdMonth.setText("Lọc theo tháng và năm");
-        rdMonth.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(rddate);
+        rddate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rddate.setText("Lọc theo ngày");
+        rddate.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdMonthItemStateChanged(evt);
+                rddateItemStateChanged(evt);
             }
         });
-        rdMonth.addActionListener(new java.awt.event.ActionListener() {
+        rddate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdMonthActionPerformed(evt);
+                rddateActionPerformed(evt);
             }
         });
-        jPanel1.add(rdMonth);
-        rdMonth.setBounds(400, 200, 170, 30);
+        jPanel1.add(rddate);
+        rddate.setBounds(200, 200, 170, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
@@ -199,6 +202,22 @@ public class InventoryProfit extends javax.swing.JFrame {
         jPanel1.add(lbTotalProfit);
         lbTotalProfit.setBounds(180, 260, 130, 20);
 
+        buttonGroup1.add(rdMonth1);
+        rdMonth1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdMonth1.setText("Lọc theo tháng và năm");
+        rdMonth1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdMonth1ItemStateChanged(evt);
+            }
+        });
+        rdMonth1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdMonth1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rdMonth1);
+        rdMonth1.setBounds(400, 200, 170, 30);
+
         tbProfit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbProfit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,7 +245,7 @@ public class InventoryProfit extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btExit);
-        btExit.setBounds(1060, 40, 140, 50);
+        btExit.setBounds(1100, 70, 130, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
@@ -234,9 +253,14 @@ public class InventoryProfit extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(520, 30, 320, 70);
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(250, 140, 140, 30);
+        jdatechooser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jdatechooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdatechooserPropertyChange(evt);
+            }
+        });
+        jPanel1.add(jdatechooser);
+        jdatechooser.setBounds(250, 140, 140, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 255));
@@ -279,7 +303,7 @@ public class InventoryProfit extends javax.swing.JFrame {
 //       DatVeXe datvexe = new DatVeXe(); 
 //        Connection connection;
 //        connection = datvexe.layKetNoi(); 
-       if(rdMonth.isSelected()){
+       if(rddate.isSelected()){
            String monthStr = (String) cbMonth.getSelectedItem();
             int month = Integer.parseInt(monthStr);
         
@@ -297,7 +321,7 @@ public class InventoryProfit extends javax.swing.JFrame {
     }//GEN-LAST:event_cbYearItemStateChanged
 
     private void cbMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMonthItemStateChanged
-       if(rdMonth.isSelected()==false) return; 
+       if(rddate.isSelected()==false) return; 
        
         String monthStr = (String) cbMonth.getSelectedItem();
         int month = Integer.parseInt(monthStr);
@@ -311,23 +335,17 @@ public class InventoryProfit extends javax.swing.JFrame {
        showDetailDueMonth(dtf, connection, year,month);
     }//GEN-LAST:event_cbMonthItemStateChanged
 
-    private void rdMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMonthActionPerformed
+    private void rddateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rddateActionPerformed
        
-    }//GEN-LAST:event_rdMonthActionPerformed
+    }//GEN-LAST:event_rddateActionPerformed
 
-    private void rdMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdMonthItemStateChanged
-        if(rdMonth.isSelected()==false) return; 
-        String monthStr = (String) cbMonth.getSelectedItem();
-        int month = Integer.parseInt(monthStr);
-       
-       String yearStr = (String) cbYear.getSelectedItem();
-       int year = Integer.parseInt(yearStr);
-       
-//       DatVeXe datvexe = new DatVeXe(); 
-//        Connection connection;
-//        connection = datvexe.layKetNoi(); 
-       showDetailDueMonth(dtf, connection, year,month);
-    }//GEN-LAST:event_rdMonthItemStateChanged
+    private void rddateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rddateItemStateChanged
+        if(rddate.isSelected()){
+             Date date = jdatechooser.getDate();
+        java.sql.Date datesql = new java.sql.Date(date.getTime());
+            showDetailDueDate(dtf, connection, datesql);
+        }
+    }//GEN-LAST:event_rddateItemStateChanged
 
     private void rdYearItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdYearItemStateChanged
         String yearStr = (String) cbYear.getSelectedItem();
@@ -375,6 +393,28 @@ public class InventoryProfit extends javax.swing.JFrame {
     private void rdQuaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdQuaterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdQuaterActionPerformed
+
+    private void jdatechooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdatechooserPropertyChange
+        Date date = jdatechooser.getDate();
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//        String strDate = formatter.format(date);
+//        System.out.println(strDate);
+        java.sql.Date datesql = new java.sql.Date(date.getTime());
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(datesql);
+        System.out.println(strDate);
+        if(rddate.isSelected()){
+            showDetailDueDate(dtf, connection, datesql);
+        }
+    }//GEN-LAST:event_jdatechooserPropertyChange
+
+    private void rdMonth1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdMonth1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdMonth1ItemStateChanged
+
+    private void rdMonth1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMonth1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdMonth1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,7 +465,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         String sql = "select * from Gara";
         String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
         String sql3 = "select * from Trip where TripOfGara_no=?";
-        String sql4 = "select count (*) from Ticket where Trip_No=?";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and Is_Paid='true'";
         
         PreparedStatement pstt;
         PreparedStatement pstt2;
@@ -500,7 +540,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         String sql = "select * from Gara";
         String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
         String sql3 = "select * from Trip where TripOfGara_no=?";
-        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? ";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and Is_Paid='true'";
         
         PreparedStatement pstt;
         PreparedStatement pstt2;
@@ -577,7 +617,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         String sql = "select * from Gara";
         String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
         String sql3 = "select * from Trip where TripOfGara_no=?";
-        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and DATEPART(quarter, Ticket.Book_Time)=?";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and DATEPART(quarter, Ticket.Book_Time)=? and Is_Paid='true'";
         
         PreparedStatement pstt;
         PreparedStatement pstt2;
@@ -654,7 +694,7 @@ public class InventoryProfit extends javax.swing.JFrame {
         String sql = "select * from Gara";
         String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
         String sql3 = "select * from Trip where TripOfGara_no=?";
-        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and MONTH(Ticket.Book_Time) = ? ";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and YEAR(Ticket.Book_Time) =? and MONTH(Ticket.Book_Time) = ? and Is_Paid='true'";
         
         PreparedStatement pstt;
         PreparedStatement pstt2;
@@ -716,13 +756,88 @@ public class InventoryProfit extends javax.swing.JFrame {
         lbTotalProfit.setText(totalProfit+" VND");
         
     }
+    public void showDetailDueDate(DefaultTableModel dtf, Connection conn, java.sql.Date date1){
+        dtf = new DefaultTableModel();
+        ListSelectionModel listSelectionModel = tbProfit.getSelectionModel(); 
+        listSelectionModel.setSelectionMode(listSelectionModel.SINGLE_SELECTION);
+        tbProfit.setModel(dtf);
+        
+        float totalProfit  =0; 
+        dtf.addColumn("Tên nhà xe");
+        dtf.addColumn("Số vé bán ra");
+        dtf.addColumn("Doanh thu");
+        
+        String sql = "select * from Gara";
+        String sql2 = "select * from ScheduleOfGara where Gara_Name=?";
+        String sql3 = "select * from Trip where TripOfGara_no=?";
+        String sql4 = "select count (*) from Ticket where Trip_No=? and CONVERT(DATE,Ticket.Book_Time)=? and Is_Paid='true'";
+        
+        PreparedStatement pstt;
+        PreparedStatement pstt2;
+        PreparedStatement pstt3;
+        PreparedStatement pstt4;
+        System.out.println("vao 785");
+        try {
+            pstt = conn.prepareStatement(sql);
+            ResultSet rs = pstt.executeQuery();
+            while(rs.next()){
+                
+                //in ra tam thoi: 
+                String garaname = rs.getString(1);
+                int totalOfTicket =0; 
+                float profit = 0; 
+                int ticketPrice= 0; 
+                float percentProfit =  0.05f; 
+                String garapicture = rs.getString(2); 
+                String review = rs.getString(3);
+                
+                //
+                
+                pstt2 = conn.prepareStatement(sql2);
+                pstt2.setString(1, garaname);
+                ResultSet rs2 = pstt2.executeQuery();
+                while(rs2.next()){
+                   
+                    String tripOfGaraNo = rs2.getString(1);
+                   
+                     ticketPrice = rs2.getInt(6);
+                    pstt3 = conn.prepareStatement(sql3);
+                    pstt3.setString(1, tripOfGaraNo);
+                   ResultSet rs3 = pstt3.executeQuery();
+                   while(rs3.next()){
+                       
+                       String tripNo = rs3.getString(1);
+//                       System.out.println(rs3.getString(1)+"-"+rs3.getString(2));
+                        pstt4 = conn.prepareStatement(sql4);
+                        pstt4.setString(1,tripNo);
+                        pstt4.setDate(2, date1);
+                        ResultSet rs4 = pstt4.executeQuery();
+                        while(rs4.next()){
+                            int quantity = rs4.getInt(1);
+//                            System.out.println(garaname+"-"+quantity);
+                            totalOfTicket+=quantity;
+                            profit +=  quantity*ticketPrice*percentProfit;
+                           
+                        }
+                   }
+                }
+                
+                //tam thoi: 
+                dtf.addRow(new Object[]{garaname,totalOfTicket,profit});
+                totalProfit += profit; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InventoryProfit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lbTotalProfit.setText(totalProfit+" VND");
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbMonth;
     private javax.swing.JComboBox<String> cbQuater;
     private javax.swing.JComboBox<String> cbYear;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -733,11 +848,13 @@ public class InventoryProfit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdatechooser;
     private javax.swing.JLabel lbTotalProfit;
     private javax.swing.JRadioButton rdAll;
-    private javax.swing.JRadioButton rdMonth;
+    private javax.swing.JRadioButton rdMonth1;
     private javax.swing.JRadioButton rdQuater;
     private javax.swing.JRadioButton rdYear;
+    private javax.swing.JRadioButton rddate;
     private javax.swing.JTable tbProfit;
     // End of variables declaration//GEN-END:variables
 }

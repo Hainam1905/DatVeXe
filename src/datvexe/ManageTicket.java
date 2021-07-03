@@ -177,14 +177,16 @@ public class ManageTicket extends javax.swing.JFrame {
         jPanel1.add(btn_orderTicket);
         btn_orderTicket.setBounds(400, 110, 170, 130);
 
-        btn_back.setText("<");
+        btn_back.setBackground(new java.awt.Color(5, 87, 169));
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setText("Thoát");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
             }
         });
         jPanel1.add(btn_back);
-        btn_back.setBounds(10, 10, 41, 23);
+        btn_back.setBounds(1040, 90, 130, 50);
 
         txt_noiDen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_noiDen.setForeground(new java.awt.Color(255, 0, 0));
@@ -225,7 +227,7 @@ public class ManageTicket extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_orderTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderTicketActionPerformed
