@@ -47,8 +47,15 @@ public class Home extends javax.swing.JFrame {
         this.kind = kind;
         if(this.kind.equals("staff")){
             btManageStaff.setVisible(false);
-            label_staffName.setText(getNameStaff(user)+" ("+kind+")");
+            btManageGara.setVisible(false);
+            btInventor.setVisible(false);
+        }else if (this.kind.equals("gara")){
+            btManageStaff.setVisible(false);
+            btManageGara.setVisible(false);
+            btInventor.setVisible(false);
+            btn_managerTicket.setVisible(false);
         }
+        label_staffName.setText(getNameStaff(user)+" ("+kind+")");
         this.user = user;
         
         Start();
@@ -100,16 +107,16 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_infoStaff);
-        btn_infoStaff.setBounds(310, 120, 160, 200);
+        btn_infoStaff.setBounds(220, 120, 160, 200);
 
-        btInventor.setText("Thống kê doanh thu");
+        btInventor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThongKeDoanhThuIcon.png"))); // NOI18N
         btInventor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInventorActionPerformed(evt);
             }
         });
         jPanel1.add(btInventor);
-        btInventor.setBounds(1050, 130, 160, 180);
+        btInventor.setBounds(980, 120, 160, 200);
 
         btn_logout.setBackground(new java.awt.Color(27, 102, 177));
         btn_logout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -144,7 +151,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btManageGara);
-        btManageGara.setBounds(830, 120, 157, 200);
+        btManageGara.setBounds(730, 120, 157, 200);
 
         btn_managerTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/QuanLiVeIcon.png"))); // NOI18N
         btn_managerTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +160,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_managerTicket);
-        btn_managerTicket.setBounds(570, 120, 160, 200);
+        btn_managerTicket.setBounds(470, 120, 160, 200);
         jPanel1.add(tpManger);
         tpManger.setBounds(40, 330, 1190, 370);
 
