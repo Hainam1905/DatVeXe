@@ -33,7 +33,6 @@ public class ManageStaff extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btManageStaffLiss = new javax.swing.JButton();
         btAddNewStaff = new javax.swing.JButton();
-        btProfit = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -55,7 +54,7 @@ public class ManageStaff extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btManageStaffLiss);
-        btManageStaffLiss.setBounds(190, 290, 230, 310);
+        btManageStaffLiss.setBounds(290, 290, 230, 310);
 
         btAddNewStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThemNhanVienIcon.png"))); // NOI18N
         btAddNewStaff.setMaximumSize(new java.awt.Dimension(171, 23));
@@ -66,16 +65,7 @@ public class ManageStaff extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btAddNewStaff);
-        btAddNewStaff.setBounds(520, 290, 230, 310);
-
-        btProfit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ThongKeIcon.png"))); // NOI18N
-        btProfit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btProfitActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btProfit);
-        btProfit.setBounds(860, 290, 230, 310);
+        btAddNewStaff.setBounds(810, 290, 230, 310);
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
         jPanel1.add(jLabel12);
@@ -116,12 +106,6 @@ public class ManageStaff extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btAddNewStaffActionPerformed
 
-    private void btProfitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProfitActionPerformed
-        InventoryProfit inventoryProfit = new InventoryProfit();
-        inventoryProfit.setLocationRelativeTo(null);
-        inventoryProfit.setVisible(true);
-    }//GEN-LAST:event_btProfitActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -160,7 +144,6 @@ public class ManageStaff extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddNewStaff;
     private javax.swing.JButton btManageStaffLiss;
-    private javax.swing.JButton btProfit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
