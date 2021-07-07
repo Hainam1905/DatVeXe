@@ -261,7 +261,17 @@ public class AddNewEmployer extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Các trường thông tin không được để trống!");
             return; 
         }
-        
+        String phonePattern = "0[0-9]{9}";
+       if(phone.length()!=10 || phone.matches(phonePattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Số điện thoại sai định dạng");
+            return; 
+       }
+        String cmndPattern = "[0-9]{10}";
+       if(cmnd.length()!=10 || cmnd.matches(cmndPattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Chứng minh nhân dân sai định dạng");
+            return; 
+       }
+       
         
         String sql2 = "INSERT INTO Account VALUES(?,?,?)"; 
         String kind; 
@@ -319,6 +329,9 @@ public class AddNewEmployer extends javax.swing.JDialog {
             if(x>0){
                 JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công!");
                 this.dispose();
+                ManageStaff mnStaff = new ManageStaff();
+                mnStaff.setLocationRelativeTo(null);
+                mnStaff.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra!");

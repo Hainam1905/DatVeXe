@@ -262,7 +262,7 @@ public class UpGara extends javax.swing.JDialog {
         String password = txPassword.getText();
         
         String phone = txPhone.getText();
-        
+        String phonePattern = "0[0-9]{9}";
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
         
@@ -295,11 +295,15 @@ public class UpGara extends javax.swing.JDialog {
         if(this.garaPoint0==-1){
              this.garaPoint0 = garapoint;
             
-        }else {
+        }else if(phone.length()!=10 || phone.matches(phonePattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Số điện thoại sai định dạng");
+            return; 
+       }else {
            this.garaPoint0 = (this.garaPoint0 + garapoint)/2;
         }
         
-        
+         
+       
         //hop tac: 
         if(active.equals("Đang hợp tác")){
             //truoc do lam, bay gio van lam: 

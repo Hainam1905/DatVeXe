@@ -153,7 +153,7 @@ public class CenSorTrip extends javax.swing.JFrame {
        String tripNo = (String) tbTrip.getValueAt(tbTrip.getSelectedRow(), 0);
        String garaName = (String) tbTrip.getValueAt(tbTrip.getSelectedRow(), 1);
        
-        int x = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn phê duyệt chuyến xe: "+tripNo+" của nhà xe "+garaName, "Phê duyệt chuyến xe", JOptionPane.YES_NO_OPTION);
+        int x = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn phê duyệt chuyến xe: "+tripNo.trim()+" của nhà xe "+garaName.trim(), "Phê duyệt chuyến xe", JOptionPane.YES_NO_OPTION);
         if(x == JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(rootPane, "Thao tác đã bị hủy");
             return;

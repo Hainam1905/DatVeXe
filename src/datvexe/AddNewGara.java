@@ -169,6 +169,8 @@ public class AddNewGara extends javax.swing.JDialog {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/iconTong.png"))); // NOI18N
         jPanel1.add(jLabel12);
         jLabel12.setBounds(50, 20, 160, 123);
+
+        txPhone.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(txPhone);
         txPhone.setBounds(200, 320, 360, 40);
 
@@ -238,6 +240,11 @@ public class AddNewGara extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Hình ảnh nhà xe không được để trống");
             return; 
         }
+         String phonePattern = "0[0-9]{9}";
+       if(phone.length()!=10 || phone.matches(phonePattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Số điện thoại sai định dạng");
+            return; 
+       }
         
         String sql = "INSERT INTO ACCOUNT values(?,?,?)";
                 PreparedStatement pstt;

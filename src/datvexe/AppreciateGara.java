@@ -247,45 +247,45 @@ public class AppreciateGara extends javax.swing.JDialog {
     private void btAppreciateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAppreciateActionPerformed
         String garaName = txGaraName.getText(); 
         
-        String garaReview = txGaraReview.getText();
-        
+//        String garaReview = txGaraReview.getText();
+//        
         float garapoint = cbAppreciate.getSelectedIndex();
         garapoint++; 
         
-        String BusResNum = txBusResNum.getText(); 
-        String active =(String)cbStatement.getSelectedItem();
-        
-        String account = txAccount.getText();
-        String password = txPassword.getText();
-        
+//        String BusResNum = txBusResNum.getText(); 
+//        String active =(String)cbStatement.getSelectedItem();
+//        
+//        String account = txAccount.getText();
+//        String password = txPassword.getText();
+//        
         DatVeXe datvexe = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
-        
-        int resultCheck = checkInfor(garaName, garaReview, BusResNum, account, password, conn);
-        if(resultCheck==empty){
-            JOptionPane.showMessageDialog(rootPane, "Thông tin phải được điền đầy đủ");
-            return; 
-        }
-        
-        
-        else  if(resultCheck==duplicateGaraName){
-            JOptionPane.showMessageDialog(rootPane, "Tên nhà xe đã có trong hệ thống \nVui lòng chọn tên nhà xe khác!");
-            return; 
-        }
-        
-        
-        
-        else  if(resultCheck==duplicateAccount){
-            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã có trong hệ thống \nVui lòng chọn tên đăng nhập khác!");
-            return; 
-                }
-        
-        
-        
-        else if(resultCheck==duplicateBusResNum){
-            JOptionPane.showMessageDialog(rootPane, "Giấy phép ĐKKD đã có trong hệ thống \nVui lòng kiểm tra lại!");
-            return; 
-        }
+//        
+//        int resultCheck = checkInfor(garaName, garaReview, BusResNum, account, password, conn);
+//        if(resultCheck==empty){
+//            JOptionPane.showMessageDialog(rootPane, "Thông tin phải được điền đầy đủ");
+//            return; 
+//        }
+//        
+//        
+//        else  if(resultCheck==duplicateGaraName){
+//            JOptionPane.showMessageDialog(rootPane, "Tên nhà xe đã có trong hệ thống \nVui lòng chọn tên nhà xe khác!");
+//            return; 
+//        }
+//        
+//        
+//        
+//        else  if(resultCheck==duplicateAccount){
+//            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã có trong hệ thống \nVui lòng chọn tên đăng nhập khác!");
+//            return; 
+//                }
+//        
+//        
+//        
+//        else if(resultCheck==duplicateBusResNum){
+//            JOptionPane.showMessageDialog(rootPane, "Giấy phép ĐKKD đã có trong hệ thống \nVui lòng kiểm tra lại!");
+//            return; 
+//        }
         
         if(this.garaPoint0==-1){
              this.garaPoint0 = garapoint;

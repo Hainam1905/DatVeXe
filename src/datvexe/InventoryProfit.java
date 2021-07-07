@@ -321,7 +321,7 @@ public class InventoryProfit extends javax.swing.JFrame {
     }//GEN-LAST:event_cbYearItemStateChanged
 
     private void cbMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMonthItemStateChanged
-       if(rddate.isSelected()==false) return; 
+       if(rdMonth1.isSelected()==false) return; 
        
         String monthStr = (String) cbMonth.getSelectedItem();
         int month = Integer.parseInt(monthStr);
@@ -409,7 +409,16 @@ public class InventoryProfit extends javax.swing.JFrame {
     }//GEN-LAST:event_jdatechooserPropertyChange
 
     private void rdMonth1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdMonth1ItemStateChanged
-        // TODO add your handling code here:
+          String monthStr = (String) cbMonth.getSelectedItem();
+        int month = Integer.parseInt(monthStr);
+       
+       String yearStr = (String) cbYear.getSelectedItem();
+       int year = Integer.parseInt(yearStr);
+       
+//       DatVeXe datvexe = new DatVeXe(); 
+//        Connection connection;
+//        connection = datvexe.layKetNoi(); 
+       showDetailDueMonth(dtf, connection, year,month);
     }//GEN-LAST:event_rdMonth1ItemStateChanged
 
     private void rdMonth1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMonth1ActionPerformed

@@ -128,7 +128,7 @@ public class UpEmp extends javax.swing.JDialog {
         jPanel1.add(jLabel6);
         jLabel6.setBounds(780, 240, 130, 17);
 
-        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Quản lí", "Nhân viên", "Chủ nhà xe" }));
+        cbKind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lí", "Nhân viên", "Chủ nhà xe" }));
         jPanel1.add(cbKind);
         cbKind.setBounds(440, 380, 210, 20);
 
@@ -228,7 +228,7 @@ public class UpEmp extends javax.swing.JDialog {
         
         DatVeXe datvexe  = new DatVeXe();
         Connection conn = datvexe.layKetNoi();
-        
+        String phonePattern = "0[0-9]{9}";
         
         String cmnd = txCmnd.getText().trim(); 
         String first = txFirst.getText().trim(); 
@@ -268,6 +268,15 @@ public class UpEmp extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã được sử dụng!\nVui lòng chọn tên đăng nhập khác!");
             return ;
         }
+        if(phone.length()!=10 || phone.matches(phonePattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Số điện thoại sai định dạng");
+            return; 
+       }
+        String cmndPattern = "[0-9]{10}";
+       if(cmnd.length()!=10 || cmnd.matches(cmndPattern)==false){
+           JOptionPane.showMessageDialog(rootPane, "Chứng minh nhân dân sai định dạng");
+            return; 
+       }
         String active = (String) cbActive.getSelectedItem();
         boolean activeBool; 
         if(active.equals("Làm việc")){
